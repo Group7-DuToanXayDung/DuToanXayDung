@@ -7,3 +7,8 @@
   border: none;
   color: #3FB4D7;
 }
+.navbar-inverse .navbar-nav>li>a{
+  background-color: #FFF;
+  border: none;
+  color: #3FB4D7;
+}
