@@ -1,0 +1,9 @@
+.menu{
+  background-color: #FFF;
+  border: none;
+}
+.navbar-inverse .navbar-nav>.active>a{
+  background-color: #FFF;
+  border: none;
+  color: #3FB4D7;
+}
