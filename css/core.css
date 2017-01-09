@@ -1,8 +1,10 @@
+body{
+  background-color: #DDDDDD;
+}
 .menu-left, .menu-right{
   background-color: #FFF;
   border: none;
 }
-
 .navbar-inverse .navbar-nav>.active>a{
   background-color: #FFF;
   border: none;
@@ -24,8 +26,8 @@
 }
 
 .main{
-  border-left: #3FB4D7 solid 1px;
-  border-bottom: #3FB4D7 solid 1px;
+  background-color: #FFF;
+  border: #3FB4D7 solid 1px;
 }
 
 .navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover
@@ -42,6 +44,7 @@
   }
 .table{
   margin-top: 20px;
-  border-left: #3FB4D7 solid 1px;
-  border-bottom: #3FB4D7 solid 1px;
+  border: #3FB4D7 solid 1px;
+  padding: 10px;
+  background-color: #FFF;
 }
