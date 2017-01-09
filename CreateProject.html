@@ -11,6 +11,31 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/core.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css" />
+	  <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+	  <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+
+
+
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		var t = $('#data_doitac').DataTable( {
+    			"scrollY":   410,
+    			"columnDefs": [ {
+    				"searchable": false,
+    				"orderable": false,
+    				"targets": 0
+    			} ],
+    			"order": [[ 1, 'asc' ]]
+    		} );
+
+    		t.on( 'order.dt search.dt', function () {
+    			t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    				cell.innerHTML = i+1;
+    			} );
+    		} ).draw();
+    	} );<!---khoi tao datatable--->
+    </script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,6 +44,11 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+
+
+
+
+
   <body>
     <div class="container">
       <div class="header">
@@ -125,6 +155,52 @@
         </fieldset>
         </form>
       </div>
+
+      <div class="col-md-12">
+        <table id="data_doitac" class="display" style='text-align:center;' width="100%" cellspacing="0">
+        	<thead>
+        		<tr>
+        			<th>STT</th>
+        			<th>Tên Đối Tác</th>
+        			<th>Hình</th>
+        			<th>Liên Kết</th>
+        			<th>UP</th>
+        			<th>DEL</th>
+        		</tr>
+        	</thead>
+
+        	<tfoot>
+        		<tr>
+        			<th>STT</th>
+        			<th>Tên Đối Tác</th>
+        			<th>Hình</th>
+        			<th>Liên Kết</th>
+        			<th>UP</th>
+        			<th>DEL</th>
+        		</tr>
+        	</tfoot>
+
+        	<tbody>
+        		<tr>
+        			<td>1</td>
+        			<td>ten doi tac 1</td>
+        			<td>hinh 1</td>
+        			<td>link 1</td>
+        			<td>update</td>
+        			<td>xoa</td>
+        		</tr>
+        		<tr>
+        			<td>1</td>
+        			<td>ten doi tac 2</td>
+        			<td>hinh 1</td>
+        			<td>link 1</td>
+        			<td>update</td>
+        			<td>xoa</td>
+        		</tr>
+        	</tbody>
+        </table>
+      </div>
+
 
       <div class="footer col-md-12 text-center">
         Copyright &copy; 2017 ISC-G7 - All rights reserved
