@@ -24,7 +24,8 @@
 }
 
 .main{
-  border: #3FB4D7 solid 2px;
+  border-left: #3FB4D7 solid 1px;
+  border-bottom: #3FB4D7 solid 1px;
 }
 
 .navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover
@@ -39,3 +40,8 @@
   padding-top: 10px;
   padding-left: 100px;
   }
+.table{
+  margin-top: 20px;
+  border-left: #3FB4D7 solid 1px;
+  border-bottom: #3FB4D7 solid 1px;
+}

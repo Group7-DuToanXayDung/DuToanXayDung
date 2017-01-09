@@ -12,30 +12,6 @@
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/core.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css" />
-	  <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-	  <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-
-
-
-    <script type="text/javascript">
-    	$(document).ready(function() {
-    		var t = $('#data_doitac').DataTable( {
-    			"scrollY":   410,
-    			"columnDefs": [ {
-    				"searchable": false,
-    				"orderable": false,
-    				"targets": 0
-    			} ],
-    			"order": [[ 1, 'asc' ]]
-    		} );
-
-    		t.on( 'order.dt search.dt', function () {
-    			t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-    				cell.innerHTML = i+1;
-    			} );
-    		} ).draw();
-    	} );<!---khoi tao datatable--->
-    </script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -156,46 +132,46 @@
         </form>
       </div>
 
-      <div class="col-md-12">
-        <table id="data_doitac" class="display" style='text-align:center;' width="100%" cellspacing="0">
+      <div class="col-md-12 table">
+        <table id="data_doitac" class="display text-center" width="100%" cellspacing="0">
         	<thead>
         		<tr>
-        			<th>STT</th>
-        			<th>Tên Đối Tác</th>
-        			<th>Hình</th>
-        			<th>Liên Kết</th>
-        			<th>UP</th>
-        			<th>DEL</th>
+        			<th class="text-center">STT</th>
+        			<th class="text-center">Tên công trình</th>
+        			<th class="text-center">Địa chỉ</th>
+        			<th class="text-center">Ngày tạo</th>
+        			<th class="text-center"></th>
+        			<th class="text-center"></th>
         		</tr>
         	</thead>
 
         	<tfoot>
         		<tr>
-        			<th>STT</th>
-        			<th>Tên Đối Tác</th>
-        			<th>Hình</th>
-        			<th>Liên Kết</th>
-        			<th>UP</th>
-        			<th>DEL</th>
+              <th class="text-center">STT</th>
+        			<th class="text-center">Tên công trình</th>
+        			<th class="text-center">Địa chỉ</th>
+        			<th class="text-center">Ngày tạo</th>
+        			<th class="text-center"></th>
+        			<th class="text-center"></th>
         		</tr>
         	</tfoot>
 
         	<tbody>
         		<tr>
         			<td>1</td>
-        			<td>ten doi tac 1</td>
+        			<td><a href="#" class="btn btn-link">ten doi tac 1</a></td>
         			<td>hinh 1</td>
         			<td>link 1</td>
-        			<td>update</td>
-        			<td>xoa</td>
+        			<td><button class="btn btn-warning">Update</button></td>
+        			<td><button class="btn btn-danger">Delete</button></td>
         		</tr>
         		<tr>
         			<td>1</td>
-        			<td>ten doi tac 2</td>
+        			<td><a href="#" class="btn btn-link">ten doi tac 2</a></td>
         			<td>hinh 1</td>
         			<td>link 1</td>
-        			<td>update</td>
-        			<td>xoa</td>
+              <td><button class="btn btn-warning">Update</button></td>
+        			<td><button class="btn btn-danger">Delete</button></td>
         		</tr>
         	</tbody>
         </table>
@@ -211,5 +187,25 @@
     <script src="js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		var t = $('#data_doitac').DataTable( {
+    			"scrollY":   410,
+    			"columnDefs": [ {
+    				"searchable": false,
+    				"orderable": false,
+    				"targets": 0
+    			} ],
+    			"order": [[ 1, 'asc' ]]
+    		} );
+
+    		t.on( 'order.dt search.dt', function () {
+    			t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    				cell.innerHTML = i+1;
+    			} );
+    		} ).draw();
+    	} );<!---khoi tao datatable--->
+    </script>
   </body>
 </html>
