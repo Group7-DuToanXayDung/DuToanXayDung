@@ -1,0 +1,139 @@
+   <head>
+   <meta charset="utf-8">
+   <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet">
+    <link href="../css/core.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css" />
+	</head>
+<div class="container">
+      <div class="main col-md-12">
+        <form class="form-horizontal">
+        <fieldset>
+
+        <!-- Form Name -->
+        <legend>Thêm mới dự án</legend>
+
+        <!-- Password input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="piCurrPass">Tên dự án :</label>
+          <div class="col-md-4">
+            <input id="piCurrPass" name="piCurrPass" type="password" placeholder="" class="form-control input-md" required="">
+
+          </div>
+        </div>
+
+        <!-- Password input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="piNewPass">Địa điểm :</label>
+          <div class="col-md-4">
+            <input id="piNewPass" name="piNewPass" type="password" placeholder="" class="form-control input-md" required="">
+
+          </div>
+        </div>
+
+        <!-- Password input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="piNewPassRepeat">Tên công ty/khách hàng :</label>
+          <div class="col-md-4">
+            <input id="piNewPassRepeat" name="piNewPassRepeat" type="password" placeholder="" class="form-control input-md" required="">
+
+          </div>
+        </div>
+
+        <!-- Password input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="piNewPassRepeat">Điện thoại :</label>
+          <div class="col-md-4">
+            <input id="piNewPassRepeat" name="piNewPassRepeat" type="password" placeholder="" class="form-control input-md" required="">
+
+          </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="bCancel"></label>
+          <div class="col-md-8">
+            <button id="bCancel" name="bCancel" class="btn btn-danger">Thêm mới</button>
+            <button id="bGodkend" name="bGodkend" class="btn btn-success">Hủy</button>
+          </div>
+        </div>
+
+        </fieldset>
+        </form>
+      </div>
+
+      <div class="col-md-12 table">
+        <table id="data_doitac" class="display text-center" width="100%" cellspacing="0">
+        	<thead>
+        		<tr>
+        			<th class="text-center">STT</th>
+        			<th class="text-center">Tên công trình</th>
+        			<th class="text-center">Địa chỉ</th>
+        			<th class="text-center">Ngày tạo</th>
+        			<th class="text-center"></th>
+        			<th class="text-center"></th>
+        		</tr>
+        	</thead>
+
+        	<tfoot>
+        		<tr>
+              <th class="text-center">STT</th>
+        			<th class="text-center">Tên công trình</th>
+        			<th class="text-center">Địa chỉ</th>
+        			<th class="text-center">Ngày tạo</th>
+        			<th class="text-center"></th>
+        			<th class="text-center"></th>
+        		</tr>
+        	</tfoot>
+
+        	<tbody>
+        		<tr>
+        			<td>1</td>
+        			<td><a href="#" class="btn btn-link">ten doi tac 1</a></td>
+        			<td>hinh 1</td>
+        			<td>link 1</td>
+        			<td><button class="btn btn-warning">Update</button></td>
+        			<td><button class="btn btn-danger">Delete</button></td>
+        		</tr>
+        		<tr>
+        			<td>1</td>
+        			<td><a href="#" class="btn btn-link">ten doi tac 2</a></td>
+        			<td>hinh 1</td>
+        			<td>link 1</td>
+              <td><button class="btn btn-warning">Update</button></td>
+        			<td><button class="btn btn-danger">Delete</button></td>
+        		</tr>
+        	</tbody>
+        </table>
+      </div>
+
+
+      <div class="footer col-md-12 text-center">
+        Copyright &copy; 2017 ISC-G7 - All rights reserved
+      </div>
+    </div>
+</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		var t = $('#data_doitac').DataTable( {
+    			"scrollY":   300,
+    			"columnDefs": [ {
+    				"searchable": false,
+    				"orderable": false,
+    				"targets": 0
+    			} ],
+    			"order": [[ 1, 'asc' ]]
+    		} );
+
+    		t.on( 'order.dt search.dt', function () {
+    			t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    				cell.innerHTML = i+1;
+    			} );
+    		} ).draw();
+    	} );<!---khoi tao datatable--->
+    </script>
