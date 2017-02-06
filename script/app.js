@@ -11,5 +11,4 @@ app2.config(function($routeProvider) {
     .when("/index", {
         templateUrl : "templates/index.html"
     });
-    
 });
