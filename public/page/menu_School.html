@@ -1,60 +1,15 @@
+<!-- Controller trường học-->
 <div ng-controller="truonghoc_ctl">
 	<div class="container">
 		<div class="row">
 			<h2 class="sub-header">University and Colledge Management</h2>
 			<div class="form-group">
 				<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
-				<div class="modal fade container " id="myModalAdd" role="dialog">
-					<div class="modal-dialog ">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header ">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Edit Schools</h4>
-							</div>
-							<div class="modal-body row">
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">University Name</label>
-									<input type="text" class="form-control" id="usr" ng-model="truonghoc.ten_th">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">University Code</label>
-									<input type="text" class="form-control" id="usr" ng-model="truonghoc.ma_th">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="pwd">Address:</label>
-									<input type="text" class="form-control" id="pwd" ng-model="truonghoc.diachi">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">Contact Information</label>
-									<input type="text" class="form-control" id="usr" ng-model="truonghoc.thongtin_lienlac">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<div class="radio">
-										<label>
-											<input type="radio" ng-model="truonghoc.trangthai" value="1">
-											Active
-										</label>
-										</div>
-										<div class="radio">
-										<label>
-											<input type="radio" ng-model="truonghoc.trangthai" value="0">
-											Inactive
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addtruonghoc()">Add</button>
-							</div>
-						</div>
-
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
+
+	<!-- dataTable content-->
 	<table id="data_doitac" class="display text-center" width="100%" cellspacing="0">
 		<thead>
 			<tr>
@@ -91,59 +46,113 @@
 				<td>{{truonghoc.thongtin_lienlac}}</td>
 				<td>{{truonghoc.trangthai}}</td>
 				<td><button class="btn btn-warning" data-toggle="modal" data-target="#myModalEdit" ng-click="edit($index)"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
-				<div class="modal fade container" id="myModalEdit" role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header ">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Edit Schools</h4>
-							</div>
-							<div class="modal-body row">
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">University Name</label>
-									<input type="text" class="form-control" id="usr" ng-model="truonghoc.ten_th">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">University Code</label>
-									<input type="text" class="form-control" id="usr" ng-model="truonghoc.ma_th">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="pwd">Address:</label>
-									<input type="text" class="form-control" id="pwd" ng-model="truonghoc.diachi">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">Contact Information</label>
-									<input type="text" class="form-control" id="usr" ng-model="truonghoc.thongtin_lienlac">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<div class="radio">
-										<label>
-											<input type="radio" ng-model="truonghoc.trangthai" value="1" ng-checked="truonghoc.trangthai == '1'">
-											Active
-										</label>
-										</div>
-										<div class="radio">
-										<label>
-											<input type="radio" ng-model="truonghoc.trangthai" value="0" ng-checked="truonghoc.trangthai == '0'">
-											Inactive
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="updatetruonghoc()">Update</button>
-							</div>
-						</div>
-
-					</div>
-				</div>
 				<td><button class="btn btn-danger" ng-click="remove(truonghoc.id_th)"><span class="glyphicon glyphicon-remove"></span> Remove</button></td>
 			</tr>
 		</tbody>
 	</table>
+
+	<!-- Modal Add content-->
+	<div class="modal fade container " id="myModalAdd" role="dialog">
+		<div class="modal-dialog ">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header ">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Edit Schools</h4>
+				</div>
+				<div class="modal-body row">
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label for="usr">University Name</label>
+						<input type="text" class="form-control" id="usr" ng-model="truonghoc.ten_th">
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label for="usr">University Code</label>
+						<input type="text" class="form-control" id="usr" ng-model="truonghoc.ma_th">
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label for="pwd">Address:</label>
+						<input type="text" class="form-control" id="pwd" ng-model="truonghoc.diachi">
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label for="usr">Contact Information</label>
+						<input type="text" class="form-control" id="usr" ng-model="truonghoc.thongtin_lienlac">
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<div class="radio">
+							<label>
+											<input type="radio" ng-model="truonghoc.trangthai" value="1" ng-checked="true">
+											Active
+										</label>
+						</div>
+						<div class="radio">
+							<label>
+											<input type="radio" ng-model="truonghoc.trangthai" value="0">
+											Inactive
+										</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addtruonghoc()">Add</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<!-- Modal Edit content-->
+	<div class="modal fade container" id="myModalEdit" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header ">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Edit Schools</h4>
+				</div>
+				<div class="modal-body row">
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label for="usr">University Name</label>
+						<input type="text" class="form-control" id="usr" ng-model="truonghoc.ten_th">
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label for="usr">University Code</label>
+						<input type="text" class="form-control" id="usr" ng-model="truonghoc.ma_th">
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label for="pwd">Address:</label>
+						<input type="text" class="form-control" id="pwd" ng-model="truonghoc.diachi">
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label for="usr">Contact Information</label>
+						<input type="text" class="form-control" id="usr" ng-model="truonghoc.thongtin_lienlac">
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<div class="radio">
+							<label>
+											<input type="radio" ng-model="truonghoc.trangthai" value="1" ng-checked="truonghoc.trangthai == '1'">
+											Active
+										</label>
+						</div>
+						<div class="radio">
+							<label>
+											<input type="radio" ng-model="truonghoc.trangthai" value="0" ng-checked="truonghoc.trangthai == '0'">
+											Inactive
+										</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="updatetruonghoc()">Update</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
 </div>
+
 <script type="text/javascript">
 	$(document).ready(function () {
 		var t = $('#data_doitac').DataTable({
@@ -161,5 +170,6 @@
 				cell.innerHTML = i + 1;
 			});
 		}).draw();
-		}); <!---khoi tao datatable-- ->
+	}); <!---khoi tao datatable-- ->
+
 </script>
