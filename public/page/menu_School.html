@@ -3,8 +3,8 @@
 		<div class="row">
 			<h2 class="sub-header">University and Colledge Management</h2>
 			<div class="form-group">
-				<button class="btn btn-primary " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Add</button>
-				<div class="modal fade container " id="myModal" role="dialog">
+				<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+				<div class="modal fade container " id="myModalAdd" role="dialog">
 					<div class="modal-dialog ">
 
 						<!-- Modal content-->
@@ -16,33 +16,37 @@
 							<div class="modal-body row">
 								<div class="form-group col-xs-12 col-sm-6 col-md-6">
 									<label for="usr">University Name</label>
-									<input type="text" class="form-control" id="usr">
+									<input type="text" class="form-control" id="usr" ng-model="truonghoc.ten_th">
 								</div>
 								<div class="form-group col-xs-12 col-sm-6 col-md-6">
 									<label for="usr">University Code</label>
-									<input type="text" class="form-control" id="usr">
+									<input type="text" class="form-control" id="usr" ng-model="truonghoc.ma_th">
 								</div>
 								<div class="form-group col-xs-12 col-sm-6 col-md-6">
 									<label for="pwd">Address:</label>
-									<input type="text" class="form-control" id="pwd">
+									<input type="text" class="form-control" id="pwd" ng-model="truonghoc.diachi">
 								</div>
 								<div class="form-group col-xs-12 col-sm-6 col-md-6">
 									<label for="usr">Contact Information</label>
-									<input type="text" class="form-control" id="usr">
+									<input type="text" class="form-control" id="usr" ng-model="truonghoc.thongtin_lienlac">
 								</div>
 								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<div class="dropdown">
-										<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
-													<span class="caret"></span></button>
-										<ul class="dropdown-menu">
-											<li><a href="#">Activie</a></li>
-											<li><a href="#">Inactive</a></li>
-										</ul>
+									<div class="radio">
+										<label>
+											<input type="radio" ng-model="truonghoc.trangthai" value="1">
+											Active
+										</label>
+										</div>
+										<div class="radio">
+										<label>
+											<input type="radio" ng-model="truonghoc.trangthai" value="0">
+											Inactive
+										</label>
 									</div>
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addtruonghoc()">Add</button>
 							</div>
 						</div>
 
@@ -80,14 +84,14 @@
 
 		<tbody>
 			<tr ng-repeat="truonghoc in truonghoc_list">
-				<td>{{truonghoc.id_th}}</td>
+				<td>{{$index+1}}</td>
 				<td>{{truonghoc.ma_th}}</td>
 				<td>{{truonghoc.ten_th}}</td>
 				<td>{{truonghoc.diachi}}</td>
 				<td>{{truonghoc.thongtin_lienlac}}</td>
 				<td>{{truonghoc.trangthai}}</td>
-				<td><button class="btn btn-warning" data-toggle="modal" data-target="#myModal" ng-click="edit(truonghoc.id_th)"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
-				<div class="modal fade container" id="myModal" role="dialog">
+				<td><button class="btn btn-warning" data-toggle="modal" data-target="#myModalEdit" ng-click="edit($index)"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+				<div class="modal fade container" id="myModalEdit" role="dialog">
 					<div class="modal-dialog">
 
 						<!-- Modal content-->
@@ -99,33 +103,37 @@
 							<div class="modal-body row">
 								<div class="form-group col-xs-12 col-sm-6 col-md-6">
 									<label for="usr">University Name</label>
-									<input type="text" class="form-control" id="usr">
+									<input type="text" class="form-control" id="usr" ng-model="truonghoc.ten_th">
 								</div>
 								<div class="form-group col-xs-12 col-sm-6 col-md-6">
 									<label for="usr">University Code</label>
-									<input type="text" class="form-control" id="usr">
+									<input type="text" class="form-control" id="usr" ng-model="truonghoc.ma_th">
 								</div>
 								<div class="form-group col-xs-12 col-sm-6 col-md-6">
 									<label for="pwd">Address:</label>
-									<input type="text" class="form-control" id="pwd">
+									<input type="text" class="form-control" id="pwd" ng-model="truonghoc.diachi">
 								</div>
 								<div class="form-group col-xs-12 col-sm-6 col-md-6">
 									<label for="usr">Contact Information</label>
-									<input type="text" class="form-control" id="usr">
+									<input type="text" class="form-control" id="usr" ng-model="truonghoc.thongtin_lienlac">
 								</div>
 								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<div class="dropdown">
-										<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
-								<span class="caret"></span></button>
-										<ul class="dropdown-menu">
-											<li><a href="#">Active</a></li>
-											<li><a href="#">Inactive</a></li>
-										</ul>
+									<div class="radio">
+										<label>
+											<input type="radio" ng-model="truonghoc.trangthai" value="1" ng-checked="truonghoc.trangthai == '1'">
+											Active
+										</label>
+										</div>
+										<div class="radio">
+										<label>
+											<input type="radio" ng-model="truonghoc.trangthai" value="0" ng-checked="truonghoc.trangthai == '0'">
+											Inactive
+										</label>
 									</div>
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="updatetruonghoc()">Update</button>
 							</div>
 						</div>
 

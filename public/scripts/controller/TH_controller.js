@@ -29,24 +29,22 @@ app.controller('truonghoc_ctl', ['$scope','$http',function($scope, $http){
 //them
 	$scope.addtruonghoc = function(){
 		$http.post('/menu_School',$scope.truonghoc).then(function successCallback(response){
+			$scope.truonghoc = null;
 			refresh();
 		},function errorCallback(response){
 			
 		});
 	}
 //load form edit
-	$scope.edit = function(id){
-		console.log(id);
-		$http.get('/menu_School/' + id).then(function successCallback(response){
-			$scope.truonghoc = response.data[0];
-		}, function errorCallback(response){
-			
-		});
+	$scope.edit = function(index){
+		toSelect = $scope.truonghoc_list[index];
+		$scope.truonghoc = toSelect;
 	}
 //sua
 	$scope.updatetruonghoc = function(){
 		console.log("id la: " + $scope.truonghoc.id_th);
 		$http.put('/menu_School/' + $scope.truonghoc.id_th, $scope.truonghoc).then(function successCallback(response){
+			$scope.truonghoc = null;
 			refresh();
 		}, function errorCallback(response){
 			
