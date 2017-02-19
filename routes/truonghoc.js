@@ -11,8 +11,7 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-router.get('/menu_School',function(req,res){
-    var truonghoc_list =[];
+router.get('/list',function(req,res){
     connection.query('select * from truonghoc', function (err, rows, fields) {
 		if (err) {
 			connection.end();
@@ -26,7 +25,7 @@ router.get('/menu_School',function(req,res){
 
 router.use(bodyParser.json());
 
-router.delete('/menu_School/:id', function(req,res){
+router.delete('/list/:id', function(req,res){
 	
 	var id = req.params.id;
 	var sql = "delete from truonghoc where id_th = '" + id + "'";
