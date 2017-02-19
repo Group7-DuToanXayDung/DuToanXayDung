@@ -3,7 +3,7 @@ app.controller('truonghoc_ctl', ['$scope','$http',function($scope, $http){
     var refresh = function(){
 		$http({
 			method: 'GET',
-			url: '/list'
+			url: '/menu_School'
 		}).then(function successCallback(response){
 			console.log("I got the data I requested");
 			$scope.truonghoc_list = response.data;
@@ -15,7 +15,7 @@ app.controller('truonghoc_ctl', ['$scope','$http',function($scope, $http){
 	refresh();
     $scope.remove = function(id){
 		console.log(id);
-		$http.delete('/list/' + id).then(function successCallback(response){
+		$http.delete('/menu_School/' + id).then(function successCallback(response){
 			refresh();
 		}, function errorCallback(response){
 			
