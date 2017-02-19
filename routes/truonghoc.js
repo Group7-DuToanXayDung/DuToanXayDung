@@ -46,12 +46,6 @@ router.delete('/menu_School/:id', function(req,res){
 
 ////them truong hoc
 router.post('/menu_School',function(req,res){
-    console.log("ma:" + req.body.ma_th);
-    console.log("ten:" + req.body.ten_th);
-    console.log("dia chi:" + req.body.diachi);
-    console.log("thong tin:" + req.body.thongtin_lienlac);
-    console.log("trang thai:" + req.body.trangthai);
-	
 	var sql = 'insert into truonghoc(ma_th,ten_th,diachi,thongtin_lienlac,trangthai) values ("'+req.body.ma_th+'","'+req.body.ten_th+'","'+req.body.diachi+'","'+req.body.thongtin_lienlac+'","'+req.body.trangthai+'")';
 	
 	connection.query(sql, function (err, rows, fields) {

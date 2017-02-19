@@ -1,5 +1,4 @@
 app.controller('truonghoc_ctl', ['$scope','$http',function($scope, $http){
-	console.log('Hello world from controller');
 
 
     var refresh = function(){
@@ -7,9 +6,7 @@ app.controller('truonghoc_ctl', ['$scope','$http',function($scope, $http){
 			method: 'GET',
 			url: '/menu_School'
 		}).then(function successCallback(response){
-			console.log("I got the data I requested");
 			$scope.truonghoc_list = response.data;
-			console.log($scope.truonghoc_list);
 		}, function errorCallback(response){
 			
 		});
@@ -19,7 +16,6 @@ app.controller('truonghoc_ctl', ['$scope','$http',function($scope, $http){
 
 //xoa
     $scope.remove = function(id){
-		console.log(id);
 		$http.delete('/menu_School/' + id).then(function successCallback(response){
 			refresh();
 		}, function errorCallback(response){
@@ -36,15 +32,16 @@ app.controller('truonghoc_ctl', ['$scope','$http',function($scope, $http){
 		});
 	}
 //load form edit
-	$scope.edit = function(index){
+	$scope.editt = function(index){
 		toSelect = $scope.truonghoc_list[index];
-		$scope.truonghoc = toSelect;
+		$scope.edittruonghoc = toSelect;
+		console.log(toSelect);
 	}
+
 //sua
 	$scope.updatetruonghoc = function(){
-		console.log("id la: " + $scope.truonghoc.id_th);
-		$http.put('/menu_School/' + $scope.truonghoc.id_th, $scope.truonghoc).then(function successCallback(response){
-			$scope.truonghoc = null;
+		$http.put('/menu_School/' + $scope.edittruonghoc.id_th, $scope.edittruonghoc).then(function successCallback(response){
+			$scope.edittruonghoc = null;
 			refresh();
 		}, function errorCallback(response){
 			
