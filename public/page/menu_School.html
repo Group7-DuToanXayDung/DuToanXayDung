@@ -1,138 +1,139 @@
-<div ng-controller="truonghoc_ctl">
-	<div class="container">
-		<div class="row">
-			<h2 class="sub-header">Quản lý danh mục trường học</h2>
-			<div class="form-group">
-				<button class="btn btn-primary " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Add</button>
-						<div class="modal fade container " id="myModal" role="dialog">
-							<div class="modal-dialog ">
-							
-								<!-- Modal content-->
-									<div class="modal-content">
-									<div class="modal-header ">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Edit School</h4>
+<div class="container">
+	<div class="row">
+		<h2 class="sub-header">University and Colledge Management</h2>
+		<div class="form-group">
+			<button class="btn btn-primary " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Add</button>
+					<div class="modal fade container " id="myModal" role="dialog">
+						<div class="modal-dialog ">
+						
+							 <!-- Modal content-->
+							  <div class="modal-content">
+								<div class="modal-header ">
+								  <button type="button" class="close" data-dismiss="modal">&times;</button>
+								  <h4 class="modal-title">Edit Schools</h4>
+								</div>
+								<div class="modal-body row">
+									<div class="form-group col-xs-12 col-sm-6 col-md-6">
+										<label for="usr">University Name</label>
+										<input type="text" class="form-control" id="usr">
 									</div>
-									<div class="modal-body row">
-										<div class="form-group col-xs-12 col-sm-6 col-md-6">
-											<label for="usr">Tên trường học</label>
-											<input type="text" class="form-control" id="usr">
-										</div>
-										<div class="form-group col-xs-12 col-sm-6 col-md-6">
-											<label for="usr">Mã trường học</label>
-											<input type="text" class="form-control" id="usr">
-										</div>
-										<div class="form-group col-xs-12 col-sm-6 col-md-6">
-											<label for="pwd">Địa chỉ:</label>
-											<input type="text" class="form-control" id="pwd">
-										</div>
-										<div class="form-group col-xs-12 col-sm-6 col-md-6">
-											<label for="usr">Thông tin liên lạc</label>
-											<input type="text" class="form-control" id="usr">
-										</div>
-										<div class="form-group col-xs-12 col-sm-6 col-md-6">
-												<div class="dropdown">
-													<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn trạng thái
-													<span class="caret"></span></button>
-													<ul class="dropdown-menu">
-													<li><a href="#">Activie</a></li>
-													<li><a href="#">Inactive</a></li>
-													</ul>
-												</div>
-										</div>		
+									<div class="form-group col-xs-12 col-sm-6 col-md-6">
+										<label for="usr">University Code</label>
+										<input type="text" class="form-control" id="usr">
 									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
+									<div class="form-group col-xs-12 col-sm-6 col-md-6">
+									  <label for="pwd">Address:</label>
+									  <input type="text" class="form-control" id="pwd">
 									</div>
+									<div class="form-group col-xs-12 col-sm-6 col-md-6">
+										<label for="usr">Contact Information</label>
+										<input type="text" class="form-control" id="usr">
 									</div>
-								
-							</div>
+									<div class="form-group col-xs-12 col-sm-6 col-md-6">
+											<div class="dropdown">
+											  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
+											  <span class="caret"></span></button>
+											  <ul class="dropdown-menu">
+												<li><a href="#">Activie</a></li>
+												<li><a href="#">Inactive</a></li>
+											  </ul>
+										  </div>
+									</div>		
+								</div>
+								<div class="modal-footer">
+								  <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
+								</div>
+							  </div>
+						  
 						</div>
 					</div>
-		</div>
+				</div>
 	</div>
-		<table id="data_doitac" class="display text-center" width="100%" cellspacing="0">
-	<thead>
-		<tr>
-			<th class="text-center">STT</th>
-			<th class="text-center">Mã trường học</th>
-			<th class="text-center">Tên trường học</th>
-			<th class="text-center">Địa chỉ</th>
-			<th class="text-center">Trạng thái</th>
-			<th class="text-center"></th>
-			<th class="text-center"></th>
-		</tr>
-	</thead>
+</div>
+  <table id="data_doitac" class="display text-center" width="100%" cellspacing="0">
+<thead>
+  <tr>
+    <th class="text-center">Index</th>
+    <th class="text-center">University Name</th>
+    <th class="text-center">University Code</th>
+    <th class="text-center">Address</th>
+    <th class="text-center">Contact Information</th>
+    <th class="text-center">Status</th>
+	<th class="text-center"></th>
+	<th class="text-center"></th>
+  </tr>
+</thead>
 
-	<tfoot>
-		<tr>
-			<th class="text-center">STT</th>
-			<th class="text-center">Mã trường học</th>
-			<th class="text-center">Tên trường học</th>
-			<th class="text-center">Địa chỉ</th>
-			<th class="text-center">Trạng thái</th>
-			<th class="text-center"></th>
-			<th class="text-center"></th>
-		</tr>
-	</tfoot>
+<tfoot>
+  <tr>
+    <th class="text-center">Index</th>
+    <th class="text-center">University Name</th>
+    <th class="text-center">University Code</th>
+    <th class="text-center">Address</th>
+    <th class="text-center">Contact Information</th>
+    <th class="text-center">Status</th>
+	<th class="text-center"></th>
+	<th class="text-center"></th>
+  </tr>
+</tfoot>
 
-	<tbody>
-		<tr ng-repeat="truonghoc in truonghoc_list">
-			<td>{{truonghoc.id_th}}</td>
-			<td>{{truonghoc.ma_th}}</td>
-			<td>{{truonghoc.ten_th}}</td>
-			<td>{{truonghoc.diachi}}</td>
-			<td>{{truonghoc.trangthai}}</td>
-			<td><button class="btn btn-warning" data-toggle="modal" data-target="#myModal" ng-click="edit(truonghoc.id_th)"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
-		<div class="modal fade container" id="myModal" role="dialog">
-			<div class="modal-dialog">
-			
-			<!-- Modal content-->
-				<div class="modal-content">
-				<div class="modal-header ">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Edit School</h4>
-				</div>
-				<div class="modal-body row">
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">Tên trường học</label>
-						<input type="text" class="form-control" id="usr">
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">Mã trường học</label>
-						<input type="text" class="form-control" id="usr">
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="pwd">Địa chỉ:</label>
-						<input type="text" class="form-control" id="pwd">
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">Thông tin liên lạc</label>
-						<input type="text" class="form-control" id="usr">
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-							<div class="dropdown">
-								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn trạng thái
-								<span class="caret"></span></button>
-								<ul class="dropdown-menu">
-								<li><a href="#">Activie</a></li>
-								<li><a href="#">Inactive</a></li>
-								</ul>
-							</div>
-					</div>		
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
-				</div>
-				</div>
-				
+<tbody>
+  <tr>
+    <td>2</td>
+    <td>Vũ Xuân Dân</td>
+    <td>G01</td>
+    <td>5</td>
+    <td>5</td>
+    <td>5</td>
+    <td><button class="btn btn-warning" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+	<div class="modal fade container" id="myModal" role="dialog">
+		<div class="modal-dialog">
+		
+		 <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header ">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Edit Schools</h4>
 			</div>
+			<div class="modal-body row">
+				<div class="form-group col-xs-12 col-sm-6 col-md-6">
+					<label for="usr">University Name</label>
+					<input type="text" class="form-control" id="usr">
+				</div>
+				<div class="form-group col-xs-12 col-sm-6 col-md-6">
+					<label for="usr">University Code</label>
+					<input type="text" class="form-control" id="usr">
+				</div>
+				<div class="form-group col-xs-12 col-sm-6 col-md-6">
+				  <label for="pwd">Address:</label>
+				  <input type="text" class="form-control" id="pwd">
+				</div>
+				<div class="form-group col-xs-12 col-sm-6 col-md-6">
+					<label for="usr">Contact Information</label>
+					<input type="text" class="form-control" id="usr">
+				</div>
+				<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<div class="dropdown">
+						  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
+						  <span class="caret"></span></button>
+						  <ul class="dropdown-menu">
+							<li><a href="#">Active</a></li>
+							<li><a href="#">Inactive</a></li>
+						  </ul>
+					  </div>
+				</div>		
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
+			</div>
+		  </div>
+		  
 		</div>
-			<td><button class="btn btn-danger" ng-click="remove(truonghoc.id_th)"><span class="glyphicon glyphicon-remove"></span> Remove</button></td>
-		</tr>
-	</tbody>
-	</table>
 	</div>
+    <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Remove</button></td>
+  </tr>
+</tbody>
+</table>
 </div>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -152,4 +153,4 @@
       } );
     } ).draw();
   } );<!---khoi tao datatable--->
-</script>
+</script> 

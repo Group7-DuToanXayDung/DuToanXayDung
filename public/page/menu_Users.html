@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<h2 class="sub-header">Quản lý người sử dụng</h2>
+		<h2 class="sub-header">Users Management</h2>
 		<div class="form-group">
 			<button class="btn btn-primary " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Add</button>
 					<div class="modal fade container " id="myModal" role="dialog">
@@ -14,7 +14,7 @@
 								</div>
 								<div class="modal-body row">
 									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Mã User</label>
+										<label for="usr">User Code</label>
 										<input type="text" class="form-control" id="usr">
 									</div>
 									<div class="form-group col-xs-12 col-sm-6 col-md-6">
@@ -34,7 +34,7 @@
 										<input type="text" class="form-control" id="usr">
 									</div>
 									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Địa chỉ</label>
+										<label for="usr">Address</label>
 										<input type="text" class="form-control" id="usr">
 									</div>				
 									<div class="form-group col-xs-12 col-sm-6 col-md-6">
@@ -48,11 +48,11 @@
 									<div class="form-group col-xs-12 col-sm-6 col-md-6">
 										  <!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
 											<div class="dropdown">
-											  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn giới tính
+											  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose sex
 											  <span class="caret"></span></button>
 											  <ul class="dropdown-menu">
-												<li><a href="#">Nam</a></li>
-												<li><a href="#">Nữ</a></li>
+												<li><a href="#">Male</a></li>
+												<li><a href="#">Female</a></li>
 											  </ul>
 											</div>
 									</div>
@@ -64,17 +64,17 @@
 													  <input type="checkbox" value="">Admin
 													</label>
 													<label class="checkbox-inline">
-													  <input type="checkbox" value="">Giáo vụ
+													  <input type="checkbox" value="">Training Employee
 													</label>
 												  </form>
 												</div>
 												<div class="container">
 													  <form>
 														<label class="checkbox-inline">
-														  <input type="checkbox" value="">Giáo viên
+														  <input type="checkbox" value="">Lecturer
 														</label>
 														<label class="checkbox-inline">
-														  <input type="checkbox" value="">Học viên
+														  <input type="checkbox" value="">Student
 														</label>
 													  </form>
 												</div>
@@ -82,7 +82,7 @@
 									</div>
 									<div class="form-group col-xs-12 col-sm-6 col-md-6">
 											<div class="dropdown">
-											  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn trạng thái
+											  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
 											  <span class="caret"></span></button>
 											  <ul class="dropdown-menu">
 												<li><a href="#">Activie</a></li>
@@ -94,7 +94,7 @@
 								
 								</div>
 								<div class="modal-footer">
-								  <button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
+								  <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
 								</div>
 							  </div>
 						  
@@ -106,15 +106,15 @@
   <table id="data_doitac" class="display text-center" width="100%" cellspacing="0">
 	<thead>
 	  <tr>
-		<th class="text-center">STT</th>
-		<th class="text-center">Mã User</th>
+		<th class="text-center">Index</th>
+		<th class="text-center">User Code</th>
 		<th class="text-center">First Name</th>
 		<th class="text-center">Last Name</th>
 		<th class="text-center">Phone</th>
 		<th class="text-center">Email</th>
-		<th class="text-center">Địa chỉ</th>
-		<th class="text-center">Loại tài khoản</th>
-		<th class="text-center">Trạng thái</th>
+		<th class="text-center">Address</th>
+		<th class="text-center">Accounts Type</th>
+		<th class="text-center">Status</th>
 		<th class="text-center">Username</th>
 		<th class="text-center"></th>
 		<th class="text-center"></th>
@@ -124,14 +124,14 @@
 	<tfoot>
 	  <tr>
 		<th class="text-center">STT</th>
-		<th class="text-center">Mã User</th>
+		<th class="text-center">User Code</th>
 		<th class="text-center">First Name</th>
 		<th class="text-center">Last Name</th>
 		<th class="text-center">Phone</th>
 		<th class="text-center">Email</th>
-		<th class="text-center">Địa chỉ</th>
-		<th class="text-center">Loại tài khoản</th>
-		<th class="text-center">Trạng thái</th>
+		<th class="text-center">Address</th>
+		<th class="text-center">Accounts Type</th>
+		<th class="text-center">Status</th>
 		<th class="text-center">Username</th>
 		<th class="text-center"></th>
 		<th class="text-center"></th>
@@ -162,7 +162,7 @@
 				</div>
 				<div class="modal-body row">
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">Mã User</label>
+						<label for="usr">User Code</label>
 						<input type="text" class="form-control" id="usr">
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
@@ -182,7 +182,7 @@
 						<input type="text" class="form-control" id="usr">
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">Địa chỉ</label>
+						<label for="usr">Address</label>
 						<input type="text" class="form-control" id="usr">
 					</div>				
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
@@ -196,11 +196,11 @@
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						  <!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
 							<div class="dropdown">
-							  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn giới tính
+							  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Sex
 							  <span class="caret"></span></button>
 							  <ul class="dropdown-menu">
-								<li><a href="#">Nam</a></li>
-								<li><a href="#">Nữ</a></li>
+								<li><a href="#">Male</a></li>
+								<li><a href="#">Female</a></li>
 							  </ul>
 							</div>
 					</div>
@@ -212,17 +212,17 @@
 									  <input type="checkbox" value="">Admin
 									</label>
 									<label class="checkbox-inline">
-									  <input type="checkbox" value="">Giáo vụ
+									  <input type="checkbox" value="">Training Employee
 									</label>
 								  </form>
 								</div>
 								<div class="container">
 									  <form>
 										<label class="checkbox-inline">
-										  <input type="checkbox" value="">Giáo viên
+										  <input type="checkbox" value="">Lecturer
 										</label>
 										<label class="checkbox-inline">
-										  <input type="checkbox" value="">Học viên
+										  <input type="checkbox" value="">Students
 										</label>
 									  </form>
 								</div>
@@ -230,7 +230,7 @@
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<div class="dropdown">
-							  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn trạng thái
+							  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
 							  <span class="caret"></span></button>
 							  <ul class="dropdown-menu">
 								<li><a href="#">Activie</a></li>
