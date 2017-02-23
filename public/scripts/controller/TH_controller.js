@@ -71,7 +71,7 @@ app.controller('truonghoc_ctl', ['$scope','$http','$window','$compile',function(
 	
 
 //xoa
-    $scope.remove = function(id, $event, index){
+    $scope.remove = function(id, $event,index){
 		$http.delete('/menu_School/' + id).then(function successCallback(response){
 			
 			$scope.truonghoc_list.splice(index,1);

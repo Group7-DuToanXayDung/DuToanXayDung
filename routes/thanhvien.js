@@ -31,8 +31,9 @@ router.use(bodyParser.json());
 router.delete('/menu_Users/:id', function (req, res) {
 
 	var id = req.params.id;
+	console.log(id);
 
-	var sql1 = "delete from decentralization where user_code = '" + id + "'";
+	var sql1 = "delete from decentralization where user_code in (select user_code from users where user_id = '" + id + "')";
 	connection.query(sql1, function (err, rows, fields) {
 		if (err) {
 			connection.end();

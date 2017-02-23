@@ -47,7 +47,7 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
-							return "<button class='btn btn-danger' ng-click='remove(" + data.user_code + ",$event)'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+							return "<button class='btn btn-danger' ng-click='remove(" + data.user_id + ",$event,$index)'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
 						}
 					}
 				],
@@ -94,31 +94,28 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 	}
 
 	//xoa
-	$scope.remove = function (user_code, $event, index) {
-		try {
-			$http.delete('/menu_Users/' + user_code).then(function successCallback(response) {
-				$scope.thanhvien_list.splice(index, 1);
-				var delButton = $event.target;
-				var tr = jQuery(delButton).closest('tr');
-				var dt = jQuery('#data_table').dataTable();
-				dt.fnDeleteRow(tr);
-				dt.fnDraw();
+	$scope.remove = function (user_id, $event, index) {
+		console.log(user_id);
+		$http.delete('/menu_Users/' + user_id).then(function successCallback(response) {
+			$scope.thanhvien_list.splice(index, 1);
+			var delButton = $event.target;
+			var tr = jQuery(delButton).closest('tr');
+			var dt = jQuery('#data_table').dataTable();
+			dt.fnDeleteRow(tr);
+			dt.fnDraw();
 
-			}, function errorCallback(response) {
+		}, function errorCallback(response) {
 
-			});
-		}catch(errorCallback){
-			alert('That bai');
-		}
+		});
 	}
 	//them
 	$scope.addthanhvien = function () {
 		var indata = { 'thanhvien': $scope.thanhvien, 'roles': $scope.roles };
 		$http.post('/menu_Users', indata).then(function successCallback(response) {
-		$scope.thanhvien.user_id = response.data.insertId;
+			$scope.thanhvien.user_id = response.data.insertId;
 			$scope.thanhvien.user_status = 1;
 			$scope.thanhvien_list.push($scope.thanhvien);
-			
+
 			var dt = jQuery('#data_table').dataTable();
 			dt.fnAddData($scope.thanhvien);
 			dt.fnDraw();
