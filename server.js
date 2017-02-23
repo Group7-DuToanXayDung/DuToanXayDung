@@ -6,6 +6,9 @@ var bodyParser = require('body-parser');
 app.use(express.static(__dirname + "/public"));
 
 app.use(require('./routes/truonghoc'));
+app.use(require('./routes/thanhvien'));
+app.use(require('./routes/quyen'));
+app.use(require('./routes/phanquyen'));
 
 app.listen(5000);
-console.log('server started');
+console.log('Server running on port 5000');

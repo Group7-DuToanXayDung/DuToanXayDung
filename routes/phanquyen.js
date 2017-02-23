@@ -14,7 +14,7 @@ router.use(bodyParser.json());
 
 
 //lay danh sach truong hoc
-router.get('/menu_School',function(req,res){
+router.get('/phanquyen',function(req,res){
     connection.query('select * from university', function (err, rows, fields) {
 		if (err) {
 			connection.end();
@@ -30,7 +30,7 @@ router.get('/menu_School',function(req,res){
 
 
 //xoa truong hoc
-router.delete('/menu_School/:id', function(req,res){
+router.delete('/phanquyen/:id', function(req,res){
 	
 	var id = req.params.id; 
 	var sql = "delete from university where univer_id = '" + id + "'";
@@ -50,9 +50,13 @@ router.delete('/menu_School/:id', function(req,res){
 
 
 
-//them truong hoc
-router.post('/menu_School',function(req,res){
-	var sql = 'insert into university(univer_code,univer_name,univer_address,contact,status) values ("'+req.body.univer_code+'","'+req.body.univer_name+'","'+req.body.univer_address+'","'+req.body.contact+'",1)';
+//them role
+router.post('/phanquyen/:user_code',function(req,res){
+    var user_code = req.params.user_code;
+    console.log(user_code);
+    console.log(req.body);
+
+	/*var sql = 'insert into university(univer_code,univer_name,univer_address,contact,status) values ("'+req.body.univer_code+'","'+req.body.univer_name+'","'+req.body.univer_address+'","'+req.body.contact+'",1)';
 	
 	connection.query(sql, function (err, rows, fields) {
 		if (err) {
@@ -62,7 +66,7 @@ router.post('/menu_School',function(req,res){
 		else {
 			res.json(rows);
 		}
-	});
+	});*/
     
 });
 

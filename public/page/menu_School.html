@@ -1,4 +1,3 @@
-
 <!-- Controller trường học-->
 <div ng-controller="truonghoc_ctl">
 	<div class="container">
@@ -26,19 +25,7 @@
 		</thead>
 
 
-		<tbody>
-			<tr ng-repeat="truonghoc in truonghoc_list">
-				<td>{{$index+1}}</td>
-				<td>{{truonghoc.ma_th}}</td>
-				<td>{{truonghoc.ten_th}}</td>
-				<td>{{truonghoc.diachi}}</td>
-				<td>{{truonghoc.thongtin_lienlac}}</td>
-				<td ng-if="truonghoc.trangthai =='1'">Active</td>
-				<td ng-if="truonghoc.trangthai =='0'">Inactive</td>
-				<td><button class="btn btn-warning" data-toggle="modal" data-target="#myModalEdit" ng-click="editt($index)"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
-				<td><button class="btn btn-danger" ng-click="remove(truonghoc.id_th)"><span class="glyphicon glyphicon-remove"></span> Remove</button></td>
-			</tr>
-		</tbody>
+		
 
 		<tfoot>
 			<tr>
@@ -67,35 +54,21 @@
 					<div class="modal-body row">
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label for="usr">University Name</label>
-							<input type="text" class="form-control" ng-class="{red: add.ten_th.$invalid}" name="ten_th" id="usr" ng-model="truonghoc.ten_th"
+							<input type="text" class="form-control" ng-class="{red: add.ten_th.$invalid}" name="ten_th" id="usr" ng-model="truonghoc.univer_name"
 								required>
 						</div>
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label for="usr">University Code</label>
 							<input type="text" class="form-control" ng-class="{red: add.ma_th.$invalid}" minlength="3" maxlength="10" name="ma_th" id="usr"
-								ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="truonghoc.ma_th" required>
+								ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="truonghoc.univer_code" required>
 						</div>
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label for="pwd">Address:</label>
-							<input type="text" class="form-control" id="pwd" ng-model="truonghoc.diachi">
+							<input type="text" class="form-control" id="pwd" ng-model="truonghoc.univer_address">
 						</div>
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label for="usr">Contact Information</label>
-							<input type="text" class="form-control" id="usr" ng-model="truonghoc.thongtin_lienlac">
-						</div>
-						<div class="form-group col-xs-12 col-sm-6 col-md-6">
-							<div class="radio">
-								<label>
-											<input type="radio" ng-model="truonghoc.trangthai" value="1" ng-checked="true">
-											Active
-										</label>
-							</div>
-							<div class="radio">
-								<label>
-											<input type="radio" ng-model="truonghoc.trangthai" value="0">
-											Inactive
-										</label>
-							</div>
+							<input type="text" class="form-control" id="usr" ng-model="truonghoc.contact">
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -113,75 +86,52 @@
 
 			<!-- Modal content-->
 			<form name="update">
-			<div class="modal-content">
-				<div class="modal-header ">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Edit Schools</h4>
-				</div>
-				<div class="modal-body row">
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">University Name</label>
-						<input type="text" class="form-control" ng-class="{red: update.ten_th.$invalid}" name="ten_th" id="usr" ng-model="edittruonghoc.ten_th"
-							required>
+				<div class="modal-content">
+					<div class="modal-header ">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Edit Schools</h4>
 					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">University Code</label>
-						<input type="text" class="form-control" ng-class="{red: update.ma_th.$invalid}" minlength="3" maxlength="10" name="ma_th" id="usr"
-							ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="edittruonghoc.ma_th" required>
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="pwd">Address:</label>
-						<input type="text" class="form-control" id="pwd" ng-model="edittruonghoc.diachi">
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">Contact Information</label>
-						<input type="text" class="form-control" id="usr" ng-model="edittruonghoc.thongtin_lienlac">
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<div class="radio">
-							<label>
-											<input type="radio" ng-model="edittruonghoc.trangthai" value="1" ng-checked="edittruonghoc.trangthai == '1'">
+					<div class="modal-body row">
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label for="usr">University Name</label>
+							<input type="text" class="form-control" ng-class="{red: update.ten_th.$invalid}" name="ten_th" id="usr" ng-model="edittruonghoc.univer_name"
+								required>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label for="usr">University Code</label>
+							<input type="text" class="form-control" ng-class="{red: update.ma_th.$invalid}" minlength="3" maxlength="10" name="ma_th"
+								id="usr" ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="edittruonghoc.univer_code" required>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label for="pwd">Address:</label>
+							<input type="text" class="form-control" id="pwd" ng-model="edittruonghoc.univer_address">
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label for="usr">Contact Information</label>
+							<input type="text" class="form-control" id="usr" ng-model="edittruonghoc.contact">
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<div class="radio">
+								<label>
+											<input type="radio" ng-model="edittruonghoc.status" value="1" ng-checked="edittruonghoc.status == '1'">
 											Active
 										</label>
-						</div>
-						<div class="radio">
-							<label>
-											<input type="radio" ng-model="edittruonghoc.trangthai" value="0" ng-checked="edittruonghoc.trangthai == '0'">
+							</div>
+							<div class="radio">
+								<label>
+											<input type="radio" ng-model="edittruonghoc.status" value="0" ng-checked="edittruonghoc.status == '0'">
 											Inactive
 										</label>
+							</div>
 						</div>
 					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="updatetruonghoc(edittruonghoc.univer_id)" ng-disabled="!update.$dirty || (update.$dirty && update.$invalid)">Update</button>
+					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="updatetruonghoc()" ng-disabled="!update.$dirty || (update.$dirty && update.$invalid)">Update</button>
-				</div>
-			</div>
 			</form>
 		</div>
 	</div>
 
 
-</div>
-
-<script type="text/javascript">
-	setTimeout(function(){ 
-		$(document).ready(function () {
-		var t = $('#data_table').DataTable({
-			"scrollY": 300,
-			"columnDefs": [{
-				"searchable": false,
-				"orderable": false,
-				"targets": 0
-			}],
-			"order": [[1, 'asc']]
-		});
-
-		t.on('order.dt search.dt', function () {
-			t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-				cell.innerHTML = i + 1;
-			});
-		}).draw();
-	 }, 500);
-	}); <!---khoi tao datatable-- ->
-
-</script>
+</div> 

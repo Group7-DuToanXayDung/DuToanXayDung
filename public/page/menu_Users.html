@@ -1,285 +1,252 @@
-<div class="container">
-	<div class="row">
-		<h2 class="sub-header">Users Management</h2>
-		<div class="form-group">
-			<button class="btn btn-primary " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Add</button>
-					<div class="modal fade container " id="myModal" role="dialog">
-						<div class="modal-dialog ">
-						
-						  <!-- Modal content-->
-							  <div class="modal-content">
-								<div class="modal-header">
-								  <button type="button" class="close" data-dismiss="modal">&times;</button>
-								  <h4 class="modal-title">Edit Users</h4>
+<div ng-controller="thanhvien_ctl">
+	<div class="container">
+		<div class="row">
+			<h2 class="sub-header">Users Management</h2>
+			<div class="form-group">
+				<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+			</div>
+		</div>
+	</div>
+	<table id="data_table" class="display text-center" width="100%" cellspacing="0" datatables="ng">
+		<thead>
+			<tr>
+				<th class="text-center">STT</th>
+				<th class="text-center">User Code</th>
+				<th class="text-center">First Name</th>
+				<th class="text-center">Last Name</th>
+				<th class="text-center">Phone</th>
+				<th class="text-center">Email</th>
+				<th class="text-center">Address</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Username</th>
+				<th class="text-center">Edit</th>
+				<th class="text-center">Remove</th>
+			</tr>
+		</thead>
+
+
+
+		<tfoot>
+			<tr>
+				<th class="text-center">STT</th>
+				<th class="text-center">User Code</th>
+				<th class="text-center">First Name</th>
+				<th class="text-center">Last Name</th>
+				<th class="text-center">Phone</th>
+				<th class="text-center">Email</th>
+				<th class="text-center">Address</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Username</th>
+				<th class="text-center">Edit</th>
+				<th class="text-center">Remove</th>
+			</tr>
+		</tfoot>
+
+	</table>
+
+	<div class="modal fade container" id="myModalEdit" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Edit Users</h4>
+							</div>
+							<div class="modal-body row">
+								<div class="form-group col-xs-12 col-sm-6 col-md-6">
+									<label for="usr">User Code</label>
+									<input type="text" class="form-control" id="usr">
 								</div>
-								<div class="modal-body row">
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">User Code</label>
-										<input type="text" class="form-control" id="usr">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">First Name</label>
-										<input type="text" class="form-control" id="usr">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									  <label for="pwd">Last Name</label>
-									  <input type="text" class="form-control" id="pwd">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Phone</label>
-										<input type="text" class="form-control" id="usr">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Email</label>
-										<input type="text" class="form-control" id="usr">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Address</label>
-										<input type="text" class="form-control" id="usr">
-									</div>				
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Username</label>
-										<input type="text" class="form-control" id="usr">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Password</label>
-										<input type="password" class="form-control" id="usr">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										  <!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
-											<div class="dropdown">
-											  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose sex
-											  <span class="caret"></span></button>
-											  <ul class="dropdown-menu">
-												<li><a href="#">Male</a></li>
-												<li><a href="#">Female</a></li>
-											  </ul>
-											</div>
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										  <!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
-											<div class="dropdown">
-											  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Universiti
-											  <span class="caret"></span></button>
-											  <ul class="dropdown-menu">
-												<li><a href="#">Thu Dau Mot</a></li>
-												<li><a href="#">Hồng Bàng</a></li>
-											  </ul>
-											</div>
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-											
-												<div class="container">
-												  <form>
-													<label class="checkbox-inline">
-													  <input type="checkbox" value="">Admin
-													</label>
-													<label class="checkbox-inline">
-													  <input type="checkbox" value="">Training Employee
-													</label>
-												  </form>
-												</div>
-												<div class="container">
-													  <form>
-														<label class="checkbox-inline">
-														  <input type="checkbox" value="">Lecturer
-														</label>
-														<label class="checkbox-inline">
-														  <input type="checkbox" value="">Student
-														</label>
-													  </form>
-												</div>
-											
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-											<div class="dropdown">
-											  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
-											  <span class="caret"></span></button>
-											  <ul class="dropdown-menu">
-												<li><a href="#">Activie</a></li>
-												<li><a href="#">Inactive</a></li>
-											  </ul>
-										  </div>
-									</div>			
-								
-								
+								<div class="form-group col-xs-12 col-sm-6 col-md-6">
+									<label for="usr">First Name</label>
+									<input type="text" class="form-control" id="usr">
 								</div>
-								<div class="modal-footer">
-								  <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
+								<div class="form-group col-xs-12 col-sm-6 col-md-6">
+									<label for="pwd">Last Name</label>
+									<input type="text" class="form-control" id="pwd">
 								</div>
-							  </div>
-						  
+								<div class="form-group col-xs-12 col-sm-6 col-md-6">
+									<label for="usr">Phone</label>
+									<input type="text" class="form-control" id="usr">
+								</div>
+								<div class="form-group col-xs-12 col-sm-6 col-md-6">
+									<label for="usr">Email</label>
+									<input type="text" class="form-control" id="usr">
+								</div>
+								<div class="form-group col-xs-12 col-sm-6 col-md-6">
+									<label for="usr">Address</label>
+									<input type="text" class="form-control" id="usr">
+								</div>
+								<div class="form-group col-xs-12 col-sm-6 col-md-6">
+									<label for="usr">Username</label>
+									<input type="text" class="form-control" id="usr">
+								</div>
+								<div class="form-group col-xs-12 col-sm-6 col-md-6">
+									<label for="usr">Password</label>
+									<input type="password" class="form-control" id="usr">
+								</div>
+								<div class="form-group col-xs-12 col-sm-6 col-md-6">
+									<!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
+									<div class="dropdown">
+										<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Sex
+							  <span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="#">Male</a></li>
+											<li><a href="#">Female</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="form-group col-xs-12 col-sm-6 col-md-6">
+
+									<div class="container">
+										<form>
+											<label class="checkbox-inline">
+									  <input type="checkbox" value="">Admin
+									</label>
+											<label class="checkbox-inline">
+									  <input type="checkbox" value="">Training Employee
+									</label>
+										</form>
+									</div>
+									<div class="container">
+										<form>
+											<label class="checkbox-inline">
+										  <input type="checkbox" value="">Lecturer
+										</label>
+											<label class="checkbox-inline">
+										  <input type="checkbox" value="">Students
+										</label>
+										</form>
+									</div>
+
+								</div>
+								<div class="form-group col-xs-12 col-sm-6 col-md-6">
+									<div class="dropdown">
+										<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
+							  <span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="">Activie</a></li>
+											<li><a href="">Inactive</a></li>
+										</ul>
+									</div>
+								</div>
+
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
+							</div>
 						</div>
+
 					</div>
 				</div>
-	</div>
-</div>
-  <table id="data_doitac" class="display text-center" width="100%" cellspacing="0">
-	<thead>
-	  <tr>
-		<th class="text-center">Index</th>
-		<th class="text-center">User Code</th>
-		<th class="text-center">First Name</th>
-		<th class="text-center">Last Name</th>
-		<th class="text-center">Phone</th>
-		<th class="text-center">Email</th>
-		<th class="text-center">Address</th>
-		<th class="text-center">Accounts Type</th>
-		<th class="text-center">Status</th>
-		<th class="text-center">Username</th>
-		<th class="text-center"></th>
-		<th class="text-center"></th>
-	  </tr>
-	</thead>
 
-	<tfoot>
-	  <tr>
-		<th class="text-center">STT</th>
-		<th class="text-center">User Code</th>
-		<th class="text-center">First Name</th>
-		<th class="text-center">Last Name</th>
-		<th class="text-center">Phone</th>
-		<th class="text-center">Email</th>
-		<th class="text-center">Address</th>
-		<th class="text-center">Accounts Type</th>
-		<th class="text-center">Status</th>
-		<th class="text-center">Username</th>
-		<th class="text-center"></th>
-		<th class="text-center"></th>
-	  </tr>
-	</tfoot>
+	<div class="modal fade container " id="myModalAdd" role="dialog">
+		<div class="modal-dialog ">
 
-	<tbody>
-	  <tr>
-		<td>2</td>
-		<td>Vũ Xuân Dân</td>
-		<td>G01</td>
-		<td>5</td>
-		<td>5</td>
-		<td>5</td>
-		<td>5</td>
-		<td>5</td>
-		<td>5</td>
-		<td>5</td>
-		<td><button class="btn btn-warning" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
-		<div class="modal fade container" id="myModal" role="dialog">
-			<div class="modal-dialog">
-			
-			  <!-- Modal content-->
-			  <div class="modal-content">
+			<!-- Modal content-->
+			<div class="modal-content">
 				<div class="modal-header">
-				  <button type="button" class="close" data-dismiss="modal">&times;</button>
-				  <h4 class="modal-title">Edit Users</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Add Users</h4>
 				</div>
 				<div class="modal-body row">
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label for="usr">User Code</label>
-						<input type="text" class="form-control" id="usr">
+						<input type="text" class="form-control" id="usr" ng-model="thanhvien.user_code">
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label for="usr">First Name</label>
-						<input type="text" class="form-control" id="usr">
+						<input type="text" class="form-control" id="usr" ng-model="thanhvien.firstname">
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-					  <label for="pwd">Last Name</label>
-					  <input type="text" class="form-control" id="pwd">
+						<label for="pwd">Last Name</label>
+						<input type="text" class="form-control" id="pwd" ng-model="thanhvien.lastname">
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label for="usr">Phone</label>
-						<input type="text" class="form-control" id="usr">
+						<input type="number" class="form-control" id="usr" ng-model="thanhvien.phone">
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label for="usr">Email</label>
-						<input type="text" class="form-control" id="usr">
+						<input type="email" class="form-control" id="usr" ng-model="thanhvien.email">
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label for="usr">Address</label>
-						<input type="text" class="form-control" id="usr">
-					</div>				
+						<input type="text" class="form-control" id="usr" ng-model="thanhvien.useraddress">
+					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label for="usr">Username</label>
-						<input type="text" class="form-control" id="usr">
+						<input type="text" class="form-control" id="usr" ng-model="thanhvien.username">
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label for="usr">Password</label>
-						<input type="password" class="form-control" id="usr">
+						<input type="password" class="form-control" id="usr" ng-model="thanhvien.password">
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						  <!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
-							<div class="dropdown">
-							  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Sex
-							  <span class="caret"></span></button>
-							  <ul class="dropdown-menu">
-								<li><a href="#">Male</a></li>
-								<li><a href="#">Female</a></li>
-							  </ul>
-							</div>
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-							
-								<div class="container">
-								  <form>
-									<label class="checkbox-inline">
-									  <input type="checkbox" value="">Admin
-									</label>
-									<label class="checkbox-inline">
-									  <input type="checkbox" value="">Training Employee
-									</label>
-								  </form>
-								</div>
-								<div class="container">
-									  <form>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">Lecturer
+						<!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose sex
+											  <span class="caret"></span></button>
+							<ul class="dropdown-menu">
+								<li>
+									<label>
+											<input type="radio" ng-model="thanhvien.gender" value="1">
+											Male
 										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">Students
+								</li>
+								<li>
+									<label>
+											<input type="radio" ng-model="thanhvien.gender" value="0">
+											Female
 										</label>
-									  </form>
-								</div>
-							
+								</li>
+							</ul>
+						</div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-							<div class="dropdown">
-							  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
-							  <span class="caret"></span></button>
-							  <ul class="dropdown-menu">
-								<li><a href="#">Activie</a></li>
-								<li><a href="#">Inactive</a></li>
-							  </ul>
-						  </div>
-					</div>			
-				
-				
+						<!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="true">
+								Chose University
+								<span class="caret"></span>
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+									<ul class="list-group" ng-repeat="truonghoc in truonghoc_list_tv">
+										<label>
+											<input type="radio" ng-model="thanhvien.univer_code" value="{{truonghoc.univer_code}}">
+											{{truonghoc.univer_name}}
+										</label>
+									</ul>
+								</div>
+						</div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="true">
+								Chose Role
+								<span class="caret"></span>
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+									<ul class="list-group" ng-repeat="role in roles_list">
+									<label class="checkbox-inline">
+													  <input type="checkbox" value="{{role.access_id}}" ng-click="checkedrole(role.access_id)">{{role.access_name}} >
+													</label>
+									</ul>
+								</div>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
-				  <button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addthanhvien()">Add</button>
 				</div>
-			  </div>
-			  
 			</div>
-		</div>
-		<td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Remove</button></td>
-	  </tr>
-	</tbody>
-</table>
-</div>
-<script type="text/javascript">
-  $(document).ready(function() {
-    var t = $('#data_doitac').DataTable( {
-      "scrollY":   300,
-      "columnDefs": [ {
-        "searchable": false,
-        "orderable": false,
-        "targets": 0
-      } ],
-      "order": [[ 1, 'asc' ]]
-    } );
 
-    t.on( 'order.dt search.dt', function () {
-      t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-        cell.innerHTML = i+1;
-      } );
-    } ).draw();
-  } );<!---khoi tao datatable--->
-</script> 
+		</div>
+	</div>
+
+
+</div>

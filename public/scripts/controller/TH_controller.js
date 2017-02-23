@@ -1,48 +1,135 @@
-app.controller('truonghoc_ctl', ['$scope','$http',function($scope, $http){
+app.controller('truonghoc_ctl', ['$scope','$http','$window','$compile',function($scope, $http, $window, $compile){
 
 
     var refresh = function(){
+		
 		$http({
 			method: 'GET',
 			url: '/menu_School'
 		}).then(function successCallback(response){
+			
 			$scope.truonghoc_list = response.data;
+			
+			var t = jQuery("#data_table").DataTable({
+						"aLengthMenu": [
+							  [10, 25, 50, 100, -1],
+							  [10, 25, 50, 100, "All"]
+						],
+						"iDisplayLength": 50,
+						"retrieve": true,
+						//"processing": true,
+						"deferRender": true,
+						"aaData": $scope.truonghoc_list,
+						"rowId": "univer_id",
+						"aoColumns": [
+							{ "data": "univer_id"},
+							{ "data": "univer_name" },
+							{ "data": "univer_code" },
+							{ "data": "univer_address" },
+							{ "data": "contact" },
+							{ "data": null,  mRender: function (data, type, row) {
+												var str = "";
+												if(data.status == 1)
+												{
+													str = "Active";
+												}
+												else
+												{
+													str = "Inactive";
+												}
+												return str;
+											} },
+							{ "data": null, mRender: function (data, type, row, index) {
+												return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
+											}},		
+							{ "data": null, mRender: function (data, type, row, index) {
+												return "<button class='btn btn-danger' ng-click='remove("+data.univer_id+",$event)'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+											}}		
+						],
+						"order": [[2, "asc"]],
+						"initComplete": function () {
+							$compile(document.getElementById('data_table'))($scope);						
+						}
+					});
+
+				t.on('order.dt search.dt', function () {
+					t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+						cell.innerHTML = i + 1;
+					});
+				}).draw();
+			
+			
 		}, function errorCallback(response){
 			
 		});
 	}
-
+	
+	
+	
 	refresh();
+	
+	
 
 //xoa
-    $scope.remove = function(id){
+    $scope.remove = function(id, $event, index){
 		$http.delete('/menu_School/' + id).then(function successCallback(response){
-			refresh();
+			
+			$scope.truonghoc_list.splice(index,1);
+			
+			var delButton = $event.target;
+			var tr = jQuery(delButton).closest('tr');
+			var dt = jQuery('#data_table').dataTable();
+			dt.fnDeleteRow(tr);
+			dt.fnDraw();
+			
 		}, function errorCallback(response){
 			
 		});
 	}
+	
+	
 //them
 	$scope.addtruonghoc = function(){
 		$http.post('/menu_School',$scope.truonghoc).then(function successCallback(response){
+			//refresh();
+			//$window.location.reload();
+			$scope.truonghoc.univer_id = response.data.insertId;
+			$scope.truonghoc.status = 1;
+			$scope.truonghoc_list.push($scope.truonghoc);
+			
+			var dt = jQuery('#data_table').dataTable();
+			dt.fnAddData($scope.truonghoc);
+			dt.fnDraw();
+			$compile(document.getElementById('data_table'))($scope);
 			$scope.truonghoc = null;
-			refresh();
 		},function errorCallback(response){
 			
 		});
 	}
+	
+	
 //load form edit
 	$scope.editt = function(index){
 		toSelect = $scope.truonghoc_list[index];
 		$scope.edittruonghoc = toSelect;
-		console.log(toSelect);
 	}
+	
 
 //sua
 	$scope.updatetruonghoc = function(){
-		$http.put('/menu_School/' + $scope.edittruonghoc.id_th, $scope.edittruonghoc).then(function successCallback(response){
-			$scope.edittruonghoc = null;
-			refresh();
+		$http.put('/menu_School/' + $scope.edittruonghoc.univer_id, $scope.edittruonghoc).then(function successCallback(response){
+			for (var i = 0; i < $scope.truonghoc_list.length; i++) {
+				if ($scope.truonghoc_list[i].univer_id === $scope.edittruonghoc.univer_id) {
+					$scope.truonghoc_list[i] = $scope.edittruonghoc;
+				}
+			}			
+			var dt = jQuery('#data_table').dataTable();
+			var row = jQuery("tr#" + $scope.edittruonghoc.univer_id);
+			dt.fnUpdate($scope.edittruonghoc, row); // Row
+			dt.fnDraw();
+			//refresh();
+			
+			//$scope.edittruonghoc = null;
 		}, function errorCallback(response){
 			
 		});
