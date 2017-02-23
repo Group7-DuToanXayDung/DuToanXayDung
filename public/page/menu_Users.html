@@ -1,147 +1,50 @@
 <div ng-controller="thanhvien_ctl">
-	<div class="container">
-		<div class="row">
-			<h2 class="sub-header">Users Management</h2>
-			<div class="form-group">
-				<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+	<div>
+		<div class="container">
+			<div class="row">
+				<h2 class="sub-header">List of Users</h2>
+				<div class="form-group">
+					<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+				</div>
 			</div>
 		</div>
+		<table id="data_table" class="display text-center" width="100%" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">No.</th>
+					<th class="text-center">User ID</th>
+					<th class="text-center">Last Name</th>
+					<th class="text-center">First Name</th>
+					<th class="text-center">Username</th>
+					<th class="text-center">Phone</th>
+					<th class="text-center">Email</th>
+					<th class="text-center">Status</th>
+					<th class="text-center">Edit</th>
+					<th class="text-center">Remove</th>
+				</tr>
+			</thead>
+
+			<tfoot>
+				<tr>
+					<th class="text-center">No.</th>
+					<th class="text-center">User ID</th>
+					<th class="text-center">Last Name</th>
+					<th class="text-center">First Name</th>
+					<th class="text-center">Username</th>
+					<th class="text-center">Phone</th>
+					<th class="text-center">Email</th>
+					<th class="text-center">Status</th>
+					<th class="text-center">Edit</th>
+					<th class="text-center">Remove</th>
+				</tr>
+			</tfoot>
+		</table>
 	</div>
-	<table id="data_table" class="display text-center" width="100%" cellspacing="0" datatables="ng">
-		<thead>
-			<tr>
-				<th class="text-center">STT</th>
-				<th class="text-center">User Code</th>
-				<th class="text-center">First Name</th>
-				<th class="text-center">Last Name</th>
-				<th class="text-center">Phone</th>
-				<th class="text-center">Email</th>
-				<th class="text-center">Address</th>
-				<th class="text-center">Status</th>
-				<th class="text-center">Username</th>
-				<th class="text-center">Edit</th>
-				<th class="text-center">Remove</th>
-			</tr>
-		</thead>
 
 
 
-		<tfoot>
-			<tr>
-				<th class="text-center">STT</th>
-				<th class="text-center">User Code</th>
-				<th class="text-center">First Name</th>
-				<th class="text-center">Last Name</th>
-				<th class="text-center">Phone</th>
-				<th class="text-center">Email</th>
-				<th class="text-center">Address</th>
-				<th class="text-center">Status</th>
-				<th class="text-center">Username</th>
-				<th class="text-center">Edit</th>
-				<th class="text-center">Remove</th>
-			</tr>
-		</tfoot>
 
-	</table>
-
-	<div class="modal fade container" id="myModalEdit" role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Edit Users</h4>
-							</div>
-							<div class="modal-body row">
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">User Code</label>
-									<input type="text" class="form-control" id="usr">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">First Name</label>
-									<input type="text" class="form-control" id="usr">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="pwd">Last Name</label>
-									<input type="text" class="form-control" id="pwd">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">Phone</label>
-									<input type="text" class="form-control" id="usr">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">Email</label>
-									<input type="text" class="form-control" id="usr">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">Address</label>
-									<input type="text" class="form-control" id="usr">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">Username</label>
-									<input type="text" class="form-control" id="usr">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label for="usr">Password</label>
-									<input type="password" class="form-control" id="usr">
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
-									<div class="dropdown">
-										<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Sex
-							  <span class="caret"></span></button>
-										<ul class="dropdown-menu">
-											<li><a href="#">Male</a></li>
-											<li><a href="#">Female</a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-
-									<div class="container">
-										<form>
-											<label class="checkbox-inline">
-									  <input type="checkbox" value="">Admin
-									</label>
-											<label class="checkbox-inline">
-									  <input type="checkbox" value="">Training Employee
-									</label>
-										</form>
-									</div>
-									<div class="container">
-										<form>
-											<label class="checkbox-inline">
-										  <input type="checkbox" value="">Lecturer
-										</label>
-											<label class="checkbox-inline">
-										  <input type="checkbox" value="">Students
-										</label>
-										</form>
-									</div>
-
-								</div>
-								<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<div class="dropdown">
-										<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
-							  <span class="caret"></span></button>
-										<ul class="dropdown-menu">
-											<li><a href="">Activie</a></li>
-											<li><a href="">Inactive</a></li>
-										</ul>
-									</div>
-								</div>
-
-
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
+	<!-- modal add -->
 	<div class="modal fade container " id="myModalAdd" role="dialog">
 		<div class="modal-dialog ">
 
@@ -149,62 +52,98 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Add Users</h4>
+					<h4 class="modal-title">Add User</h4>
 				</div>
 				<div class="modal-body row">
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">User Code</label>
-						<input type="text" class="form-control" id="usr" ng-model="thanhvien.user_code">
+						<label>User ID</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="UserID" ng-model="thanhvien.user_code><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">First Name</label>
-						<input type="text" class="form-control" id="usr" ng-model="thanhvien.firstname">
+						<label>Last Name</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="LastName" ng-model="thanhvien.lastname><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="pwd">Last Name</label>
-						<input type="text" class="form-control" id="pwd" ng-model="thanhvien.lastname">
+						<label>First Name</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="First Name" ng-model="thanhvien.firstname"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Phone</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="Phone" ng-model="thanhvien.phone><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">Phone</label>
-						<input type="number" class="form-control" id="usr" ng-model="thanhvien.phone">
+						<label>Email</label>
+						<div><input style="width:95%; float:left" type="email" class="form-control" id="Email" ng-model="thanhvien.email><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">Email</label>
-						<input type="email" class="form-control" id="usr" ng-model="thanhvien.email">
+						<label>Address</label>
+						<textarea style="width:95%" class="form-control" rows="3" id="address_Add" ng-model="thanhvien.useraddress"></textarea>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">Address</label>
-						<input type="text" class="form-control" id="usr" ng-model="thanhvien.useraddress">
+						<label>Username</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="Username" ng-model="thanhvien.username><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">Username</label>
-						<input type="text" class="form-control" id="usr" ng-model="thanhvien.username">
+						<label>Password</label>
+						<div><input style="width:95%; float:left" type="password" class="form-control" id="Password" ng-model="thanhvien.password><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label for="usr">Password</label>
-						<input type="password" class="form-control" id="usr" ng-model="thanhvien.password">
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
-						<div class="dropdown">
-							<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose sex
-											  <span class="caret"></span></button>
-							<ul class="dropdown-menu">
-								<li>
-									<label>
-											<input type="radio" ng-model="thanhvien.gender" value="1">
+						<label style="display:block">Select Gender</label>
+						<form>
+							<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" ng-model="thanhvien.gender" value="1" checked="checked">
 											Male
-										</label>
-								</li>
-								<li>
-									<label>
-											<input type="radio" ng-model="thanhvien.gender" value="0">
+							</label>
+							<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" ng-model="thanhvien.gender" value="0">
 											Female
-										</label>
-								</li>
-							</ul>
-						</div>
+
+							</label>
+						</form>
 					</div>
+
+
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Select Roles</label>
+						<div class="container">
+							<form>
+								<label class="checkbox-inline">
+									  <input type="checkbox" value="" ng-click="checkedrole(1)">Admin
+									</label>
+								<label class="checkbox-inline">
+									  <input type="checkbox" value="" ng-click="checkedrole(2)">Registrar
+									</label>
+							</form>
+						</div>
+						<div class="container">
+							<form>
+								<label class="checkbox-inline">
+										  <input type="checkbox" value="" ng-click="checkedrole(3)">Lecturer
+										</label>
+								<label class="checkbox-inline">
+										  <input type="checkbox" value="" ng-click="checkedrole(4)">Student
+										</label>
+							</form>
+						</div>
+
+					</div>
+					
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label style="display:block">Select status</label>
+						<form>
+							<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" value="1" ng-model="thanhvien.user_status" checked="checked">
+											Active
+							</label>
+							<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" ng-model="thanhvien.user_status" value="0">
+											Inactive
+
+							</label>
+						</form>
+					</div>
+
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
 						<div class="dropdown">
@@ -223,30 +162,159 @@
 								</div>
 						</div>
 					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<div class="dropdown">
-							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="true">
-								Chose Role
-								<span class="caret"></span>
-								</button>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-									<ul class="list-group" ng-repeat="role in roles_list">
-									<label class="checkbox-inline">
-													  <input type="checkbox" value="{{role.access_id}}" ng-click="checkedrole(role.access_id)">{{role.access_name}} >
-													</label>
-									</ul>
-								</div>
-						</div>
-					</div>
+
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addthanhvien()">Add</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addthanhvien()"><span class="glyphicon glyphicon-plus"></span>Add</button>
 				</div>
 			</div>
 
 		</div>
 	</div>
 
+
+
+
+	<!-- modal edit -->
+
+	<div class="modal fade container " id="myModalEdit" role="dialog">
+		<div class="modal-dialog ">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Update User</h4>
+				</div>
+				<div class="modal-body row">
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>User ID</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="UserID"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Last Name</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="LastName"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>First Name</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="First Name"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Phone</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="Phone"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Email</label>
+						<div><input style="width:95%; float:left" type="email" class="form-control" id="Email"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Address</label>
+						<textarea style="width:95%" class="form-control" rows="3" id="address_Add"></textarea>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Username</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="Username"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Password</label>
+						<div><input style="width:95%; float:left" type="password" class="form-control" id="Password"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label style="display:block">Select status</label>
+						<form>
+							<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" value="1" checked="checked">
+											Male
+							</label>
+							<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" value="0">
+											Female
+
+							</label>
+						</form>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Select status</label>
+						<div class="container">
+							<form>
+								<label class="checkbox-inline">
+									  <input type="checkbox" value="">Admin
+									</label>
+								<label class="checkbox-inline">
+									  <input type="checkbox" value="">Registrar
+									</label>
+							</form>
+						</div>
+						<div class="container">
+							<form>
+								<label class="checkbox-inline">
+										  <input type="checkbox" value="">Lecturer
+										</label>
+								<label class="checkbox-inline">
+										  <input type="checkbox" value="">Student
+										</label>
+							</form>
+						</div>
+
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label style="display:block">Select status</label>
+						<form>
+							<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" value="1" checked="checked">
+											Active
+							</label>
+							<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" value="0">
+											Inactive
+
+							</label>
+						</form>
+					</div>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-edit"></span>Update</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+	<!-- modal confirm -->
+	<div class="container">
+		<div class="modal fade" id="myModalConfirm" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">ARE YOU SURE</h4>
+
+					</div>
+
+					<div class="modal-body">
+						<p>Do you want to remove data?</p>
+					</div>
+
+					<div class="modal-footer">
+
+						<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+							class="btn" data-dismiss="modal">Yes</button>
+							<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+								class="btn" data-dismiss="modal">No</button>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 </div>

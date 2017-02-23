@@ -1,170 +1,192 @@
 <div class="container">
 	<div class="row">
-		<h2 class="sub-header">Studying Program Information</h2>
+		<h2 class="sub-header">List of Specializations</h2>
 		<div class="form-group">
-			<button class="btn btn-primary " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Add</button>
-					<div class="modal fade container " id="myModal" role="dialog">
-						<div class="modal-dialog ">
-						
-						  	<!-- Modal content-->
-							  <div class="modal-content">
-								<div class="modal-header">
-								  <button type="button" class="close" data-dismiss="modal">&times;</button>
-								  <h4 class="modal-title">Edit subjects</h4>
-								</div>
-								<div class="modal-body row">
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Program Code</label>
-										<input type="text" class="form-control" id="usr">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Program Name</label>
-										<input type="text" class="form-control" id="usr">
-									</div>
-									<div style="max-height:150px; overflow:auto" class="form-group col-xs-12 col-sm-12 col-md-12">
-									  <label>Choose subject in studying program</label>
-									  <form>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">HTML
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">CSS
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">BOOTSTRAP
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">JQUERY
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">ANGULARJS
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">NODEJS
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">ENGLISH FOR PRESENTATION
-										</label>
-											<input type="checkbox" value="">HTML
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">CSS
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">BOOTSTRAP
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">JQUERY
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">ANGULARJS
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">NODEJS
-										</label>
-										<label class="checkbox-inline">
-										  <input type="checkbox" value="">ENGLISH FOR PRESENTATION
-										</label>
-									  </form>
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Status</label>
-											<div class="dropdown">
-											  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
-											  <span class="caret"></span></button>
-											  <ul class="dropdown-menu">
-												<li><a href="#">Activie</a></li>
-												<li><a href="#">Inactive</a></li>
-											  </ul>
-										  </div>
-									</div>		
-								</div>
-								<div class="modal-footer">
-								  <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
-								</div>
-							  </div>
-						  
-						</div>
-					</div>
-				</div>
+			<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+		</div>
 	</div>
 </div>
 	
-<table id="data_doitac" class="display text-center" width="100%" cellspacing="0">
-<thead>
-  <tr>
-    <th class="text-center">Index</th>
-    <th class="text-center">Program Code</th>
-    <th class="text-center">Program Name</th>
-    <th class="text-center">Status</th>
-	<th class="text-center"></th>
-	<th class="text-center"></th>
-  </tr>
-</thead>
+<table id="chuongtrinhhoc" class="display text-center" width="100%" cellspacing="0">
+	<thead>
+	  <tr>
+		<th class="text-center">No.</th>
+		<th class="text-center">Specialization ID</th>
+		<th class="text-center">Name</th>
+		<th class="text-center">Description</th>
+		<th class="text-center">Status</th>
+		<th class="text-center">Update</th>
+		<th class="text-center">Remove</th>
+	  </tr>
+	</thead>
 
-<tfoot>
-  <tr>
-    <th class="text-center">Index</th>
-    <th class="text-center">Program Code</th>
-    <th class="text-center">Program Name</th>
-    <th class="text-center">Status</th>
-	<th class="text-center"></th>
-	<th class="text-center"></th>
-  </tr>
-</tfoot>
+	<tfoot>
+	  <tr>
+		<th class="text-center">No.</th>
+		<th class="text-center">Specialization ID</th>
+		<th class="text-center">Name</th>
+		<th class="text-center">Description</th>
+		<th class="text-center">Status</th>
+		<th class="text-center">Update</th>
+		<th class="text-center">Remove</th>
+	  </tr>
+	</tfoot>
 
-<tbody>
-  <tr>
-    <td>2</td>
-    <td>Vũ Xuân Dân</td>
-    <td>G01</td>
-    <td>5</td>
-    <td><button class="btn btn-warning" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
-	<div class="modal fade container" id="myModal" role="dialog">
-		<div class="modal-dialog">
+	<tbody>
+	  <tr>
+		<td>1</td>
+		<td>AQT</td>
+		<td>Thiết kế Web_Apllication</td>
+		<td>Học FrontEnd và BackEnd</td>
+		<td>Active</td>
+		<td><button class="btn btn-warning" data-toggle="modal" data-target="#myModalEdit"><span class="glyphicon glyphicon-edit"></span>Update</button></td>
+		<td><button class="btn btn-danger" data-toggle="modal" data-target="#myModalConfirm"><span class="glyphicon glyphicon-remove"></span>Remove</button></td>
+	  </tr>
+	</tbody>
+</table>
+
+
+
+
+<!-- modal ADD -->
+<div class="container">
+	<div class="modal fade container " id="myModalAdd" role="dialog">
+		<div class="modal-dialog ">
 		
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Edit Subjects</h4>
-			</div>
-			<div class="modal-body row">
-				<div class="form-group col-xs-12 col-sm-6 col-md-6">
-					<label for="usr">Program Code</label>
-					<input type="text" class="form-control" id="usr">
+			<!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">Add Specialization</h4>
 				</div>
-				<div class="form-group col-xs-12 col-sm-6 col-md-6">
-					<label for="usr">Program Name</label>
-					<input type="text" class="form-control" id="usr">
+				<div class="modal-body row">
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Specialization ID</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="programcode_Add"><span style="color:red">&nbsp;&#42;</span></div>						
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Name</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="programname_Add"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Description</label>
+						<textarea  style="width:95%" class="form-control" rows="3" id="description_Add"></textarea>
+					</div>									
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label style="display:block">Select status</label>
+						<form>
+								<label class="radio-inline">
+												<input type="radio"  name ="status_Edit" value="1" checked="checked">
+												Active
+								</label>
+								<label   class="radio-inline">
+												<input type="radio"  name ="status_Edit" value="0">
+												Inactive
+
+								</label>
+						</form>
+					</div>		
 				</div>
-				<div class="form-group col-xs-12 col-sm-6 col-md-6">
-					<label for="usr">Status</label>
-						<div class="dropdown">
-						  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
-						  <span class="caret"></span></button>
-						  <ul class="dropdown-menu">
-							<li><a href="#">Activie</a></li>
-							<li><a href="#">Inactive</a></li>
-						  </ul>
-					  </div>
-				</div>		
-			</div>
-			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
-			</div>
-		  </div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span>Add</button>
+				</div>
+			  </div>
 		  
 		</div>
 	</div>
-    <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Remove</button></td>
-  </tr>
-</tbody>
-</table>
 </div>
+
+
+
+
+<!-- modal Edit -->
+<div class="container">
+	<div class="modal fade container " id="myModalEdit" role="dialog">
+		<div class="modal-dialog ">
+		
+			<!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">Update Specialization</h4>
+				</div>
+				<div class="modal-body row">
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Specialization ID</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="programcode_Edit"><span style="color:red">&nbsp;&#42;</span></div>						
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Name</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="programname_Edit"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Description</label>
+						<textarea  style="width:95%" class="form-control" rows="3" id="description_Edit"></textarea>
+					</div>									
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label style="display:block">Select status</label>
+						<form>
+								<label class="radio-inline">
+												<input type="radio"  name ="status_Edit" value="1" checked="checked">
+												Active
+								</label>
+								<label   class="radio-inline">
+												<input type="radio"  name ="status_Edit" value="0">
+												Inactive
+
+								</label>
+						</form>
+					</div>		
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-edit"></span>Update</button>
+				</div>
+			  </div>
+		  
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- modal confirm -->
+<div class="container">
+  <div class="modal fade" id="myModalConfirm" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+		
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ARE YOU SURE</h4>
+		  
+        </div>
+		
+        <div class="modal-body">
+          <p>Do you want to remove data?</p>
+        </div>
+		
+        <div class="modal-footer">
+		
+          <button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'"  type="button" class="btn" data-dismiss="modal">Yes</button>
+          <button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button" class="btn" data-dismiss="modal">No</button>
+		  
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 <script type="text/javascript">
   $(document).ready(function() {
-    var t = $('#data_doitac').DataTable( {
+    var t = $('#chuongtrinhhoc').DataTable( {
       "scrollY":   300,
       "columnDefs": [ {
         "searchable": false,

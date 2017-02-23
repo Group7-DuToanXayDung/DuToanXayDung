@@ -2,7 +2,7 @@ app.controller('truonghoc_ctl', ['$scope','$http','$window','$compile',function(
 
 
     var refresh = function(){
-		
+											
 		$http({
 			method: 'GET',
 			url: '/menu_School'
@@ -23,19 +23,20 @@ app.controller('truonghoc_ctl', ['$scope','$http','$window','$compile',function(
 						"rowId": "univer_id",
 						"aoColumns": [
 							{ "data": "univer_id"},
-							{ "data": "univer_name" },
-							{ "data": "univer_code" },
-							{ "data": "univer_address" },
+							{ "data": "univer_code"},
+							{ "data": null, mRender: function(data, type, row, index) {
+								return "<div id='tooltip'>"+data.univer_name+"<span id='tooltiptext'>"+data.univer_address+"</span></div>";
+							}},
 							{ "data": "contact" },
 							{ "data": null,  mRender: function (data, type, row) {
 												var str = "";
-												if(data.status == 1)
+												if(data.status == 0)
 												{
-													str = "Active";
+													str = "Inactive";
 												}
 												else
 												{
-													str = "Inactive";
+													str = "Active";
 												}
 												return str;
 											} },
@@ -44,7 +45,7 @@ app.controller('truonghoc_ctl', ['$scope','$http','$window','$compile',function(
 											}},		
 							{ "data": null, mRender: function (data, type, row, index) {
 												return "<button class='btn btn-danger' ng-click='remove("+data.univer_id+",$event)'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
-											}}		
+											}}											
 						],
 						"order": [[2, "asc"]],
 						"initComplete": function () {
@@ -67,11 +68,38 @@ app.controller('truonghoc_ctl', ['$scope','$http','$window','$compile',function(
 	
 	
 	refresh();
+
+
+
+
+//them
+	$scope.addtruonghoc = function(){
+		$http.post('/menu_School',$scope.truonghoc).then(function successCallback(response){
+			//refresh();
+			//$window.location.reload();
+			$scope.truonghoc.univer_id = response.data.insertId;
+			$scope.truonghoc_list.push($scope.truonghoc);
+			
+			var dt = jQuery('#data_table').dataTable();
+			dt.fnAddData($scope.truonghoc);
+			dt.fnDraw();
+			$compile(document.getElementById('data_table'))($scope);
+			
+			$scope.truonghoc.status = 1;
+			$scope.truonghoc_list.push($scope.truonghoc);
+			$scope.truonghoc = null;
+		},function errorCallback(response){
+			
+		});
+	}
+
+
+
 	
 	
 
 //xoa
-    $scope.remove = function(id, $event,index){
+    $scope.remove = function(id, $event, index){
 		$http.delete('/menu_School/' + id).then(function successCallback(response){
 			
 			$scope.truonghoc_list.splice(index,1);
@@ -87,25 +115,7 @@ app.controller('truonghoc_ctl', ['$scope','$http','$window','$compile',function(
 		});
 	}
 	
-	
-//them
-	$scope.addtruonghoc = function(){
-		$http.post('/menu_School',$scope.truonghoc).then(function successCallback(response){
-			//refresh();
-			//$window.location.reload();
-			$scope.truonghoc.univer_id = response.data.insertId;
-			$scope.truonghoc.status = 1;
-			$scope.truonghoc_list.push($scope.truonghoc);
-			
-			var dt = jQuery('#data_table').dataTable();
-			dt.fnAddData($scope.truonghoc);
-			dt.fnDraw();
-			$compile(document.getElementById('data_table'))($scope);
-			$scope.truonghoc = null;
-		},function errorCallback(response){
-			
-		});
-	}
+
 	
 	
 //load form edit

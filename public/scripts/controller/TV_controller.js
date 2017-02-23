@@ -7,9 +7,8 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 			url: '/menu_Users'
 		}).then(function successCallback(response) {
 			$scope.thanhvien_list = response.data;
-
 			var t = jQuery("#data_table").DataTable({
-				"aLengthMenu": [
+				"aLengthMenu": [ 
 					[10, 25, 50, 100, -1],
 					[10, 25, 50, 100, "All"]
 				],
@@ -22,11 +21,11 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 				"aoColumns": [
 					{ "data": "user_id" },
 					{ "data": "user_code" },
-					{ "data": "firstname" },
 					{ "data": "lastname" },
+					{ "data": "firstname" },
+					{ "data": "username" },
 					{ "data": "phone" },
 					{ "data": "email" },
-					{ "data": "useraddress" },
 					{
 						"data": null, mRender: function (data, type, row) {
 							var str = "";
@@ -39,7 +38,6 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 							return str;
 						}
 					},
-					{ "data": "username" },
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
@@ -95,7 +93,6 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 
 	//xoa
 	$scope.remove = function (user_id, $event, index) {
-		console.log(user_id);
 		$http.delete('/menu_Users/' + user_id).then(function successCallback(response) {
 			$scope.thanhvien_list.splice(index, 1);
 			var delButton = $event.target;
@@ -111,6 +108,7 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 	//them
 	$scope.addthanhvien = function () {
 		var indata = { 'thanhvien': $scope.thanhvien, 'roles': $scope.roles };
+		console.log(indata);
 		$http.post('/menu_Users', indata).then(function successCallback(response) {
 			$scope.thanhvien.user_id = response.data.insertId;
 			$scope.thanhvien.user_status = 1;

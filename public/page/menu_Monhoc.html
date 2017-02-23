@@ -1,169 +1,234 @@
-<div class="container">
-	<div class="row">
-		<h2 class="sub-header">Subjects Management</h2>
-		<div class="form-group">
-			<button class="btn btn-primary " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Add</button>
-					<div class="modal fade container " id="myModal" role="dialog">
-						<div class="modal-dialog ">
-							
-						  <!-- Modal content-->
-							  <div class="modal-content">
-								<div class="modal-header">
-								  <button type="button" class="close" data-dismiss="modal">&times;</button>
-								  <h4 class="modal-title">Edit Subjects</h4>
+<div ng-app="discipline_App">	
+	<div class="container">
+		<div class="row">
+			<h2 class="sub-header">List of Disciplines</h2>
+			<div class="form-group">
+				<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+			</div>
+		</div>
+	</div>
+	<table id="monhoc" class="display text-center" width="100%" cellspacing="0">
+			<thead>
+			  <tr>
+				<th class="text-center">No.</th>
+				<th class="text-center">Discipline ID</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Hours</th>
+				<th class="text-center">Credits</th>
+				<th class="text-center">Description</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Update</th>
+				<th class="text-center">Remove</th>
+			  </tr>
+			</thead>
+
+			<tfoot>
+			  <tr>
+				<th class="text-center">No.</th>
+				<th class="text-center">Discipline ID</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Hours</th>
+				<th class="text-center">Credits</th>
+				<th class="text-center">Description</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Update</th>
+				<th class="text-center">Remove</th>
+			  </tr>
+			</tfoot>
+
+			<tbody>
+			  <tr>
+				<td>1</td>
+				<td>AGL</td>
+				<td>Angularjs</td>
+				<td>15h</td>
+				<td>3 tín chỉ</td>
+				<td>xử lý frontend ở client</td>
+				<td>Active</td>
+				<td><button class="btn btn-warning" data-toggle="modal" data-target="#myModalEdit"><span class="glyphicon glyphicon-edit"></span>Update</button></td>
+				<td><button class="btn btn-danger" data-toggle="modal" data-target="#myModalConfirm"><span class="glyphicon glyphicon-remove"></span>Remove</button></td>
+			  </tr>
+			</tbody>
+	</table>
+
+
+
+	 <!-- modal ADD -->
+	<div class="modal fade container " id="myModalAdd" role="dialog">
+		<div class="modal-dialog ">	
+		  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">Add Discipline</h4>
+				</div>
+				<div class="modal-body row" >
+					<form name="userForm" novalidate>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Discipline ID</label>
+								<div><input style="width:95%; float:left" type="text" class="form-control" id="subjectcode_Add"><span style="color:red">&nbsp;&#42;</span></div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Name</label>
+								<div><input style="width:95%; float:left" type="text" class="form-control" id="subjectname_Add"><span style="color:red">&nbsp;&#42;</span></div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<div style="position:relative">
+									<label>Hours</label>
+									<div><input  type="number" min="0" class="form-control" style="width:95%; float:left"  name="hours" ng-model="hours" id="studytime_Add" ng-required="true"><span style="color:red">&nbsp;&#42;</span></div>
+									<span style="color:red;position:absolute;left:0;top:60px;" ng-show="!userForm.hours.$valid">must be numberic bigger than -1</span>
 								</div>
-								<div class="modal-body row">
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Subject Code</label>
-										<input type="text" class="form-control" id="usr">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Subject Name</label>
-										<input type="text" class="form-control" id="usr">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									  <label for="pwd">Study Time</label>
-									  <input type="text" class="form-control" id="pwd">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Credit</label>
-										<input type="text" class="form-control" id="usr">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Description</label>
-										<input type="text" class="form-control" id="usr">
-									</div>
-									<div class="form-group col-xs-12 col-sm-6 col-md-6">
-										<label for="usr">Status</label>
-											<div class="dropdown">
-											  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
-											  <span class="caret"></span></button>
-											  <ul class="dropdown-menu">
-												<li><a href="#">Activie</a></li>
-												<li><a href="#">Inactive</a></li>
-											  </ul>
-										  </div>
-									</div>		
-								</div>
-								<div class="modal-footer">
-								  <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
-								</div>
-							  </div>
-						  
+							</div>
+
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Credit</label>
+								<div><input style="width:95%; float:left" type="text" class="form-control" id="credit_Add"><span style="color:red">&nbsp;&#42;</span></div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Description</label>
+								<textarea  style="width:95%" class="form-control" rows="3" id="description_Add"></textarea>
+							</div>								
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label style="display:block">Select status</label>
+								<form>
+										<label class="radio-inline">
+														<input type="radio"  name ="discipline_Add" value="1" checked="checked">
+														Active
+										</label>
+										<label   class="radio-inline">
+														<input type="radio"  name ="discipline_Add" value="0">
+														Inactive
+
+										</label>
+								</form>
+							</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					  <button  type="submit" name="discipline_Add" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span>Add</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	 <!-- modal Edit -->
+	<div class="modal fade container " id="myModalEdit" role="dialog">
+		<div class="modal-dialog ">	
+		  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">Update Discipline</h4>
+				</div>
+				<div class="modal-body row">
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Discipline ID</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="subjectcode_Edit"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Name</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="subjectname_Edit"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<div style="position:relative">
+							<label>Hours</label>
+							<div><input  type="number" min="0" class="form-control" style="width:95%; float:left"  name="hours" ng-model="hours" id="studytime_Add" ng-required="true"><span style="color:red">&nbsp;&#42;</span></div>
+							<span style="color:red;position:absolute;left:0;top:60px;" ng-show="!userForm.hours.$valid">must be numberic bigger than -1</span>
 						</div>
 					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Credit</label>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="credit_Edit"><span style="color:red">&nbsp;&#42;</span></div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label>Description</label>
+						<textarea  style="width:95%" class="form-control" rows="3" id="description_Edit"></textarea>
+					</div>	
+					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<label style="display:block">Select status</label>
+						<form>
+								<label class="radio-inline">
+												<input type="radio"  name ="status_Edit" value="1" checked="checked">
+												Active
+								</label>
+								<label   class="radio-inline">
+												<input type="radio"  name ="status_Edit" value="0">
+												Inactive
+
+								</label>
+						</form>
+					</div>		
 				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-edit"></span>Update</button>
+				</div>
+			  </div>
+		  
+		</div>
 	</div>
-</div>
-  <table id="data_doitac" class="display text-center" width="100%" cellspacing="0">
-<thead>
-  <tr>
-    <th class="text-center">Index</th>
-    <th class="text-center">Subject Code</th>
-    <th class="text-center">Subject Name</th>
-    <th class="text-center">Study Time</th>
-    <th class="text-center">Credits</th>
-    <th class="text-center">Description</th>
-    <th class="text-center">Status</th>
-	<th class="text-center"></th>
-	<th class="text-center"></th>
-  </tr>
-</thead>
 
-<tfoot>
-  <tr>
-    <th class="text-center">Index</th>
-    <th class="text-center">Subject Code</th>
-    <th class="text-center">Subject Name</th>
-    <th class="text-center">Study Time</th>
-    <th class="text-center">Credits</th>
-    <th class="text-center">Description</th>
-    <th class="text-center">Status</th>
-	<th class="text-center"></th>
-	<th class="text-center"></th>
-  </tr>
-</tfoot>
 
-<tbody>
-  <tr>
-    <td>2</td>
-    <td>Vũ Xuân Dân</td>
-    <td>G01</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td><button class="btn btn-warning" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
-	<div class="modal fade container" id="myModal" role="dialog">
+
+
+	<!-- modal confirm -->
+	<div class="container">
+	  <div class="modal fade" id="myModalConfirm" role="dialog">
 		<div class="modal-dialog">
-		
 		  <!-- Modal content-->
 		  <div class="modal-content">
 			<div class="modal-header">
+			
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Edit Subject</h4>
+			  <h4 class="modal-title">ARE YOU SURE</h4>
+			  
 			</div>
-			<div class="modal-body row">
-				<div class="form-group col-xs-12 col-sm-6 col-md-6">
-					<label for="usr">Subject Code</label>
-					<input type="text" class="form-control" id="usr">
-				</div>
-				<div class="form-group col-xs-12 col-sm-6 col-md-6">
-					<label for="usr">Subject Name</label>
-					<input type="text" class="form-control" id="usr">
-				</div>
-				<div class="form-group col-xs-12 col-sm-6 col-md-6">
-				  <label for="pwd">Study Time</label>
-				  <input type="text" class="form-control" id="pwd">
-				</div>
-				<div class="form-group col-xs-12 col-sm-6 col-md-6">
-					<label for="usr">Credits</label>
-					<input type="text" class="form-control" id="usr">
-				</div>
-				<div class="form-group col-xs-12 col-sm-6 col-md-6">
-					<label for="usr">Description</label>
-					<input type="text" class="form-control" id="usr">
-				</div>
-				<div class="form-group col-xs-12 col-sm-6 col-md-6">
-					<label for="usr">Status</label>
-						<div class="dropdown">
-						  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chose Status
-						  <span class="caret"></span></button>
-						  <ul class="dropdown-menu">
-							<li><a href="#">Activie</a></li>
-							<li><a href="#">Inactive</a></li>
-						  </ul>
-					  </div>
-				</div>		
+			
+			<div class="modal-body">
+			  <p>Do you want to remove data?</p>
 			</div>
+			
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
+			
+			  <button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'"  type="button" class="btn" data-dismiss="modal">Yes</button>
+			  <button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button" class="btn" data-dismiss="modal">No</button>
+			  
 			</div>
 		  </div>
 		  
 		</div>
+	  </div>
 	</div>
-    <td><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Remove</button></td>
-  </tr>
-</tbody>
-</table>
-</div>
-<script type="text/javascript">
-  $(document).ready(function() {
-    var t = $('#data_doitac').DataTable( {
-      "scrollY":   300,
-      "columnDefs": [ {
-        "searchable": false,
-        "orderable": false,
-        "targets": 0
-      } ],
-      "order": [[ 1, 'asc' ]]
-    } );
 
-    t.on( 'order.dt search.dt', function () {
-      t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-        cell.innerHTML = i+1;
-      } );
-    } ).draw();
-  } );<!---khoi tao datatable--->
-</script> 
+
+
+
+
+
+
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var t = $('#monhoc').DataTable({
+				"scrollY": 300,
+				"columnDefs": [{
+					"searchable": false,
+					"orderable": false,
+					"targets": 0
+				}],
+				"order": [[1, 'asc']]
+			});
+
+			t.on('order.dt search.dt', function () {
+				t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+					cell.innerHTML = i + 1;
+				});
+			}).draw();
+		}); <!---khoi tao datatable-- ->
+
+	</script>
+</div>
