@@ -165,12 +165,12 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
 
 //sua
 	$scope.updatekhoahoc = function () {
-                for (var i = 0; i < $scope.khoahoc_list.length; i++) {
+                /*for (var i = 0; i < $scope.khoahoc_list.length; i++) {
                     if ($scope.khoahoc_list[i].int_code == $scope.editkhoahoc.int_code && $scope.khoahoc_list[i].int_id != $scope.editkhoahoc.int_id) {
-                        $window.alert('Mã khoa hoc đã tồn tại');
+                        $window.alert('Mã khóa học đã tồn tại');
                         return;
                     }
-                }
+                }bị tí lỗi chưa debug dc*/ 
                 $http.put('/menu_Khoahoc/' + $scope.editkhoahoc.int_id, $scope.editkhoahoc).then(function successCallback(response) {
                     for (var i = 0; i < $scope.khoahoc_list.length; i++) {
                         if ($scope.khoahoc_list[i].int_id == $scope.editkhoahoc.int_id) {
