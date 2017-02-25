@@ -111,6 +111,11 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 			$scope.roles.push(3);
 		if ($scope.student == true)
 			$scope.roles.push(4);
+		if($scope.roles.length == 0)
+		{
+			$window.alert('Chưa chọn vai trò của thành viên');
+			return;
+		}
 		for (var i = 0; i < $scope.thanhvien_list.length; i++) {
 			if ($scope.thanhvien_list[i].user_code == $scope.thanhvien.user_code) {
 				$window.alert('Mã user đã tồn tại');
@@ -137,38 +142,94 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 
 
 	//load form edit
+	$scope.role_user = [];
 	$scope.editt = function (index) {
-		var role_user = [];
-		toSelect = $scope.thanhvien_list[index];
+		var toSelect = $scope.thanhvien_list[index];
 		$scope.editthanhvien = toSelect;
 		$http({
 			method: 'GET',
 			url: '/rolesUser/' + toSelect.user_code
 		}).then(function successCallback(response) {
-			role_user = response.data;
+			$scope.role_user = response.data;
+			//console.log(role_user);
+
+
+			jQuery("#admin_u").prop('checked', false);
+			jQuery("#registra_u").prop('checked', false);
+			jQuery("#lecturer_u").prop('checked', false);
+			jQuery("#student_u").prop('checked', false);
+
+
+
+			for (var i = 0; i < $scope.role_user.length; i++) {
+				if ($scope.role_user[i].access_id == 1) {
+					jQuery("#admin_u").prop('checked', true);
+				}
+
+				if ($scope.role_user[i].access_id == 2) {
+					jQuery("#registra_u").prop('checked', true);
+				}
+
+				if ($scope.role_user[i].access_id == 3) {
+					jQuery("#lecturer_u").prop('checked', true);
+				}
+
+				if ($scope.role_user[i].access_id == 4) {
+					jQuery("#student_u").prop('checked', true);
+				}
+			}
 		}, function errorCallback(response) {
 
 		});
-		for (var i = 0; i < role_user.length; i++) {
-			if (role_user[i].access_id == 1)
-				$scope.admin_u = 1;
-			if (role_user[i].access_id == 2)
-				$scope.registra_u = 2;
-			if (role_user[i].access_id == 3)
-				$scope.lecturer_u = 3;
-			if (role_user[i].access_id == 4)
-				$scope.student_u = 4;
-		}
 
 	}
 
 	//sua
-	$scope.updatetruonghoc = function () {
-		$http.put('/menu_Users/' + $scope.edittruonghoc.id_th, $scope.edittruonghoc).then(function successCallback(response) {
-			$scope.edittruonghoc = null;
-			refresh();
+	$scope.updatethanhvien = function () {
+		var insert_r=[];
+		var delete_r=[];
+		var role_current = [];
+		if(jQuery("#admin_u").is(':checked')==true)
+			role_current.push(1);
+		if(jQuery("#registra_u").is(':checked')==true)
+			role_current.push(2);
+		if(jQuery("#lecturer_u").is(':checked')==true)
+			role_current.push(3);
+		if(jQuery("#student_u").is(':checked')==true)
+			role_current.push(4);
+
+
+		for(var i=0;i<role_current.length;i++)
+		{
+			for(var j=0;j<$scope.role_user.length;j++)
+			{
+				if(role_current[i] != $scope.role_user[j])
+					insert_r.push(role_current[i]);
+			}
+		}
+		for(var x=0;x<$scope.role_user.length;x++)
+		{
+			for(var y=0;y<role_current.length;y++)
+			{
+				if($scope.role_user[x] != role_current[y])
+					delete_r.push($scope.role_user[x].access_id);
+			}
+		}
+
+		console.log(delete_r);
+		console.log(insert_r);
+		/*$http.put('/menu_Users/' + $scope.editthanhvien.user_id, $scope.editthanhvien).then(function successCallback(response) {
+			for (var i = 0; i < $scope.truonghoc_list.length; i++) {
+				if ($scope.thanhvien_list[i].user_id == $scope.editthanhvien.user_id) {
+					$scope.thanhvien_list[i] = $scope.editthanhvien;
+				}
+			}
+			var dt = jQuery('#data_table').dataTable();
+			var row = jQuery("tr#" + $scope.editthanhvien.user_id);
+			dt.fnUpdate($scope.editthanhvien, row); // Row
+			dt.fnDraw();
 		}, function errorCallback(response) {
 
-		});
+		});*/
 	}
 }]);

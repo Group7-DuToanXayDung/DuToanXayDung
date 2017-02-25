@@ -77,16 +77,14 @@ app.controller('truonghoc_ctl', ['$scope','$http','$window','$compile',function(
 		$http.post('/menu_School',$scope.truonghoc).then(function successCallback(response){
 			//refresh();
 			//$window.location.reload();
+			$scope.truonghoc.status = 1;
+			$scope.truonghoc_list.push($scope.truonghoc);
 			$scope.truonghoc.univer_id = response.data.insertId;
 			$scope.truonghoc_list.push($scope.truonghoc);
-			
 			var dt = jQuery('#data_table').dataTable();
 			dt.fnAddData($scope.truonghoc);
 			dt.fnDraw();
 			$compile(document.getElementById('data_table'))($scope);
-			
-			$scope.truonghoc.status = 1;
-			$scope.truonghoc_list.push($scope.truonghoc);
 			$scope.truonghoc = null;
 		},function errorCallback(response){
 			
@@ -120,7 +118,7 @@ app.controller('truonghoc_ctl', ['$scope','$http','$window','$compile',function(
 	
 //load form edit
 	$scope.editt = function(index){
-		toSelect = $scope.truonghoc_list[index];
+		var toSelect = $scope.truonghoc_list[index];
 		$scope.edittruonghoc = toSelect;
 	}
 	
