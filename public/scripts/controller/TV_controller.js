@@ -8,7 +8,7 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 		}).then(function successCallback(response) {
 			$scope.thanhvien_list = response.data;
 			var t = jQuery("#data_table").DataTable({
-				"aLengthMenu": [ 
+				"aLengthMenu": [
 					[10, 25, 50, 100, -1],
 					[10, 25, 50, 100, "All"]
 				],
@@ -87,10 +87,6 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 	refresh();
 
 	$scope.roles = [];
-	$scope.checkedrole = function (access_id) {
-		$scope.roles.push(access_id);
-	}
-
 	//xoa
 	$scope.remove = function (user_id, $event, index) {
 		$http.delete('/menu_Users/' + user_id).then(function successCallback(response) {
@@ -107,6 +103,20 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 	}
 	//them
 	$scope.addthanhvien = function () {
+		if ($scope.admin == true)
+			$scope.roles.push(1);
+		if ($scope.registrar == true)
+			$scope.roles.push(2);
+		if ($scope.lecturer == true)
+			$scope.roles.push(3);
+		if ($scope.student == true)
+			$scope.roles.push(4);
+		for (var i = 0; i < $scope.thanhvien_list.length; i++) {
+			if ($scope.thanhvien_list[i].user_code == $scope.thanhvien.user_code) {
+				$window.alert('Mã user đã tồn tại');
+				return;
+			}
+		}
 		var indata = { 'thanhvien': $scope.thanhvien, 'roles': $scope.roles };
 		console.log(indata);
 		$http.post('/menu_Users', indata).then(function successCallback(response) {
@@ -119,15 +129,39 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 			dt.fnDraw();
 			$compile(document.getElementById('data_table'))($scope);
 			$scope.thanhvien = null;
-			$scope.roles = null;
+			$scope.roles = [];
 		}, function errorCallback(response) {
 
 		});
 	}
+
+
 	//load form edit
 	$scope.editt = function (index) {
-		toSelect = $scope.truonghoc_list[index];
-		$scope.edittruonghoc = toSelect;
+		var role_user = [];
+		toSelect = $scope.thanhvien_list[index];
+		$scope.editthanhvien = toSelect;
+		$http({
+			method: 'GET',
+			url: '/rolesUser/' + toSelect.user_code
+		}).then(function successCallback(response) {
+			role_user = response.data;
+			console.log(role_user);
+			console.log(role_user.length);
+		}, function errorCallback(response) {
+
+		});
+		for (var i = 0; i < role_user.length; i++) {
+			if (role_user[i].access_id == 1)
+				$scope.admin_u = 1;
+			if (role_user[i].access_id == 2)
+				$scope.registra_u = 2;
+			if (role_user[i].access_id == 3)
+				$scope.lecturer_u = 3;
+			if (role_user[i].access_id == 4)
+				$scope.student_u = 4;
+		}
+
 	}
 
 	//sua

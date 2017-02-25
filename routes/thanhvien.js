@@ -13,7 +13,7 @@ connection.connect();
 
 //lay danh sach thanh vien
 router.get('/menu_Users', function (req, res) {
-	connection.query('SELECT u.user_id,u.user_code,u.firstname,u.lastname,u.useraddress,u.phone,u.status as user_status,u.username,u.gender,u.email from users u', function (err, rows, fields) {
+	connection.query('SELECT u.user_id,u.user_code,u.firstname,u.lastname,u.useraddress,u.password,u.phone,u.status as user_status,u.username,u.gender,u.email from users u', function (err, rows, fields) {
 		if (err) {
 			connection.end();
 			throw err;
@@ -59,10 +59,10 @@ router.post('/menu_Users', function (req, res) {
 	var user_code = req.body.thanhvien.user_code;
 	var thanhvien = req.body.thanhvien;
 	if (req.body.univer_code == null) {
-		var sql = 'insert into users(user_code,firstname,lastname,phone,email,gender,useraddress,username,password,status) VALUES("' + thanhvien.user_code + '","' + thanhvien.firstname + '","' + thanhvien.lastname + '","' + thanhvien.phone + '","' + thanhvien.email + '","' + thanhvien.gender + '","' + thanhvien.useraddress + '","' + thanhvien.username + '","' + thanhvien.password + '","'+thanhvien.user_status+'")';
+		var sql = 'insert into users(user_code,firstname,lastname,phone,email,gender,useraddress,username,password,status) VALUES("' + thanhvien.user_code + '","' + thanhvien.firstname + '","' + thanhvien.lastname + '","' + thanhvien.phone + '","' + thanhvien.email + '","' + thanhvien.gender + '","' + thanhvien.useraddress + '","' + thanhvien.username + '","' + thanhvien.password + '",1)';
 	}
 	if (req.body.univer_code != null) {
-		var sql = 'insert into users(user_code,firstname,lastname,phone,email,gender,useraddress,username,password,status,univer_code) VALUES("' + thanhvien.user_code + '","' + thanhvien.firstname + '","' + thanhvien.lastname + '","' + thanhvien.phone + '","' + thanhvien.email + '","' + thanhvien.gender + '","' + thanhvien.useraddress + '","' + thanhvien.username + '","' + thanhvien.password + '","'+thanhvien.user_status+'","' + thanhvien.univer_code + '")';
+		var sql = 'insert into users(user_code,firstname,lastname,phone,email,gender,useraddress,username,password,status,univer_code) VALUES("' + thanhvien.user_code + '","' + thanhvien.firstname + '","' + thanhvien.lastname + '","' + thanhvien.phone + '","' + thanhvien.email + '","' + thanhvien.gender + '","' + thanhvien.useraddress + '","' + thanhvien.username + '","' + thanhvien.password + '",1,"' + thanhvien.univer_code + '")';
 	}
 	connection.query(sql, function (err, rows, fields) {
 		if (err) {
@@ -71,7 +71,6 @@ router.post('/menu_Users', function (req, res) {
 		}
 		else {
 			res.json(rows);
-			console.log(rows);
 		}
 	});
 	for (var i = 0; i < req.body.roles.length; i++) {

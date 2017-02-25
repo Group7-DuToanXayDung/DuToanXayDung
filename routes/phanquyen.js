@@ -10,83 +10,19 @@ var connection = mysql.createConnection({
 });
 
 connection.connect();
-router.use(bodyParser.json());
 
-
-//lay danh sach truong hoc
-router.get('/phanquyen',function(req,res){
-    connection.query('select * from university', function (err, rows, fields) {
+//lay danh sach thanh vien
+router.get('/rolesUser/:id',function(req,res){
+    var user_code = req.params.id;
+    connection.query('SELECT access_id from decentralization where user_code="'+user_code+'" ', function (err, rows, fields) {
 		if (err) {
 			connection.end();
 			throw err;
 		}
-		else {
+        else {
 			res.json(rows)
 		}
 	});
-});
-
-
-
-
-//xoa truong hoc
-router.delete('/phanquyen/:id', function(req,res){
-	
-	var id = req.params.id; 
-	var sql = "delete from university where univer_id = '" + id + "'";
-	
-	connection.query(sql, function (err, rows, fields) {
-		if (err) {
-			connection.end();
-			throw err;
-		}
-		else {
-			res.json(rows);
-		}
-	});
-	
-});
-
-
-
-
-//them role
-router.post('/phanquyen/:user_code',function(req,res){
-    var user_code = req.params.user_code;
-    console.log(user_code);
-    console.log(req.body);
-
-	/*var sql = 'insert into university(univer_code,univer_name,univer_address,contact,status) values ("'+req.body.univer_code+'","'+req.body.univer_name+'","'+req.body.univer_address+'","'+req.body.contact+'",1)';
-	
-	connection.query(sql, function (err, rows, fields) {
-		if (err) {
-			connection.end();
-			throw err;
-		}
-		else {
-			res.json(rows);
-		}
-	});*/
-    
-});
-
-
-
-//sua truong hoc
-router.put('/menu_School/:id', function(req, res){
-	var id = req.params.id;
-	var sql = "update university set univer_code='" + req.body.univer_code + "', univer_name='" + req.body.univer_name + "', univer_address='" + req.body.univer_address + "', contact='" + req.body.contact + "', status='" + req.body.status + "' where univer_id = '" + id + "'";
-	
-	connection.query(sql, function (err, rows, fields) {
-		if (err) {
-			connection.end();
-			throw err;
-		}
-		else {
-			res.json(rows);
-		}
-	});
-	
 });
 
 module.exports = router;

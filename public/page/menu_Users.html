@@ -57,11 +57,11 @@
 				<div class="modal-body row">
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>User ID</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="UserID" ng-model="thanhvien.user_code><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="UserID" ng-model="thanhvien.user_code"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Last Name</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="LastName" ng-model="thanhvien.lastname><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="LastName" ng-model="thanhvien.lastname"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>First Name</label>
@@ -70,11 +70,11 @@
 
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Phone</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="Phone" ng-model="thanhvien.phone><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="Phone" ng-model="thanhvien.phone"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Email</label>
-						<div><input style="width:95%; float:left" type="email" class="form-control" id="Email" ng-model="thanhvien.email><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="email" class="form-control" id="Email" ng-model="thanhvien.email"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Address</label>
@@ -82,11 +82,11 @@
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Username</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="Username" ng-model="thanhvien.username><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="Username" ng-model="thanhvien.username"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Password</label>
-						<div><input style="width:95%; float:left" type="password" class="form-control" id="Password" ng-model="thanhvien.password><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="password" class="form-control" id="Password" ng-model="thanhvien.password"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label style="display:block">Select Gender</label>
@@ -109,27 +109,27 @@
 						<div class="container">
 							<form>
 								<label class="checkbox-inline">
-									  <input type="checkbox" value="" ng-click="checkedrole(1)">Admin
+									  <input type="checkbox" value="1" ng-model="admin">Admin
 									</label>
 								<label class="checkbox-inline">
-									  <input type="checkbox" value="" ng-click="checkedrole(2)">Registrar
+									  <input type="checkbox" value="2" ng-model="registrar">Registrar
 									</label>
 							</form>
 						</div>
 						<div class="container">
 							<form>
 								<label class="checkbox-inline">
-										  <input type="checkbox" value="" ng-click="checkedrole(3)">Lecturer
+										  <input type="checkbox" value="3" ng-model="lecturer">Lecturer
 										</label>
 								<label class="checkbox-inline">
-										  <input type="checkbox" value="" ng-click="checkedrole(4)">Student
+										  <input type="checkbox" value="4" ng-model="student">Student
 										</label>
 							</form>
 						</div>
 
 					</div>
 					
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
+					<!-- <div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label style="display:block">Select status</label>
 						<form>
 							<label class="radio-inline">
@@ -145,7 +145,7 @@
 					</div>
 
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<!-- <label class="col-md-5 control-label" for="create_Date">Giới tính</label> -->
+						<label class="col-md-5 control-label" for="create_Date">Giới tính</label>
 						<div class="dropdown">
 							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="true">
@@ -161,11 +161,11 @@
 									</ul>
 								</div>
 						</div>
-					</div>
+					</div>-->
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addthanhvien()"><span class="glyphicon glyphicon-plus"></span>Add</button>
+					<button type="button" class="btn btn-primary" ng-click="addthanhvien()"><span class="glyphicon glyphicon-plus"></span>Add</button>
 				</div>
 			</div>
 
@@ -189,70 +189,70 @@
 				<div class="modal-body row">
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>User ID</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="UserID"><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="UserID" ng-model="editthanhvien.user_code"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Last Name</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="LastName"><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="LastName" ng-model="editthanhvien.lastname"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>First Name</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="First Name"><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="First Name" ng-model="editthanhvien.firstname"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Phone</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="Phone"><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="Phone" ng-model="editthanhvien.phone"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Email</label>
-						<div><input style="width:95%; float:left" type="email" class="form-control" id="Email"><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="email" class="form-control" id="Email" ng-model="editthanhvien.email"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Address</label>
-						<textarea style="width:95%" class="form-control" rows="3" id="address_Add"></textarea>
+						<textarea style="width:95%" class="form-control" rows="3" id="address_Add" ng-model="editthanhvien.useraddress"></textarea>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Username</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="Username"><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="text" class="form-control" id="Username" ng-model="editthanhvien.username"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
 						<label>Password</label>
-						<div><input style="width:95%; float:left" type="password" class="form-control" id="Password"><span style="color:red">&nbsp;&#42;</span></div>
+						<div><input style="width:95%; float:left" type="password" class="form-control" id="Password" ng-model="editthanhvien.password"><span style="color:red">&nbsp;&#42;</span></div>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label style="display:block">Select status</label>
+						<label style="display:block">Select Gender</label>
 						<form>
 							<label class="radio-inline">
-											<input type="radio"  name ="status_Edit" value="1" checked="checked">
+											<input type="radio"  name ="status_Edit" value="1" ng-model="editthanhvien.gender" ng-checked="editthanhvien.gender == 1">
 											Male
 							</label>
 							<label class="radio-inline">
-											<input type="radio"  name ="status_Edit" value="0">
+											<input type="radio"  name ="status_Edit" value="0" ng-model="editthanhvien.gender" ng-checked="editthanhvien.gender == 0">
 											Female
 
 							</label>
 						</form>
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label>Select status</label>
+						<label>Select Roles</label>
 						<div class="container">
 							<form>
 								<label class="checkbox-inline">
-									  <input type="checkbox" value="">Admin
+									  <input type="checkbox" ng-model="admin_u" value="1" ng-checked="admin_u == '1'">Admin
 									</label>
 								<label class="checkbox-inline">
-									  <input type="checkbox" value="">Registrar
+									  <input type="checkbox" ng-model="registra_u" value="2" ng-checked="registra_u == '2'">Registrar
 									</label>
 							</form>
 						</div>
 						<div class="container">
 							<form>
 								<label class="checkbox-inline">
-										  <input type="checkbox" value="">Lecturer
+										  <input type="checkbox" ng-model="lecturer_u" value="3" ng-checked="lecturer_u == '3'">Lecturer
 										</label>
 								<label class="checkbox-inline">
-										  <input type="checkbox" value="">Student
+										  <input type="checkbox" ng-model="student_u" value="4" ng-checked="student_u == '4'">Student
 										</label>
 							</form>
 						</div>
@@ -262,11 +262,11 @@
 						<label style="display:block">Select status</label>
 						<form>
 							<label class="radio-inline">
-											<input type="radio"  name ="status_Edit" value="1" checked="checked">
+											<input type="radio"  name ="status_Edit" value="1" ng-model="editthanhvien.user_status" ng-checked="editthanhvien.user_status==1">
 											Active
 							</label>
 							<label class="radio-inline">
-											<input type="radio"  name ="status_Edit" value="0">
+											<input type="radio"  name ="status_Edit" value="0" ng-model="editthanhvien.user_status" ng-checked="editthanhvien.user_status==0">
 											Inactive
 
 							</label>
