@@ -87,6 +87,8 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 	refresh();
 
 	$scope.roles = [];
+
+
 	//xoa
 	$scope.remove = function (user_id, $event, index) {
 		$http.delete('/menu_Users/' + user_id).then(function successCallback(response) {
@@ -96,6 +98,7 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 			var dt = jQuery('#data_table').dataTable();
 			dt.fnDeleteRow(tr);
 			dt.fnDraw();
+			refresh();
 
 		}, function errorCallback(response) {
 

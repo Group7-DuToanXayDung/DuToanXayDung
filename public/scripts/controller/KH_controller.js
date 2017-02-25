@@ -112,6 +112,7 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
             $scope.khoahoc.status = 1;
             $scope.khoahoc_list.push($scope.khoahoc);
             $scope.khoahoc = null;
+            refresh();
         }, function errorCallback(response) {
 
         });
