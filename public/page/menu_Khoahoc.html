@@ -1,229 +1,169 @@
-<div class="container">
-	<div class="row">
-		<h2 class="sub-header">List of Intake</h2>
-		<div class="form-group">
-			<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+<div ng-controller="khoahoc_ctl">
+	<div class="container">
+		<div class="row">
+			<h2 class="sub-header">List of Intake</h2>
+			<div class="form-group">
+				<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+			</div>
 		</div>
 	</div>
-</div>
-<table id="khoahoc" class="display text-center" width="100%" cellspacing="0">
-	<thead>
-	  <tr>
-		<th class="text-center">No.</th>
-		<th class="text-center">Name</th>
-		<th class="text-center">Description</th>
-		<th class="text-center">Start Date</th>
-		<th class="text-center">End Date</th>
-		<th class="text-center">Status</th>
-		<th class="text-center">Edit</th>
-		<th class="text-center">Remove</th>
-	  </tr>
-	</thead>
+	<table id="data_table" class="display text-center" width="100%" cellspacing="0" datatables="ng">
+		<thead>
+			<tr>
+				<th class="text-center">No.</th>
+				<th class="text-center">Code</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Description</th>
+				<th class="text-center">Start Date</th>
+				<th class="text-center">End Date</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Edit</th>
+				<th class="text-center">Remove</th>
+			</tr>
+		</thead>
 
-	<tfoot>
-	  <tr>
-		<th class="text-center">No.</th>
-		<th class="text-center">Name</th>
-		<th class="text-center">Description</th>
-		<th class="text-center">Start Date</th>
-		<th class="text-center">End Date</th>
-		<th class="text-center">Status</th>
-		<th class="text-center">Edit</th>
-		<th class="text-center">Remove</th>
-	  </tr>
-	</tfoot>
+		<tfoot>
+			<tr>
+				<th class="text-center">No.</th>
+				<th class="text-center">Code</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Description</th>
+				<th class="text-center">Start Date</th>
+				<th class="text-center">End Date</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Edit</th>
+				<th class="text-center">Remove</th>
+			</tr>
+		</tfoot>
 
-	<tbody>
-	  <tr>
-		<td>1</td>
-		<td>Intake 01</td>
-		<td>Thiết kế Web</td>
-		<td>1/1/2017</td>
-		<td>1/5/2017</td>
-		<td>Active</td>
-		<td><button class="btn btn-warning" data-toggle="modal" data-target="#myModalEdit" ><span class="glyphicon glyphicon-edit"></span>Update</button></td>
-		<td><button class="btn btn-danger" data-toggle="modal" data-target="#myModalConfirm"><span class="glyphicon glyphicon-remove"></span> Remove</button></td>
-	
-		
-	  </tr>
-	</tbody>
-</table>
+	</table>
 
 
 
 
-<div class="container">
-	<!-- Modal Add content-->
-	<div class="modal fade container " id="myModalAdd" role="dialog">
-		<div class="modal-dialog ">
+	<div class="container">
+		<!-- Modal Add content-->
+		<div class="modal fade container " id="myModalAdd" role="dialog">
+			<div class="modal-dialog ">
 				<!-- Modal content-->
-				<form name="Add">		
-				  <div class="modal-content">
-					<div class="modal-header">
-					  <button type="button" class="close" data-dismiss="modal">&times;</button>
-					  <h4 class="modal-title">Add Intake</h4>
-					</div>
-					<div class="modal-body row">
-						<div class="form-group col-xs-12 col-sm-6 col-md-6">
-							<label>Intake Name</label>
-							<div><input style="width:95%; float:left" type="text" class="form-control" id="coursename_Add"><span style="color:red">&nbsp;&#42;</span></div>
+				<form name="Add">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Add Intake</h4>
 						</div>
-						<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						  <label>Start Date</label>
-						  <div><input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Addstart"><span style="color:red">&nbsp;&#42;</span></div>
-						</div>
-						<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						  <label>End Date</label>
-						  <div><input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Addfinish"><span style="color:red">&nbsp;&#42;</span></div>
-						</div>
-						<div class="form-group col-xs-12 col-sm-6 col-md-6">
-							<label>Description</label>
-							<textarea style="width:95%" class="form-control" rows="3" id="description_Add"></textarea>
-						</div>	
-						<div  class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label style="display:block">Select status</label>
-									<form>
-											<label class="radio-inline">
-															<input type="radio"  name ="status_Add" value="1" checked="checked">
-															Active
-											</label>
-											<label   class="radio-inline">
-															<input type="radio"  name ="status_Add" value="0">
-															Inactive
+						<div class="modal-body row">
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Intake Code</label>
+								<div><input style="width:95%; float:left" type="text" class="form-control" id="coursename_Code" ng-model="khoahoc.int_code"><span
+										style="color:red">&nbsp;&#42;</span></div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Intake Name</label>
+								<div><input style="width:95%; float:left" type="text" class="form-control" id="coursename_Add" ng-model="khoahoc.int_name"><span
+										style="color:red">&nbsp;&#42;</span></div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Start Date</label>
+								<div><input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Addstart" ng-model="khoahoc.startdate"><span
+										style="color:red">&nbsp;&#42;</span></div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>End Date</label>
+								<div><input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Addfinish" ng-model="khoahoc.enddate"><span
+										style="color:red">&nbsp;&#42;</span></div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Description</label>
+								<textarea style="width:95%" class="form-control" rows="3" id="description_Add" ng-model="khoahoc.int_description"></textarea>
+							</div>
 
-											</label>
-									</form>
 						</div>
-					
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addkhoahoc()"><span class="glyphicon glyphicon-plus"></span>Add</button>
+						</div>
 					</div>
-					<div class="modal-footer">
-					  <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span>Add</button>
-					</div>
-				  </div>
-				  
-				 </form>
+
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
 
 
 
 
 
-<div class="container">
-	<!-- Modal Edit content-->
-	<div class="modal fade container" id="myModalEdit" role="dialog">
-		<div class="modal-dialog">
-		
-		  <!-- Modal content-->
+	<div class="container">
+		<!-- Modal Edit content-->
+		<div class="modal fade container" id="myModalEdit" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
 				<form name="edit">
-				  <div class="modal-content">
-					<div class="modal-header">
-					  <button type="button" class="close" data-dismiss="modal">&times;</button>
-					  <h4 class="modal-title">Update Intake</h4>
-					</div>
-					<div class="modal-body row">
-						<div class="form-group col-xs-12 col-sm-6 col-md-6">
-							<label>Name</label>
-							<div><input style="width:95%; float:left" type="text" class="form-control" id="coursename_Edit"><span style="color:red">&nbsp;&#42;</span></div>
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Update Intake</h4>
 						</div>
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						  <label>Start Date</label>
-						  <div><input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Editstart"><span style="color:red">&nbsp;&#42;</span></div>
+							<label>Intake Code</label>
+							<div><input style="width:95%; float:left" type="text" class="form-control" id="coursename_Codee" ng-model="editkhoahoc.int_code"><span
+									style="color:red">&nbsp;&#42;</span></div>
 						</div>
-						<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						  <label>End Date</label>
-						  <div><input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Editfinish"><span style="color:red">&nbsp;&#42;</span></div>
-						</div>
-						<div class="form-group col-xs-12 col-sm-6 col-md-6">
-							<label>Description</label>
-							<textarea  style="width:95%" class="form-control" rows="3" id="description_Edit"></textarea>
-						</div>	
-						<div class="form-group col-xs-12 col-sm-6 col-md-6">
-									<label style="display:block">Select status</label>
-									<form>
-											<label class="radio-inline">
-															<input type="radio"  name ="status_Edit" value="1" checked="checked">
+						<div class="modal-body row">
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Name</label>
+								<div><input style="width:95%; float:left" type="text" class="form-control" id="coursename_Edit" ng-model="editkhoahoc.int_name"><span
+										style="color:red">&nbsp;&#42;</span></div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Start Date</label>
+								<div><input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Editstart" ng-model="editkhoahoc.startdate"><span
+										style="color:red">&nbsp;&#42;</span></div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>End Date</label>
+								<div><input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Editfinish" ng-model="editkhoahoc.enddate"><span
+										style="color:red">&nbsp;&#42;</span></div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Description</label>
+								<textarea style="width:95%" class="form-control" rows="3" id="description_Edit" ng-model="editkhoahoc.int_description"></textarea>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label style="display:block">Select status</label>
+								<form>
+									<label class="radio-inline">
+															<input type="radio"  name ="status_Edit" value="1" ng-model="editkhoahoc.status" ng-checked="editkhoahoc.status==1">
 															Active
 											</label>
-											<label   class="radio-inline">
-															<input type="radio"  name ="status_Edit" value="0">
+									<label class="radio-inline">
+															<input type="radio"  name ="status_Edit" value="0" ng-model="editkhoahoc.status" ng-checked="editkhoahoc.status==0">
 															Inactive
 
 											</label>
-									</form>
+								</form>
+							</div>
+
 						</div>
-					
+						<div class="modal-footer">
+							<button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="updatekhoahoc()"><span class="glyphicon glyphicon-edit"></span>Update</button>
+						</div>
 					</div>
-					<div class="modal-footer">
-					  <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-edit"></span>Update</button>
-					</div>
-				  </div>
 				</form>
+			</div>
 		</div>
-	</div>	
-</div>
+	</div>
 
 
 
 
- 
-<!-- modal confirm -->
-<div class="container">
-  <div class="modal fade" id="myModalConfirm" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-		
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">ARE YOU SURE</h4>
-		  
-        </div>
-		
-        <div class="modal-body">
-          <p>Do you want to remove data?</p>
-        </div>
-		
-        <div class="modal-footer">
-		
-          <button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'"  type="button" class="btn" data-dismiss="modal">Yes</button>
-          <button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button" class="btn" data-dismiss="modal">No</button>
-		  
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</div>
-
-
-
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    var t = $('#khoahoc').DataTable( {
-      "scrollY":   300,
-      "columnDefs": [ {
-        "searchable": false,
-        "orderable": false,
-        "targets": 0
-      } ],
-      "order": [[ 1, 'asc' ]]
-    } );
-
-    t.on( 'order.dt search.dt', function () {
-      t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-        cell.innerHTML = i+1;
-      } );
-    } ).draw();
-  } );<!---khoi tao datatable--->
-</script> 
 	<script type="text/javascript">
-$( function() {
-  $( "#datepicker_Addstart" ).datepicker();
-  $( "#datepicker_Addfinish" ).datepicker();
-  $( "#datepicker_Editstart" ).datepicker();
-  $( "#datepicker_Editfinish" ).datepicker();
-} );
-</script>
+		$(function () {
+			$("#datepicker_Addstart").datepicker();
+			$("#datepicker_Addfinish").datepicker();
+			$("#datepicker_Editstart").datepicker();
+			$("#datepicker_Editfinish").datepicker();
+		});
+	</script>
+</div>

@@ -129,7 +129,7 @@ app.controller('truonghoc_ctl', ['$scope','$http','$window','$compile',function(
 	$scope.updatetruonghoc = function(){
 		$http.put('/menu_School/' + $scope.edittruonghoc.univer_id, $scope.edittruonghoc).then(function successCallback(response){
 			for (var i = 0; i < $scope.truonghoc_list.length; i++) {
-				if ($scope.truonghoc_list[i].univer_id === $scope.edittruonghoc.univer_id) {
+				if ($scope.truonghoc_list[i].univer_id == $scope.edittruonghoc.univer_id) {
 					$scope.truonghoc_list[i] = $scope.edittruonghoc;
 				}
 			}			
