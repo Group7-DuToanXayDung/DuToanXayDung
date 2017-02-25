@@ -146,8 +146,6 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 			url: '/rolesUser/' + toSelect.user_code
 		}).then(function successCallback(response) {
 			role_user = response.data;
-			console.log(role_user);
-			console.log(role_user.length);
 		}, function errorCallback(response) {
 
 		});
