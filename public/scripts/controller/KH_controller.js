@@ -182,6 +182,7 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                     var row = jQuery("tr#" + $scope.editkhoahoc.int_id);
                     dt.fnUpdate($scope.editkhoahoc, row); // Row
                     dt.fnDraw();
+                    $compile(document.getElementById('data_table'))($scope);
                     //refresh();
 
                     //$scope.edittruonghoc = null;

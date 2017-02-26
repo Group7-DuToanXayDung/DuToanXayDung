@@ -1,205 +1,124 @@
-<div class="container">
-	<div class="row">
-		<h2 class="sub-header">List of Specializations</h2>
-		<div class="form-group">
-			<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+<div ng-controller="cth_controller">
+	<div class="container">
+		<div class="row">
+			<h2 class="sub-header">List of Specializations</h2>
+			<div class="form-group">
+				<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+			</div>
 		</div>
 	</div>
-</div>
-	
-<table id="chuongtrinhhoc" class="display text-center" width="100%" cellspacing="0">
-	<thead>
-	  <tr>
-		<th class="text-center">No.</th>
-		<th class="text-center">Specialization ID</th>
-		<th class="text-center">Name</th>
-		<th class="text-center">Description</th>
-		<th class="text-center">Status</th>
-		<th class="text-center">Update</th>
-		<th class="text-center">Remove</th>
-	  </tr>
-	</thead>
+	<table id="data_table" class="display text-center" width="100%" cellspacing="0">
+		<thead>
+			<tr>
+				<th class="text-center">No.</th>
+				<th class="text-center">Specialization ID</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Description</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Update</th>
+				<th class="text-center">Remove</th>
+			</tr>
+		</thead>
 
-	<tfoot>
-	  <tr>
-		<th class="text-center">No.</th>
-		<th class="text-center">Specialization ID</th>
-		<th class="text-center">Name</th>
-		<th class="text-center">Description</th>
-		<th class="text-center">Status</th>
-		<th class="text-center">Update</th>
-		<th class="text-center">Remove</th>
-	  </tr>
-	</tfoot>
-
-	<tbody>
-	  <tr>
-		<td>1</td>
-		<td>AQT</td>
-		<td>Thiết kế Web_Apllication</td>
-		<td>Học FrontEnd và BackEnd</td>
-		<td>Active</td>
-		<td><button class="btn btn-warning" data-toggle="modal" data-target="#myModalEdit"><span class="glyphicon glyphicon-edit"></span>Update</button></td>
-		<td><button class="btn btn-danger" data-toggle="modal" data-target="#myModalConfirm"><span class="glyphicon glyphicon-remove"></span>Remove</button></td>
-	  </tr>
-	</tbody>
-</table>
+		<tfoot>
+			<tr>
+				<th class="text-center">No.</th>
+				<th class="text-center">Specialization ID</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Description</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Update</th>
+				<th class="text-center">Remove</th>
+			</tr>
+		</tfoot>
+	</table>
 
 
 
 
-<!-- modal ADD -->
-<div class="container">
-	<div class="modal fade container " id="myModalAdd" role="dialog">
-		<div class="modal-dialog ">
-		
-			<!-- Modal content-->
-			  <div class="modal-content">
-				<div class="modal-header">
-				  <button type="button" class="close" data-dismiss="modal">&times;</button>
-				  <h4 class="modal-title">Add Specialization</h4>
+	<!-- modal ADD -->
+	<div class="container">
+		<div class="modal fade container " id="myModalAdd" role="dialog">
+			<div class="modal-dialog ">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add Specialization</h4>
+					</div>
+					<div class="modal-body row">
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Specialization ID</label>
+							<div><input style="width:95%; float:left" type="text" class="form-control" id="programcode_Add" ng-model="cth.pro_code"><span style="color:red">&nbsp;&#42;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Name</label>
+							<div><input style="width:95%; float:left" type="text" class="form-control" id="programname_Add" ng-model="cth.pro_name"><span style="color:red">&nbsp;&#42;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Description</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="description_Add" ng-model="cth.pro_description"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" ng-click="addcth()"><span class="glyphicon glyphicon-plus"></span>Add</button>
+					</div>
 				</div>
-				<div class="modal-body row">
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label>Specialization ID</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="programcode_Add"><span style="color:red">&nbsp;&#42;</span></div>						
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- modal Edit -->
+	<div class="container">
+		<div class="modal fade container " id="myModalEdit" role="dialog">
+			<div class="modal-dialog ">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Update Specialization</h4>
 					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label>Name</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="programname_Add"><span style="color:red">&nbsp;&#42;</span></div>
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label>Description</label>
-						<textarea  style="width:95%" class="form-control" rows="3" id="description_Add"></textarea>
-					</div>									
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label style="display:block">Select status</label>
-						<form>
+					<div class="modal-body row">
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Specialization ID</label>
+							<div><input style="width:95%; float:left" type="text" class="form-control" id="programcode_Edit" ng-model="editcth.pro_code"><span style="color:red">&nbsp;&#42;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Name</label>
+							<div><input style="width:95%; float:left" type="text" class="form-control" id="programname_Edit" ng-model="editcth.pro_name"><span style="color:red">&nbsp;&#42;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Description</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="description_Edit" ng-model="editcth.pro_description"></textarea>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label style="display:block">Select status</label>
+							<form>
 								<label class="radio-inline">
-												<input type="radio"  name ="status_Edit" value="1" checked="checked">
+												<input type="radio"  name ="status_Edit" value="1" ng-model="editcth.pro_status" ng-checked="editcth.pro_status==1">
 												Active
 								</label>
-								<label   class="radio-inline">
-												<input type="radio"  name ="status_Edit" value="0">
+								<label class="radio-inline">
+												<input type="radio"  name ="status_Edit" value="0" ng-model="editcth.pro_status" ng-checked="editcth.pro_status==0">
 												Inactive
 
 								</label>
-						</form>
-					</div>		
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="updatecth()"><span class="glyphicon glyphicon-edit"></span>Update</button>
+					</div>
 				</div>
-				<div class="modal-footer">
-				  <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span>Add</button>
-				</div>
-			  </div>
-		  
+
+			</div>
 		</div>
 	</div>
+
 </div>
-
-
-
-
-<!-- modal Edit -->
-<div class="container">
-	<div class="modal fade container " id="myModalEdit" role="dialog">
-		<div class="modal-dialog ">
-		
-			<!-- Modal content-->
-			  <div class="modal-content">
-				<div class="modal-header">
-				  <button type="button" class="close" data-dismiss="modal">&times;</button>
-				  <h4 class="modal-title">Update Specialization</h4>
-				</div>
-				<div class="modal-body row">
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label>Specialization ID</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="programcode_Edit"><span style="color:red">&nbsp;&#42;</span></div>						
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label>Name</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="programname_Edit"><span style="color:red">&nbsp;&#42;</span></div>
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label>Description</label>
-						<textarea  style="width:95%" class="form-control" rows="3" id="description_Edit"></textarea>
-					</div>									
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label style="display:block">Select status</label>
-						<form>
-								<label class="radio-inline">
-												<input type="radio"  name ="status_Edit" value="1" checked="checked">
-												Active
-								</label>
-								<label   class="radio-inline">
-												<input type="radio"  name ="status_Edit" value="0">
-												Inactive
-
-								</label>
-						</form>
-					</div>		
-				</div>
-				<div class="modal-footer">
-				  <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-edit"></span>Update</button>
-				</div>
-			  </div>
-		  
-		</div>
-	</div>
-</div>
-
-
-
-
-<!-- modal confirm -->
-<div class="container">
-  <div class="modal fade" id="myModalConfirm" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-		
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">ARE YOU SURE</h4>
-		  
-        </div>
-		
-        <div class="modal-body">
-          <p>Do you want to remove data?</p>
-        </div>
-		
-        <div class="modal-footer">
-		
-          <button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'"  type="button" class="btn" data-dismiss="modal">Yes</button>
-          <button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button" class="btn" data-dismiss="modal">No</button>
-		  
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    var t = $('#chuongtrinhhoc').DataTable( {
-      "scrollY":   300,
-      "columnDefs": [ {
-        "searchable": false,
-        "orderable": false,
-        "targets": 0
-      } ],
-      "order": [[ 1, 'asc' ]]
-    } );
-
-    t.on( 'order.dt search.dt', function () {
-      t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-        cell.innerHTML = i+1;
-      } );
-    } ).draw();
-  } );<!---khoi tao datatable--->
-</script> 

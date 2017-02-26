@@ -153,6 +153,7 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', funct
 					var row = jQuery("tr#" + $scope.edittruonghoc.univer_id);
 					dt.fnUpdate($scope.edittruonghoc, row); // Row
 					dt.fnDraw();
+					$compile(document.getElementById('data_table'))($scope);
 					//refresh();
 
 					//$scope.edittruonghoc = null;

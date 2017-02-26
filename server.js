@@ -10,6 +10,8 @@ app.use(require('./routes/thanhvien'));
 app.use(require('./routes/quyen'));
 app.use(require('./routes/phanquyen'));
 app.use(require('./routes/khoahoc'));
+app.use(require('./routes/monhoc'));
+app.use(require('./routes/chuongtrinhhoc'));
 
 app.listen(5000);
 console.log('Server running on port 5000');
