@@ -63,7 +63,7 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                     },
                     {
                         "data": null, mRender: function (data, type, row, index) {
-                            return "<button class='btn btn-danger' id="+index.row+" data-toggle='modal' data-target='#myModalConfirm'  ng-click='getremove("+data.int_id+","+index.row+")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+                            return "<button class='btn btn-danger' id="+data.int_id+" data-toggle='modal' data-target='#myModalConfirm'  ng-click='getremove("+data.int_id+","+data.int_id+")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
                         },"bSortable": false
                     }
                 ],
@@ -120,10 +120,10 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
 
 
 
-    $scope.getremove = function(id,index){
-
+    $scope.getremove = function(id,id2){
+	console.log(id);
 		$scope.idremove = id;
-		$scope.indexremove = index;
+		$scope.indexremove = id2;
 
 	 }	
 
