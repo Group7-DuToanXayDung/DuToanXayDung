@@ -23,7 +23,7 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 				"rowId": "dis_id",
 				"aoColumns": [
 					{ "data": "dis_id", "bSortable": false },
-					{ "data": "dis_code", "bSortable": false},
+					{ "data": "dis_code", "bSortable": false },
 					{ "data": "dis_name", "bSortable": false },
 					{ "data": "dis_hours", "bSortable": false },
 					{ "data": "credits", "bSortable": false },
@@ -47,7 +47,7 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
-							return "<button class='btn btn-danger' id="+index.row+" data-toggle='modal' ng-click='getremove("+data.dis_id+","+index.row+")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+							return "<button class='btn btn-danger' id=" + data.dis_id + " data-toggle='modal' ng-click='getremove(" + data.dis_id + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
 						}, "bSortable": false
 					}
 				],
@@ -62,6 +62,10 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 					cell.innerHTML = i + 1;
 				});
 			}).draw();
+
+			t.on('draw.dt', function (e, settings, len) {
+				$compile(document.getElementById('data_table'))($scope);
+			});
 
 
 		}, function errorCallback(response) {
@@ -104,18 +108,17 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 
 
 
-	$scope.getremove = function (id, index) {
+	$scope.getremove = function (id) {
 
-		$scope.idremove = id;
-		$scope.indexremove = index;
+		$scope.id = id;
 		jQuery("#myModalConfirm").modal('show');
 	}
 
 
 	//xoa
 	$scope.remove = function () {
-		$http.delete('/menu_Monhoc/' + $scope.idremove).then(function successCallback(response) {
-			var tr = jQuery('#' + $scope.indexremove).closest('tr');
+		$http.delete('/menu_Monhoc/' + $scope.id).then(function successCallback(response) {
+			var tr = jQuery('#' + $scope.id).closest('tr');
 			var dt = jQuery('#data_table').dataTable();
 			dt.fnDeleteRow(tr);
 			dt.fnDraw();

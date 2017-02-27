@@ -45,7 +45,7 @@ app.controller('cth_controller', ['$scope', '$http', '$window', '$compile', func
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
-							return "<button class='btn btn-danger' id=" + index.row + " data-toggle='modal' data-target='#myModalConfirm'  ng-click='getremove(" + data.pro_id + "," + index.row + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+							return "<button class='btn btn-danger' id='R" + data.pro_id + "' data-toggle='modal'  ng-click='getremove(" + data.pro_id + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
 						}, "bSortable": false
 					}
 				],
@@ -60,6 +60,9 @@ app.controller('cth_controller', ['$scope', '$http', '$window', '$compile', func
 					cell.innerHTML = i + 1;
 				});
 			}).draw();
+			t.on('draw.dt', function (e, settings, len) {
+				$compile(document.getElementById('data_table'))($scope);
+			});
 
 
 		}, function errorCallback(response) {
@@ -98,13 +101,10 @@ app.controller('cth_controller', ['$scope', '$http', '$window', '$compile', func
 		});
 	}
 
+	$scope.getremove = function (id) {
 
-	$scope.a;
-	$scope.c;
-	$scope.getremove = function (id, index) {
-
-		$scope.idremove = id;
-		$scope.indexremove = index;
+		$scope.id = id;
+		jQuery("#myModalConfirm").modal('show');
 
 	}
 
@@ -113,16 +113,15 @@ app.controller('cth_controller', ['$scope', '$http', '$window', '$compile', func
 	//xoa
 
 	$scope.remove = function () {
-		console.log($scope.idremove,$scope.indexremove);
-				$http.delete('/menu_CThoc/' + $scope.idremove).then(function successCallback(response) {
-					var tr = jQuery('#' + $scope.indexremove).closest('tr');
-					var dt = jQuery('#data_table').dataTable();
-					dt.fnDeleteRow(tr);
-					dt.fnDraw();
-					$compile(document.getElementById('data_table'))($scope);
-				}, function errorCallback(response) {
+		$http.delete('/menu_CThoc/' + $scope.id).then(function successCallback(response) {
+			var tr = jQuery('#' + $scope.id).closest('tr');
+			var dt = jQuery('#data_table').dataTable();
+			dt.fnDeleteRow(tr);
+			dt.fnDraw();
+			$compile(document.getElementById('data_table'))($scope);
+		}, function errorCallback(response) {
 
-				});
+		});
 	}
 
 

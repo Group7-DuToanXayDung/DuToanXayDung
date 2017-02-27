@@ -22,10 +22,10 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                 "aaData": $scope.khoahoc_list,
                 "rowId": "int_id",
                 "aoColumns": [
-                    { "data": "int_id", "bSortable": false  },
-                    { "data": "int_code","bSortable": false },
-                    { "data": "int_name","bSortable": false },
-                    { "data": "int_description","bSortable": false },
+                    { "data": "int_id", "bSortable": false },
+                    { "data": "int_code", "bSortable": false },
+                    { "data": "int_name", "bSortable": false },
+                    { "data": "int_description", "bSortable": false },
                     {
                         "data": null, mRender: function (data, type, row) {
                             var str = "";
@@ -33,7 +33,7 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                             var month = date_star.getMonth() + 1;
                             str = (month > 10 ? month : "0" + month) + "/" + date_star.getDate() + "/" + date_star.getFullYear();
                             return str;
-                        },"bSortable": false
+                        }, "bSortable": false
                     },
                     {
                         "data": null, mRender: function (data, type, row) {
@@ -42,7 +42,7 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                             var month = date_end.getMonth() + 1;
                             str = (month > 10 ? month : "0" + month) + "/" + date_end.getDate() + "/" + date_end.getFullYear();
                             return str;
-                        },"bSortable": false
+                        }, "bSortable": false
                     },
                     {
                         "data": null, mRender: function (data, type, row) {
@@ -54,21 +54,21 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                                 str = "Active";
                             }
                             return str;
-                        },"bSortable": false
+                        }, "bSortable": false
                     },
                     {
                         "data": null, mRender: function (data, type, row, index) {
                             return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
-                        },"bSortable": false
+                        }, "bSortable": false
                     },
                     {
                         "data": null, mRender: function (data, type, row, index) {
                             console.log(index.row);
-                            return "<button class='btn btn-danger' id="+data.int_id+" data-toggle='modal' data-target='#myModalConfirm'  ng-click='getremove("+data.int_id+","+data.int_id+")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
-                        },"bSortable": false
+                            return "<button class='btn btn-danger' id=" + data.int_id + " data-toggle='modal'  ng-click='getremove(" + data.int_id + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+                        }, "bSortable": false
                     }
                 ],
-                //"order": [[0, "asc"]],
+                "order": [[0, "asc"]],
                 "initComplete": function () {
                     $compile(document.getElementById('data_table'))($scope);
                 }
@@ -77,8 +77,14 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
             t.on('order.dt search.dt', function () {
                 t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
                     cell.innerHTML = i + 1;
+                    $compile(document.getElementById('data_table'))($scope);
                 });
             }).draw();
+
+
+            t.on('draw.dt', function (e, settings, len) {
+                $compile(document.getElementById('data_table'))($scope);
+            });
 
 
         }, function errorCallback(response) {
@@ -121,18 +127,16 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
 
 
 
-    $scope.getremove = function(id,id2){
-	console.log(id);
-		$scope.idremove = id;
-		$scope.indexremove = id2;
-
-	 }	
+    $scope.getremove = function (id) {
+        $scope.id = id;
+        jQuery("#myModalConfirm").modal('show');
+    }
 
 
     //xoa
     $scope.remove = function () {
-        $http.delete('/menu_Khoahoc/' + $scope.idremove).then(function successCallback(response) {
-            var tr = jQuery('#' + $scope.indexremove).closest('tr');
+        $http.delete('/menu_Khoahoc/' + $scope.id).then(function successCallback(response) {
+            var tr = jQuery('#' + $scope.id).closest('tr');
             var dt = jQuery('#data_table').dataTable();
             dt.fnDeleteRow(tr);
             dt.fnDraw();

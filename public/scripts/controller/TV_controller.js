@@ -45,7 +45,7 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
-							return "<button class='btn btn-danger' id=" + index.row + " data-toggle='modal' data-target='#myModalConfirm'  ng-click='getremove(" + data.user_id + "," + index.row + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+							return "<button class='btn btn-danger' id=" + data.user_id + " data-toggle='modal'  ng-click='getremove(" + data.user_id + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
 						}, "bSortable": false
 					}
 				],
@@ -60,6 +60,9 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 					cell.innerHTML = i + 1;
 				});
 			}).draw();
+			t.on( 'draw.dt', function ( e, settings, len ) {
+					$compile(document.getElementById('data_table'))($scope);
+				} );
 
 
 		}, function errorCallback(response) {
@@ -89,17 +92,16 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 	$scope.roles = [];
 
 
-	$scope.getremove = function (id, index) {
+	$scope.getremove = function (id) {
 
-		$scope.idremove = id;
-		$scope.indexremove = index;
+		$scope.id = id;
 
 	}
 
 	//xoa
 	$scope.remove = function () {
-		$http.delete('/menu_Users/' + $scope.idremove).then(function successCallback(response) {
-			var tr = jQuery('#' + $scope.indexremove).closest('tr');
+		$http.delete('/menu_Users/' + $scope.id).then(function successCallback(response) {
+			var tr = jQuery('#' + $scope.id).closest('tr');
 			var dt = jQuery('#data_table').dataTable();
 			dt.fnDeleteRow(tr);
 			dt.fnDraw();
