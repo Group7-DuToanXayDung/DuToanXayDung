@@ -17,11 +17,11 @@ app.controller('vnito_ctl', ['$scope','$http','$window','$compile',function($sco
 						"aaData": $scope.vnito_list,
 						"rowId": "com_id",
 						"aoColumns": [
-							{ "data": "com_id", "bSortable": false},
-							{ "data": "com_code", "bSortable": false},
+							{ "data": "com_id"},
+							{ "data": "com_code"},
 							{ "data": null, mRender: function(data, type, row, index) {
 								return "<div id='tooltip'>"+data.com_name+"<span id='tooltiptext'>"+data.com_address+"</span></div>";
-							}, "bSortable": false},
+							}},
 							{ "data": "com_contact" },
 							{ "data": null,  mRender: function (data, type, row) {
 												var str = "";
@@ -34,25 +34,29 @@ app.controller('vnito_ctl', ['$scope','$http','$window','$compile',function($sco
 													str = "Active";
 												}
 												return str;
-											}, "bSortable": false },
+											} },
 							{ "data": null, mRender: function (data, type, row, index) {
 												return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
-											}, "bSortable": false},		
+											}},		
 							{ "data": null, mRender: function (data, type, row, index) {
-												return "<button class='btn btn-danger' id="+index.row+" data-toggle='modal' data-target='#myModalConfirm'  ng-click='getremove("+data.com_id+","+index.row+")' ><span class='glyphicon glyphicon-remove'></span> Remove</button>";
-											}, "bSortable": false}
+												return "<button class='btn btn-danger' id='R"+data.com_id+"' data-toggle='modal'  ng-click='getremove("+data.com_id+")' ><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+											}}
 						],
-						"order": [[0, "asc"]],
+						"order": [[1, "asc"]],
 						"initComplete": function () {
-							$compile(document.getElementById('data_table'))($scope);						
+							$compile(document.getElementById('data_table'))($scope);							
 						}
 					});
 
-				t.on('order.dt search.dt', function () {
+				t.on('order.dt search.dt page.dt', function () {
 					t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
 						cell.innerHTML = i + 1;
-					});
+					});					
 				}).draw();
+
+				t.on( 'draw.dt', function ( e, settings, len ) {
+					$compile(document.getElementById('data_table'))($scope);
+				} );
 			
 			
 		}, function errorCallback(response){
@@ -93,23 +97,18 @@ app.controller('vnito_ctl', ['$scope','$http','$window','$compile',function($sco
 //load form xoa
 $scope.a;
 $scope.c;
-	$scope.getremove = function(id,index){
+	$scope.getremove = function(id){
 
 		$scope.idremove = id;
-		$scope.indexremove = index;
-
-	 }		
-		
-
-	
-
+		jQuery("#myModalConfirm").modal('show');
+	 }
 //xoa
     $scope.remove = function(){
 		jQuery(function () {
 
 							$http.delete('/menu_VNITO/' + $scope.idremove).then(function successCallback(response){	
 								
-								var tr = jQuery('#'+$scope.indexremove ).closest('tr');
+								var tr = jQuery('#R'+$scope.idremove ).closest('tr');
 								var dt = jQuery('#data_table').dataTable();
 								dt.fnDeleteRow(tr);
 								dt.fnDraw();

@@ -63,11 +63,12 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                     },
                     {
                         "data": null, mRender: function (data, type, row, index) {
+                            console.log(index.row);
                             return "<button class='btn btn-danger' id="+data.int_id+" data-toggle='modal' data-target='#myModalConfirm'  ng-click='getremove("+data.int_id+","+data.int_id+")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
                         },"bSortable": false
                     }
                 ],
-                "order": [[0, "asc"]],
+                //"order": [[0, "asc"]],
                 "initComplete": function () {
                     $compile(document.getElementById('data_table'))($scope);
                 }

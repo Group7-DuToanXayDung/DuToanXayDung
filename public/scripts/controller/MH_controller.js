@@ -47,7 +47,7 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
-							return "<button class='btn btn-danger' id="+index.row+" data-toggle='modal' data-target='#myModalConfirm'  ng-click='getremove("+data.dis_id+","+index.row+")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+							return "<button class='btn btn-danger' id="+index.row+" data-toggle='modal' ng-click='getremove("+data.dis_id+","+index.row+")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
 						}, "bSortable": false
 					}
 				],
@@ -108,7 +108,7 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 
 		$scope.idremove = id;
 		$scope.indexremove = index;
-
+		jQuery("#myModalConfirm").modal('show');
 	}
 
 
