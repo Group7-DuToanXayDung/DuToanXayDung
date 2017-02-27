@@ -15,19 +15,19 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 					[10, 25, 50, 100, -1],
 					[10, 25, 50, 100, "All"]
 				],
-				"iDisplayLength": 50,
+				"iDisplayLength": 10,
 				"retrieve": true,
 				//"processing": true,
 				"deferRender": true,
 				"aaData": $scope.monhoc_list,
 				"rowId": "dis_id",
 				"aoColumns": [
-					{ "data": "dis_id" },
-                    { "data": "dis_code" },
-					{ "data": "dis_name" },
-					{ "data": "dis_hours" },
-                    { "data": "credits" },
-                    { "data": "dis_description" },
+					{ "data": "dis_id", "bSortable": false },
+					{ "data": "dis_code", "bSortable": false},
+					{ "data": "dis_name", "bSortable": false },
+					{ "data": "dis_hours", "bSortable": false },
+					{ "data": "credits", "bSortable": false },
+					{ "data": "dis_description", "bSortable": false },
 					{
 						"data": null, mRender: function (data, type, row) {
 							var str = "";
@@ -38,17 +38,17 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 								str = "Active";
 							}
 							return str;
-						}
+						}, "bSortable": false
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
-						}
+						}, "bSortable": false
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
-							return "<button class='btn btn-danger' ng-click='remove(" + data.dis_id + ",$event)'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
-						}
+							return "<button class='btn btn-danger' id="+index.row+" data-toggle='modal' data-target='#myModalConfirm'  ng-click='getremove("+data.dis_id+","+index.row+")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+						}, "bSortable": false
 					}
 				],
 				"order": [[2, "asc"]],
@@ -79,11 +79,11 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 	//them
 	$scope.addmonhoc = function () {
 		for (var i = 0; i < $scope.monhoc_list.length; i++) {
-            if ($scope.monhoc_list[i].dis_code == $scope.monhoc.dis_code) {
-                $window.alert('Mã mon hoc đã tồn tại');
-                return;
-            }
-        }
+			if ($scope.monhoc_list[i].dis_code == $scope.monhoc.dis_code) {
+				$window.alert('Mã mon hoc đã tồn tại');
+				return;
+			}
+		}
 		$http.post('/menu_Monhoc', $scope.monhoc).then(function successCallback(response) {
 			//refresh();
 			//$window.location.reload();
@@ -104,59 +104,55 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 
 
 
+	$scope.getremove = function (id, index) {
 
+		$scope.idremove = id;
+		$scope.indexremove = index;
+
+	}
 
 
 	//xoa
-	$scope.remove = function (id, $event, index) {
-		jQuery(function () {
-			var t = (confirm("Are you sure"));
-			if (t == true) {
-				$http.delete('/menu_Monhoc/' + id).then(function successCallback(response) {
+	$scope.remove = function () {
+		$http.delete('/menu_Monhoc/' + $scope.idremove).then(function successCallback(response) {
+			var tr = jQuery('#' + $scope.indexremove).closest('tr');
+			var dt = jQuery('#data_table').dataTable();
+			dt.fnDeleteRow(tr);
+			dt.fnDraw();
+			$compile(document.getElementById('data_table'))($scope);
+		}, function errorCallback(response) {
 
-					$scope.monhoc_list.splice(index, 1);
-
-					var delButton = $event.target;
-					var tr = jQuery(delButton).closest('tr');
-					var dt = jQuery('#data_table').dataTable();
-					dt.fnDeleteRow(tr);
-					dt.fnDraw();
-					refresh();
-				}, function errorCallback(response) {
-
-				});
-			}
 		});
 	}
 
 
 
 
-//load form edit
+	//load form edit
 	$scope.editt = function (index) {
-				var toSelect = $scope.monhoc_list[index];
-				$scope.editmonhoc = toSelect;
-			}
+		var toSelect = $scope.monhoc_list[index];
+		$scope.editmonhoc = toSelect;
+	}
 
 
-//sua
+	//sua
 	$scope.updatemonhoc = function () {
-				$http.put('/menu_Monhoc/' + $scope.editmonhoc.dis_id, $scope.editmonhoc).then(function successCallback(response) {
-					for (var i = 0; i < $scope.monhoc_list.length; i++) {
-						if ($scope.monhoc_list[i].dis_id == $scope.editmonhoc.dis_id) {
-							$scope.monhoc_list[i] = $scope.editmonhoc;
-						}
-					}
-					var dt = jQuery('#data_table').dataTable();
-					var row = jQuery("tr#" + $scope.editmonhoc.dis_id);
-					dt.fnUpdate($scope.editmonhoc, row); // Row
-					dt.fnDraw();
-					$compile(document.getElementById('data_table'))($scope);
-					//refresh();
-
-					//$scope.edittruonghoc = null;
-				}, function errorCallback(response) {
-
-				});
+		$http.put('/menu_Monhoc/' + $scope.editmonhoc.dis_id, $scope.editmonhoc).then(function successCallback(response) {
+			for (var i = 0; i < $scope.monhoc_list.length; i++) {
+				if ($scope.monhoc_list[i].dis_id == $scope.editmonhoc.dis_id) {
+					$scope.monhoc_list[i] = $scope.editmonhoc;
+				}
 			}
+			var dt = jQuery('#data_table').dataTable();
+			var row = jQuery("tr#" + $scope.editmonhoc.dis_id);
+			dt.fnUpdate($scope.editmonhoc, row); // Row
+			dt.fnDraw();
+			$compile(document.getElementById('data_table'))($scope);
+			//refresh();
+
+			//$scope.edittruonghoc = null;
+		}, function errorCallback(response) {
+
+		});
+	}
 }]);

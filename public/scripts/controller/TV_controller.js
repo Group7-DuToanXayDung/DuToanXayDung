@@ -12,20 +12,20 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 					[10, 25, 50, 100, -1],
 					[10, 25, 50, 100, "All"]
 				],
-				"iDisplayLength": 50,
+				"iDisplayLength": 10,
 				"retrieve": true,
 				//"processing": true,
 				"deferRender": true,
 				"aaData": $scope.thanhvien_list,
 				"rowId": "user_id",
 				"aoColumns": [
-					{ "data": "user_id" },
-					{ "data": "user_code" },
-					{ "data": "lastname" },
-					{ "data": "firstname" },
-					{ "data": "username" },
-					{ "data": "phone" },
-					{ "data": "email" },
+					{ "data": "user_id", "bSortable": false },
+					{ "data": "user_code", "bSortable": false },
+					{ "data": "lastname", "bSortable": false },
+					{ "data": "firstname", "bSortable": false},
+					{ "data": "username", "bSortable": false },
+					{ "data": "phone", "bSortable": false },
+					{ "data": "email", "bSortable": false },
 					{
 						"data": null, mRender: function (data, type, row) {
 							var str = "";
@@ -36,17 +36,17 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 								str = "Inactive";
 							}
 							return str;
-						}
+						}, "bSortable": false
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
-						}
+						}, "bSortable": false
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
-							return "<button class='btn btn-danger' ng-click='remove(" + data.user_id + ",$event,$index)'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
-						}
+							return "<button class='btn btn-danger' id=" + index.row + " data-toggle='modal' data-target='#myModalConfirm'  ng-click='getremove(" + data.user_id + "," + index.row + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+						}, "bSortable": false
 					}
 				],
 				"order": [[2, "asc"]],
@@ -67,43 +67,51 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 		});
 	}
 
-	$http({
+	/*$http({
 		method: 'GET',
 		url: '/menu_School'
 	}).then(function successCallback(response) {
 		$scope.truonghoc_list_tv = response.data;
 	}, function errorCallback(response) {
 
-	});
-	$http({
+	});*/
+	/*$http({
 		method: 'GET',
 		url: '/roles'
 	}).then(function successCallback(response) {
 		$scope.roles_list = response.data;
 	}, function errorCallback(response) {
 
-	});
+	});*/
 
 	refresh();
 
 	$scope.roles = [];
 
 
+	$scope.getremove = function (id, index) {
+
+		$scope.idremove = id;
+		$scope.indexremove = index;
+
+	}
+
 	//xoa
-	$scope.remove = function (user_id, $event, index) {
-		$http.delete('/menu_Users/' + user_id).then(function successCallback(response) {
-			$scope.thanhvien_list.splice(index, 1);
-			var delButton = $event.target;
-			var tr = jQuery(delButton).closest('tr');
+	$scope.remove = function () {
+		$http.delete('/menu_Users/' + $scope.idremove).then(function successCallback(response) {
+			var tr = jQuery('#' + $scope.indexremove).closest('tr');
 			var dt = jQuery('#data_table').dataTable();
 			dt.fnDeleteRow(tr);
 			dt.fnDraw();
-			refresh();
-
+			$compile(document.getElementById('data_table'))($scope);
 		}, function errorCallback(response) {
 
 		});
 	}
+
+
+
+
 	//them
 	$scope.addthanhvien = function () {
 		if ($scope.admin == true)
@@ -114,8 +122,7 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 			$scope.roles.push(3);
 		if ($scope.student == true)
 			$scope.roles.push(4);
-		if($scope.roles.length == 0)
-		{
+		if ($scope.roles.length == 0) {
 			$window.alert('Chưa chọn vai trò của thành viên');
 			return;
 		}
@@ -149,6 +156,8 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 	$scope.editt = function (index) {
 		var toSelect = $scope.thanhvien_list[index];
 		$scope.editthanhvien = toSelect;
+
+
 		$http({
 			method: 'GET',
 			url: '/rolesUser/' + toSelect.user_code
@@ -156,14 +165,14 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 			$scope.role_user = response.data;
 			//console.log(role_user);
 
-
+			//set lai checkbox
 			jQuery("#admin_u").prop('checked', false);
 			jQuery("#registra_u").prop('checked', false);
 			jQuery("#lecturer_u").prop('checked', false);
 			jQuery("#student_u").prop('checked', false);
 
 
-
+			//kiem tra su ly checkbox
 			for (var i = 0; i < $scope.role_user.length; i++) {
 				if ($scope.role_user[i].access_id == 1) {
 					jQuery("#admin_u").prop('checked', true);
@@ -189,8 +198,6 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 
 	//sua
 	$scope.updatethanhvien = function () {
-		var insert_r=[];
-		var delete_r=[];
 		var role_current = [];
 		if(jQuery("#admin_u").is(':checked')==true)
 			role_current.push(1);
@@ -201,28 +208,10 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 		if(jQuery("#student_u").is(':checked')==true)
 			role_current.push(4);
 
+		//var indata = { 'thanhvien': $scope.editthanhvien, 'roles': role_current };
 
-		for(var i=0;i<role_current.length;i++)
-		{
-			for(var j=0;j<$scope.role_user.length;j++)
-			{
-				if(role_current[i] != $scope.role_user[j])
-					insert_r.push(role_current[i]);
-			}
-		}
-		for(var x=0;x<$scope.role_user.length;x++)
-		{
-			for(var y=0;y<role_current.length;y++)
-			{
-				if($scope.role_user[x] != role_current[y])
-					delete_r.push($scope.role_user[x].access_id);
-			}
-		}
-
-		console.log(delete_r);
-		console.log(insert_r);
-		/*$http.put('/menu_Users/' + $scope.editthanhvien.user_id, $scope.editthanhvien).then(function successCallback(response) {
-			for (var i = 0; i < $scope.truonghoc_list.length; i++) {
+		$http.put('/menu_Users/' + $scope.editthanhvien.user_id, $scope.editthanhvien).then(function successCallback(response) {
+			for (var i = 0; i < $scope.thanhvien_list.length; i++) {
 				if ($scope.thanhvien_list[i].user_id == $scope.editthanhvien.user_id) {
 					$scope.thanhvien_list[i] = $scope.editthanhvien;
 				}
@@ -231,8 +220,18 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 			var row = jQuery("tr#" + $scope.editthanhvien.user_id);
 			dt.fnUpdate($scope.editthanhvien, row); // Row
 			dt.fnDraw();
+			$compile(document.getElementById('data_table'))($scope);
 		}, function errorCallback(response) {
 
-		});*/
+		});
+
+		$http.put('/rolesUser/' + $scope.editthanhvien.user_code,role_current).then(function successCallback(response){	
+								var tr = jQuery('#'+index).closest('tr');
+								var dt = jQuery('#data_table').dataTable();
+								dt.fnDeleteRow(tr);
+								dt.fnDraw();
+							}, function errorCallback(response){
+								
+							});
 	}
 }]);

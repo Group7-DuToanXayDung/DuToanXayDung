@@ -88,7 +88,7 @@ router.post('/menu_Users', function (req, res) {
 ///sua thanh vien
 router.put('/menu_Users/:id', function (req, res) {
 	var id = req.params.id;
-	var sql = "update thanhvien set ma_tv='" + req.body.ma_tv + "', ho='" + req.body.ho + "', gioitinh='" + req.body.gioitinh + "', ten_dn='" + req.body.ten_dn + "', matkhau='" + req.body.matkhau + "', sodt='" + req.body.sodt + "',ten='" + req.body.ten + "', diachi='" + req.body.diachi + "', email='" + req.body.email + "', trangthai='" + req.body.trangthai + "' where id_th = '" + id + "'";
+	var sql = "update users set user_code='" + req.body.user_code + "', firstname='" + req.body.firstname + "',lastname='" + req.body.lastname + "', gender='" + req.body.gender + "', username='" + req.body.username + "', password='" + req.body.password + "', phone='" + req.body.phone + "', useraddress='" + req.body.useraddress + "', email='" + req.body.email + "', status='" + req.body.user_status + "' where user_id = '" + id + "'";
 
 	connection.query(sql, function (err, rows, fields) {
 		if (err) {

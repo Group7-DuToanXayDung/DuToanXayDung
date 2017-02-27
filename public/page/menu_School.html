@@ -24,7 +24,7 @@
 		</thead>
 
 
-		
+
 
 		<tfoot>
 			<tr>
@@ -50,33 +50,35 @@
 						<h4 class="modal-title">Add University</h4>
 					</div>
 					<div class="modal-body row">
-							<div class="form-group col-xs-12 col-sm-6 col-md-6">
-								<label>UniversityID</label>
-								<div><input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: add.ma_th.$invalid}" minlength="3" maxlength="10" name="ma_th" id="UniversityID"
-									ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="truonghoc.univer_code" required><span style="color:red">&nbsp;&#42;</span></div>
-							</div>
-							<div class="form-group col-xs-12 col-sm-6 col-md-6">
-								<label>Name</label>
-								<div><input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: add.ten_th.$invalid}" name="ten_th" id="Name" ng-model="truonghoc.univer_name"
-									required><span style="color:red">&nbsp;&#42;</span></div>
-							</div>
-							<div class="form-group col-xs-12 col-sm-6 col-md-6">
-								<label>Address</label>
-								<textarea style="width:95%" class="form-control" rows="3" id="address_Add" ng-model="truonghoc.univer_address"></textarea>
-							</div>
-							<!-- <div class="form-group col-xs-12 col-sm-6 col-md-6"> -->
-								<!-- <label for="pwd">Address:</label> -->
-								<!-- <input type="text" class="form-control" id="pwd" ng-model="truonghoc.univer_address"> -->
-							<!-- </div> -->
-							<div class="form-group col-xs-12 col-sm-6 col-md-6">
-								<label>Contact</label>
-								<textarea style="width:95%" class="form-control" rows="3" id="contact_Add" ng-model="truonghoc.contact"></textarea>
-							</div>
-							<!-- <div class="form-group col-xs-12 col-sm-6 col-md-6"> -->
-								<!-- <label for="usr">Contact Information</label> -->
-								<!-- <input type="text" class="form-control" id="usr" ng-model="truonghoc.contact"> -->
-							<!-- </div> -->
-							<!--<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>UniversityID</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: add.ma_th.$invalid}" minlength="3"
+									maxlength="10" name="ma_th" id="UniversityID" ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="truonghoc.univer_code" required><span style="color:red">&nbsp;&#42;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Name</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: add.ten_th.$invalid}" name="ten_th"
+									id="Name" ng-model="truonghoc.univer_name" required><span style="color:red">&nbsp;&#42;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Address</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="address_Add" ng-model="truonghoc.univer_address"></textarea>
+						</div>
+						<!-- <div class="form-group col-xs-12 col-sm-6 col-md-6"> -->
+						<!-- <label for="pwd">Address:</label> -->
+						<!-- <input type="text" class="form-control" id="pwd" ng-model="truonghoc.univer_address"> -->
+						<!-- </div> -->
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Contact</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="contact_Add" ng-model="truonghoc.contact"></textarea>
+						</div>
+						<!-- <div class="form-group col-xs-12 col-sm-6 col-md-6"> -->
+						<!-- <label for="usr">Contact Information</label> -->
+						<!-- <input type="text" class="form-control" id="usr" ng-model="truonghoc.contact"> -->
+						<!-- </div> -->
+						<!--<div class="form-group col-xs-12 col-sm-6 col-md-6">
 								<div class="radio">
 									<label>
 												<input type="radio" ng-model="truonghoc.trangthai" value="1" ng-checked="truonghoc.trangthai == ''">
@@ -114,29 +116,31 @@
 					<div class="modal-body row">
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label>UniversityID</label>
-							<div><input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: update.ma_th.$invalid}" minlength="3" maxlength="10" name="ma_th"
-								id="usr" ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="edittruonghoc.univer_code" required><span style="color:red">&nbsp;&#42;</span></div>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: update.ma_th.$invalid}" minlength="3"
+									maxlength="10" name="ma_th" id="usr" ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="edittruonghoc.univer_code" required><span style="color:red">&nbsp;&#42;</span></div>
 						</div>
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label>Name</label>
-							<div><input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: update.ten_th.$invalid}" name="ten_th" id="University Name" ng-model="edittruonghoc.univer_name"
-								required><span style="color:red">&nbsp;&#42;</span></div>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: update.ten_th.$invalid}" name="ten_th"
+									id="University Name" ng-model="edittruonghoc.univer_name" required><span style="color:red">&nbsp;&#42;</span></div>
 						</div>
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label>Address</label>
 							<textarea style="width:95%" class="form-control" rows="3" id="address_Add" ng-model="edittruonghoc.univer_address"></textarea>
-						</div>						
+						</div>
 						<!-- <div class="form-group col-xs-12 col-sm-6 col-md-6"> -->
-							<!-- <label for="pwd">Address:</label> -->
-							<!-- <input type="text" class="form-control" id="pwd" ng-model="edittruonghoc.univer_address"> -->
+						<!-- <label for="pwd">Address:</label> -->
+						<!-- <input type="text" class="form-control" id="pwd" ng-model="edittruonghoc.univer_address"> -->
 						<!-- </div> -->
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label>Contact</label>
 							<textarea style="width:95%" class="form-control" rows="3" id="contact_Add" ng-model="edittruonghoc.contact"></textarea>
-						</div>						
+						</div>
 						<!-- <div class="form-group col-xs-12 col-sm-6 col-md-6"> -->
-							<!-- <label for="usr">Contact Information</label> -->
-							<!-- <input type="text" class="form-control" id="usr" ng-model="edittruonghoc.contact"> -->
+						<!-- <label for="usr">Contact Information</label> -->
+						<!-- <input type="text" class="form-control" id="usr" ng-model="edittruonghoc.contact"> -->
 						<!-- </div> -->
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<div class="radio">
@@ -161,43 +165,41 @@
 		</div>
 	</div>
 
-	
-	
-	
-<!-- modal confirm -->
-<div class="container">
-  <div class="modal fade" id="myModalConfirm" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-		
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">ARE YOU SURE</h4>
-		  
-        </div>
-		
-        <div class="modal-body">
-          <p>Do you want to remove data?</p>
-        </div>
-		
-        <div class="modal-footer">
-		
-          <button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'"  type="button" class="btn" data-dismiss="modal">Yes</button>
-          <button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button" class="btn" data-dismiss="modal">No</button>
-		  
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</div>
-	
-	
-	
-	
-	
-	
-	
 
-</div> 
+
+
+
+	<!-- modal confirm -->
+	<div class="container">
+		<div class="modal fade" id="myModalConfirm" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">ARE YOU SURE</h4>
+
+					</div>
+
+					<div class="modal-body">
+						<p>Do you want to remove data?</p>
+					</div>
+
+					<div class="modal-footer">
+
+						<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+							class="btn" data-dismiss="modal" ng-click='remove()'>Yes</button>
+							<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+								class="btn" data-dismiss="modal">No</button>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+</div>

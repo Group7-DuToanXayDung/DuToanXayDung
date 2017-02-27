@@ -1,4 +1,4 @@
-<div ng-controller="dis_controller">	
+<div ng-controller="dis_controller">
 	<div class="container">
 		<div class="row">
 			<h2 class="sub-header">List of Disciplines</h2>
@@ -8,8 +8,8 @@
 		</div>
 	</div>
 	<table id="data_table" class="display text-center" width="100%" cellspacing="0">
-			<thead>
-			  <tr>
+		<thead>
+			<tr>
 				<th class="text-center">No.</th>
 				<th class="text-center">Discipline ID</th>
 				<th class="text-center">Name</th>
@@ -19,11 +19,11 @@
 				<th class="text-center">Status</th>
 				<th class="text-center">Update</th>
 				<th class="text-center">Remove</th>
-			  </tr>
-			</thead>
+			</tr>
+		</thead>
 
-			<tfoot>
-			  <tr>
+		<tfoot>
+			<tr>
 				<th class="text-center">No.</th>
 				<th class="text-center">Discipline ID</th>
 				<th class="text-center">Name</th>
@@ -33,51 +33,56 @@
 				<th class="text-center">Status</th>
 				<th class="text-center">Update</th>
 				<th class="text-center">Remove</th>
-			  </tr>
-			</tfoot>
+			</tr>
+		</tfoot>
 	</table>
 
 
 
-	 <!-- modal ADD -->
+	<!-- modal ADD -->
 	<div class="modal fade container " id="myModalAdd" role="dialog">
-		<div class="modal-dialog ">	
-		  <!-- Modal content-->
-			  <div class="modal-content">
+		<div class="modal-dialog ">
+			<!-- Modal content-->
+			<div class="modal-content">
 				<div class="modal-header">
-				  <button type="button" class="close" data-dismiss="modal">&times;</button>
-				  <h4 class="modal-title">Add Discipline</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Add Discipline</h4>
 				</div>
-				<div class="modal-body row" >
-					<form name="userForm" novalidate>
-							<div class="form-group col-xs-12 col-sm-6 col-md-6">
-								<label>Discipline ID</label>
-								<div><input style="width:95%; float:left" type="text" class="form-control" id="subjectcode_Add" ng-model="monhoc.dis_code"><span style="color:red">&nbsp;&#42;</span></div>
+				<div class="modal-body row">
+					<form name="addForm" novalidate>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Discipline ID</label>
+							<div><input style="width:95%; float:left" type="text" class="form-control" id="subjectcode_Add" ng-model="monhoc.dis_code"><span
+									style="color:red" ng-pattern="/^[a-zA-Z0-9]+$/" ng-required="true">&nbsp;&#42;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Name</label>
+							<div><input style="width:95%; float:left" type="text" class="form-control" id="subjectname_Add" ng-model="monhoc.dis_name"><span
+									style="color:red">&nbsp;&#42;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<div style="position:relative">
+								<label>Hours</label>
+								<div>
+									<input type="number" class="form-control" min="0" style="width:95%; float:left" name="hours" id="studytime_Add" ng-model="monhoc.dis_hours"
+										ng-required="true"><span style="color:red">&nbsp;&#42;</span></div>
+								<span style="color:red;position:absolute;left:0;top:60px;" ng-show="!addForm.hours.$valid">must be numberic bigger than -1</span>
 							</div>
-							<div class="form-group col-xs-12 col-sm-6 col-md-6">
-								<label>Name</label>
-								<div><input style="width:95%; float:left" type="text" class="form-control" id="subjectname_Add" ng-model="monhoc.dis_name"><span style="color:red">&nbsp;&#42;</span></div>
-							</div>
-							<div class="form-group col-xs-12 col-sm-6 col-md-6">
-								<div style="position:relative">
-									<label>Hours</label>
-									<div><input  type="number" class="form-control" style="width:95%; float:left"  name="hours" id="studytime_Add" ng-model="monhoc.dis_hours" ng-required="true"><span style="color:red">&nbsp;&#42;</span></div>
-									<span style="color:red;position:absolute;left:0;top:60px;" ng-show="!userForm.hours.$valid">must be numberic bigger than -1</span>
-								</div>
-							</div>
+						</div>
 
-							<div class="form-group col-xs-12 col-sm-6 col-md-6">
-								<label>Credit</label>
-								<div><input type="number" style="width:95%; float:left" type="text" class="form-control" id="credit_Add" ng-model="monhoc.credits"><span style="color:red">&nbsp;&#42;</span></div>
-							</div>
-							<div class="form-group col-xs-12 col-sm-6 col-md-6">
-								<label>Description</label>
-								<textarea  style="width:95%" class="form-control" rows="3" id="description_Add" ng-model="monhoc.dis_description"></textarea>
-							</div>	
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Credit</label>
+							<div><input type="number" style="width:95%; float:left" type="text" class="form-control" id="credit_Add" ng-model="monhoc.credits"><span
+									style="color:red">&nbsp;&#42;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Description</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="description_Add" ng-model="monhoc.dis_description"></textarea>
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					  <button  type="submit" name="discipline_Add" class="btn btn-primary" ng-click="addmonhoc()"><span class="glyphicon glyphicon-plus"></span>Add</button>
+					<button type="submit" name="discipline_Add" class="btn btn-primary" ng-disabled="!addForm.$dirty || (addForm.$dirty && addForm.$invalid)" ng-click="addmonhoc()"><span class="glyphicon glyphicon-plus"></span>Add</button>
 				</div>
 
 			</div>
@@ -88,62 +93,100 @@
 
 
 
-	 <!-- modal Edit -->
+	<!-- modal Edit -->
 	<div class="modal fade container " id="myModalEdit" role="dialog">
-		<div class="modal-dialog ">	
-		  <!-- Modal content-->
-			  <div class="modal-content">
+		<div class="modal-dialog ">
+			<!-- Modal content-->
+			<div class="modal-content">
 				<div class="modal-header">
-				  <button type="button" class="close" data-dismiss="modal">&times;</button>
-				  <h4 class="modal-title">Update Discipline</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Update Discipline</h4>
 				</div>
 				<div class="modal-body row">
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label>Discipline ID</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="subjectcode_Edit" ng-model="editmonhoc.dis_code"><span style="color:red">&nbsp;&#42;</span></div>
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label>Name</label>
-						<div><input style="width:95%; float:left" type="text" class="form-control" id="subjectname_Edit" ng-model="editmonhoc.dis_name"><span style="color:red">&nbsp;&#42;</span></div>
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<div style="position:relative">
-							<label>Hours</label>
-							<div><input  type="number" min="0" class="form-control" style="width:95%; float:left"  name="hours" id="studytime_Add" ng-model="editmonhoc.dis_hours" ng-required="true"><span style="color:red">&nbsp;&#42;</span></div>
-							<span style="color:red;position:absolute;left:0;top:60px;" ng-show="!userForm.hours.$valid">must be numberic bigger than -1</span>
+					<form name="userForm" novalidate>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Discipline ID</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" id="subjectcode_Edit" ng-model="editmonhoc.dis_code"
+									ng-pattern="/^[a-zA-Z0-9]+$/" required><span style="color:red">&nbsp;&#42;</span></div>
 						</div>
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label>Credit</label>
-						<div><input type="number" style="width:95%; float:left" type="text" class="form-control" id="credit_Edit" ng-model="editmonhoc.credits"><span style="color:red">&nbsp;&#42;</span></div>
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label>Description</label>
-						<textarea  style="width:95%" class="form-control" rows="3" id="description_Edit" ng-model="editmonhoc.dis_description"></textarea>
-					</div>	
-					<div class="form-group col-xs-12 col-sm-6 col-md-6">
-						<label style="display:block">Select status</label>
-						<form>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Name</label>
+							<div><input style="width:95%; float:left" type="text" class="form-control" id="subjectname_Edit" ng-model="editmonhoc.dis_name"><span
+									style="color:red">&nbsp;&#42;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<div style="position:relative">
+								<label>Hours</label>
+								<div>
+									<input type="number" min="0" class="form-control" style="width:95%; float:left" name="hours" id="studytime_Edit" ng-model="editmonhoc.dis_hours"
+										ng-required="true"><span style="color:red">&nbsp;&#42;</span></div>
+								<span style="color:red;position:absolute;left:0;top:60px;" ng-show="!userForm.hours.$valid">must be numberic bigger than -1</span>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Credit</label>
+							<div><input type="number" style="width:95%; float:left" type="text" class="form-control" id="credit_Edit" ng-model="editmonhoc.credits"><span
+									style="color:red">&nbsp;&#42;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Description</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="description_Edit" ng-model="editmonhoc.dis_description"></textarea>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label style="display:block">Select status</label>
+							<form>
 								<label class="radio-inline">
 												<input type="radio"  name ="status_Edit" value="1" ng-model="editmonhoc.status" ng-checked="editmonhoc.status==1">
 												Active
 								</label>
-								<label   class="radio-inline">
+								<label class="radio-inline">
 												<input type="radio"  name ="status_Edit" value="0" ng-model="editmonhoc.status" ng-checked="editmonhoc.status==0">
 												Inactive
 
 								</label>
-						</form>
-					</div>		
+							</form>
+						</div>
+					</form>
 				</div>
 				<div class="modal-footer">
-				  <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="updatemonhoc()"><span class="glyphicon glyphicon-edit"></span>Update</button>
+					<button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="!userForm.$dirty || (userForm.$dirty && userForm.$invalid)"
+						ng-click="updatemonhoc()"><span class="glyphicon glyphicon-edit"></span>Update</button>
 				</div>
-			  </div>
-		  
+			</div>
 		</div>
 	</div>
 
 
-	</script>
+
+	<!-- modal confirm -->
+	<div class="container">
+		<div class="modal fade" id="myModalConfirm" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">ARE YOU SURE</h4>
+
+					</div>
+
+					<div class="modal-body">
+						<p>Do you want to remove data?</p>
+					</div>
+
+					<div class="modal-footer">
+
+						<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+							class="btn" data-dismiss="modal" ng-click='remove()'>Yes</button>
+							<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+								class="btn" data-dismiss="modal">No</button>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </div>
