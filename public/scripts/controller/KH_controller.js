@@ -67,7 +67,7 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                         },"bSortable": false
                     }
                 ],
-                "order": [[2, "asc"]],
+                "order": [[0, "asc"]],
                 "initComplete": function () {
                     $compile(document.getElementById('data_table'))($scope);
                 }

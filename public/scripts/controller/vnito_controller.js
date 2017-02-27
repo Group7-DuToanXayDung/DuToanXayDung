@@ -42,7 +42,7 @@ app.controller('vnito_ctl', ['$scope','$http','$window','$compile',function($sco
 												return "<button class='btn btn-danger' id="+index.row+" data-toggle='modal' data-target='#myModalConfirm'  ng-click='getremove("+data.com_id+","+index.row+")' ><span class='glyphicon glyphicon-remove'></span> Remove</button>";
 											}, "bSortable": false}
 						],
-						"order": [[2, "asc"]],
+						"order": [[0, "asc"]],
 						"initComplete": function () {
 							$compile(document.getElementById('data_table'))($scope);						
 						}

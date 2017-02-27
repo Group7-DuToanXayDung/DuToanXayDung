@@ -53,7 +53,7 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', funct
 						}, "bSortable": false
 					}
 				],
-				"order": [[2, "asc"]],
+				"order": [[0, "asc"]],
 				"initComplete": function () {
 					$compile(document.getElementById('data_table'))($scope);
 				}

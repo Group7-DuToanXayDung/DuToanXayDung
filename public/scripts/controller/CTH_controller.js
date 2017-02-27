@@ -49,7 +49,7 @@ app.controller('cth_controller', ['$scope', '$http', '$window', '$compile', func
 						}, "bSortable": false
 					}
 				],
-				"order": [[2, "asc"]],
+				"order": [[0, "asc"]],
 				"initComplete": function () {
 					$compile(document.getElementById('data_table'))($scope);
 				}
