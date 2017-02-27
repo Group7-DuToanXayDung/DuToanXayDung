@@ -17,15 +17,16 @@ app.controller('cth_controller', ['$scope', '$http', '$window', '$compile', func
 				],
 				"iDisplayLength": 10,
 				"retrieve": true,
+				"bSort" : false,
 				//"processing": true,
 				"deferRender": true,
 				"aaData": $scope.cth_list,
 				"rowId": "pro_id",
 				"aoColumns": [
-					{ "data": "pro_id", "bSortable": false },
-					{ "data": "pro_code", "bSortable": false },
-					{ "data": "pro_name", "bSortable": false },
-					{ "data": "pro_description", "bSortable": false },
+					{ "data": "pro_id" },
+					{ "data": "pro_code" },
+					{ "data": "pro_name" },
+					{ "data": "pro_description" },
 					{
 						"data": null, mRender: function (data, type, row) {
 							var str = "";
@@ -36,17 +37,17 @@ app.controller('cth_controller', ['$scope', '$http', '$window', '$compile', func
 								str = "Active";
 							}
 							return str;
-						}, "bSortable": false
+						}
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
-						}, "bSortable": false
+						}
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-danger' id='R" + data.pro_id + "' data-toggle='modal'  ng-click='getremove(" + data.pro_id + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
-						}, "bSortable": false
+						}
 					}
 				],
 				"order": [[0, "asc"]],
@@ -55,14 +56,12 @@ app.controller('cth_controller', ['$scope', '$http', '$window', '$compile', func
 				}
 			});
 
-			t.on('order.dt search.dt', function () {
+			t.on('order.dt search.dt draw.dt', function () {
 				t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
 					cell.innerHTML = i + 1;
+					$compile(document.getElementById('data_table'))($scope);
 				});
 			}).draw();
-			t.on('draw.dt', function (e, settings, len) {
-				$compile(document.getElementById('data_table'))($scope);
-			});
 
 
 		}, function errorCallback(response) {

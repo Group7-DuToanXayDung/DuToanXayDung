@@ -14,18 +14,19 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 				],
 				"iDisplayLength": 10,
 				"retrieve": true,
+				"bSort": false,
 				//"processing": true,
 				"deferRender": true,
 				"aaData": $scope.thanhvien_list,
 				"rowId": "user_id",
 				"aoColumns": [
-					{ "data": "user_id", "bSortable": false },
-					{ "data": "user_code", "bSortable": false },
-					{ "data": "lastname", "bSortable": false },
-					{ "data": "firstname", "bSortable": false},
-					{ "data": "username", "bSortable": false },
-					{ "data": "phone", "bSortable": false },
-					{ "data": "email", "bSortable": false },
+					{ "data": "user_id" },
+					{ "data": "user_code" },
+					{ "data": "lastname" },
+					{ "data": "firstname" },
+					{ "data": "username" },
+					{ "data": "phone" },
+					{ "data": "email" },
 					{
 						"data": null, mRender: function (data, type, row) {
 							var str = "";
@@ -36,17 +37,17 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 								str = "Inactive";
 							}
 							return str;
-						}, "bSortable": false
+						}
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
-						}, "bSortable": false
+						}
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-danger' id=" + data.user_id + " data-toggle='modal'  ng-click='getremove(" + data.user_id + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
-						}, "bSortable": false
+						}
 					}
 				],
 				"order": [[0, "asc"]],
@@ -55,37 +56,17 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 				}
 			});
 
-			t.on('order.dt search.dt', function () {
+			t.on('order.dt search.dt draw.dt', function () {
 				t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
 					cell.innerHTML = i + 1;
 				});
 			}).draw();
-			t.on( 'draw.dt', function ( e, settings, len ) {
-					$compile(document.getElementById('data_table'))($scope);
-				} );
 
 
 		}, function errorCallback(response) {
 
 		});
 	}
-
-	/*$http({
-		method: 'GET',
-		url: '/menu_School'
-	}).then(function successCallback(response) {
-		$scope.truonghoc_list_tv = response.data;
-	}, function errorCallback(response) {
-
-	});*/
-	/*$http({
-		method: 'GET',
-		url: '/roles'
-	}).then(function successCallback(response) {
-		$scope.roles_list = response.data;
-	}, function errorCallback(response) {
-
-	});*/
 
 	refresh();
 
@@ -201,13 +182,13 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 	//sua
 	$scope.updatethanhvien = function () {
 		var role_current = [];
-		if(jQuery("#admin_u").is(':checked')==true)
+		if (jQuery("#admin_u").is(':checked') == true)
 			role_current.push(1);
-		if(jQuery("#registra_u").is(':checked')==true)
+		if (jQuery("#registra_u").is(':checked') == true)
 			role_current.push(2);
-		if(jQuery("#lecturer_u").is(':checked')==true)
+		if (jQuery("#lecturer_u").is(':checked') == true)
 			role_current.push(3);
-		if(jQuery("#student_u").is(':checked')==true)
+		if (jQuery("#student_u").is(':checked') == true)
 			role_current.push(4);
 
 		//var indata = { 'thanhvien': $scope.editthanhvien, 'roles': role_current };
@@ -227,13 +208,13 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 
 		});
 
-		$http.put('/rolesUser/' + $scope.editthanhvien.user_code,role_current).then(function successCallback(response){	
-								var tr = jQuery('#'+index).closest('tr');
-								var dt = jQuery('#data_table').dataTable();
-								dt.fnDeleteRow(tr);
-								dt.fnDraw();
-							}, function errorCallback(response){
-								
-							});
+		$http.put('/rolesUser/' + $scope.editthanhvien.user_code, role_current).then(function successCallback(response) {
+			var tr = jQuery('#' + index).closest('tr');
+			var dt = jQuery('#data_table').dataTable();
+			dt.fnDeleteRow(tr);
+			dt.fnDraw();
+		}, function errorCallback(response) {
+
+		});
 	}
 }]);

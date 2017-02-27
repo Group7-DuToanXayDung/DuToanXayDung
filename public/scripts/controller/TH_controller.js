@@ -17,17 +17,18 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', funct
 				],
 				"iDisplayLength": 10,
 				"retrieve": true,
+				"bSort" : false,
 				//"processing": true,
 				"deferRender": true,
 				"aaData": $scope.truonghoc_list,
 				"rowId": "univer_id",
 				"aoColumns": [
-					{ "data": "univer_id", "bSortable": false },
-					{ "data": "univer_code", "bSortable": false },
+					{ "data": "univer_id" },
+					{ "data": "univer_code" },
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<div id='tooltip'>" + data.univer_name + "<span id='tooltiptext'>" + data.univer_address + "</span></div>";
-						}, "bSortable": false
+						}
 					},
 					{ "data": "contact" },
 					{
@@ -40,33 +41,31 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', funct
 								str = "Active";
 							}
 							return str;
-						}, "bSortable": false
+						}
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
-						}, "bSortable": false
+						}
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-danger' id=" + data.univer_id + " data-toggle='modal'  ng-click='getremove(" + data.univer_id + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
-						}, "bSortable": false
+						}
 					}
 				],
-				"order": [[0, "asc"]],
+				"order": [[1, "asc"]],
 				"initComplete": function () {
 					$compile(document.getElementById('data_table'))($scope);
 				}
 			});
 
-			t.on('order.dt search.dt', function () {
+			t.on('order.dt search.dt draw.dt', function () {
 				t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-					cell.innerHTML = i + 1;
+					cell.innerHTML = i+1;
+					$compile(document.getElementById('data_table'))($scope);
 				});
 			}).draw();
-			t.on('draw.dt', function (e, settings, len) {
-				$compile(document.getElementById('data_table'))($scope);
-			});
 
 
 		}, function errorCallback(response) {

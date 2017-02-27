@@ -19,15 +19,16 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 				"retrieve": true,
 				//"processing": true,
 				"deferRender": true,
+				"bSort" : false,
 				"aaData": $scope.monhoc_list,
 				"rowId": "dis_id",
 				"aoColumns": [
-					{ "data": "dis_id", "bSortable": false },
-					{ "data": "dis_code", "bSortable": false },
-					{ "data": "dis_name", "bSortable": false },
-					{ "data": "dis_hours", "bSortable": false },
-					{ "data": "credits", "bSortable": false },
-					{ "data": "dis_description", "bSortable": false },
+					{ "data": "dis_id" },
+					{ "data": "dis_code" },
+					{ "data": "dis_name" },
+					{ "data": "dis_hours" },
+					{ "data": "credits" },
+					{ "data": "dis_description" },
 					{
 						"data": null, mRender: function (data, type, row) {
 							var str = "";
@@ -38,34 +39,31 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 								str = "Active";
 							}
 							return str;
-						}, "bSortable": false
+						}
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
-						}, "bSortable": false
+						}
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-danger' id=" + data.dis_id + " data-toggle='modal' ng-click='getremove(" + data.dis_id + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
-						}, "bSortable": false
+						}
 					}
 				],
-				"order": [[0, "asc"]],
+				"order": [[1, "asc"]],
 				"initComplete": function () {
 					$compile(document.getElementById('data_table'))($scope);
 				}
 			});
 
-			t.on('order.dt search.dt', function () {
+			t.on('order.dt search.dt draw.dt', function () {
 				t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
 					cell.innerHTML = i + 1;
+					$compile(document.getElementById('data_table'))($scope);
 				});
 			}).draw();
-
-			t.on('draw.dt', function (e, settings, len) {
-				$compile(document.getElementById('data_table'))($scope);
-			});
 
 
 		}, function errorCallback(response) {
