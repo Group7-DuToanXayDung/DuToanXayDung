@@ -17,13 +17,11 @@ app.controller('cth_controller', ['$scope', '$http', '$window', '$compile', func
 				],
 				"iDisplayLength": 10,
 				"retrieve": true,
-				"bSort" : false,
 				//"processing": true,
 				"deferRender": true,
 				"aaData": $scope.cth_list,
 				"rowId": "pro_id",
 				"aoColumns": [
-					{ "data": "pro_id" },
 					{ "data": "pro_code" },
 					{ "data": "pro_name" },
 					{ "data": "pro_description" },
@@ -101,10 +99,8 @@ app.controller('cth_controller', ['$scope', '$http', '$window', '$compile', func
 	}
 
 	$scope.getremove = function (id) {
-
 		$scope.id = id;
 		jQuery("#myModalConfirm").modal('show');
-
 	}
 
 

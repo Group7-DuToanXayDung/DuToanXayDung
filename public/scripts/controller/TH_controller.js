@@ -108,9 +108,8 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', funct
 
 
 	$scope.getremove = function (id) {
-
 		$scope.id = id;
-
+		jQuery("#myModalConfirm").modal('show');
 	}
 
 

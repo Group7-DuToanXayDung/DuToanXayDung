@@ -107,7 +107,6 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 
 
 	$scope.getremove = function (id) {
-
 		$scope.id = id;
 		jQuery("#myModalConfirm").modal('show');
 	}
