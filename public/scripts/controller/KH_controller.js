@@ -11,37 +11,30 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
             $scope.khoahoc_list = response.data;
 
             var t = jQuery("#data_table").DataTable({
-
+        
                 "aLengthMenu": [
                     [10, 25, 50, 100, -1],
                     [10, 25, 50, 100, "All"]
                 ],
                 "iDisplayLength": 10,
                 "retrieve": true,
+                "bSort" : false,
                 //"processing": true,
                 "deferRender": true,
                 "aaData": $scope.khoahoc_list,
                 "rowId": "int_id",
-                "bAutoWidth" : false, 
                 "aoColumns": [
+                    { "data": "int_id"},
                     { "data": "int_code"},
-                    {
-                        "data": null, mRender: function (data, type, row, index) {
-                            return "<div class='text-left'>"+data.int_name+"</div>";
-                        }
-                    },
-                    {
-                        "data": null, mRender: function (data, type, row, index) {
-                            return "<div class='text-left'>"+data.int_description+"</div>";
-                        }
-                    },
+                    { "data": "int_name" },
+                    { "data": "int_description"},
                     {
                         "data": null, mRender: function (data, type, row) {
                             var str = "";
                             var date_star = new Date(data.startdate);
                             var month = date_star.getMonth() + 1;
-                            str = (month >= 10 ? month : "0" + month) + "/" + date_star.getDate() + "/" + date_star.getFullYear();
-                            return "<div class='text-right'>"+str+"</div>";
+                            str = (month > 10 ? month : "0" + month) + "/" + date_star.getDate() + "/" + date_star.getFullYear();
+                            return str;
                         }
                     },
                     {
@@ -49,8 +42,8 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                             var str = "";
                             var date_end = new Date(data.enddate);
                             var month = date_end.getMonth() + 1;
-                            str = (month >= 10 ? month : "0" + month) + "/" + date_end.getDate() + "/" + date_end.getFullYear();
-                            return "<div class='text-right'>"+str+"</div>";
+                            str = (month > 10 ? month : "0" + month) + "/" + date_end.getDate() + "/" + date_end.getFullYear();
+                            return str;
                         }
                     },
                     {
@@ -67,11 +60,17 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                     },
                     {
                         "data": null, mRender: function (data, type, row, index) {
-                            return "<button class='btn btn-warning btn-sm' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span></button>&nbsp;"
-                                    +"<button class='btn btn-danger btn-sm' id=" + data.int_id + " data-toggle='modal'  ng-click='getremove(" + data.int_id + ")'><span class='glyphicon glyphicon-remove'></span></button>";
+                            return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
                         }
                     },
+                    {
+                        "data": null, mRender: function (data, type, row, index) {
+                            console.log(index.row);
+                            return "<button class='btn btn-danger' id=" + data.int_id + " data-toggle='modal'  ng-click='getremove(" + data.int_id + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+                        }
+                    }
                 ],
+                "order": [[0, "asc"]],
                 "initComplete": function () {
                     $compile(document.getElementById('data_table'))($scope);
                 }

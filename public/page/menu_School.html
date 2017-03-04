@@ -1,4 +1,5 @@
 <!-- Controller trường học-->
+
 <div ng-controller="truonghoc_ctl">
 	<div class="container">
 		<div class="row">
@@ -42,59 +43,56 @@
 	<!-- Modal Add content-->
 	<div class="modal fade container " id="myModalAdd" role="dialog">
 		<div class="modal-dialog ">
+			<div class="alert alert-success" ng-if="visibility==true">
+				<strong>Thành công!</strong> Bạn vừa thềm thành công trường học có mã: <b>{{univer_code}}</b>, tên <b>{{univer_name}}</b>.
+			</div>
 			<!-- Modal content-->
-			<form name="add">
+			<form name="add" novalidate>
 				<div class="modal-content">
 					<div class="modal-header ">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Add University</h4>
+						<div style="text-align:center;padding:5px;color:#a4ff49;font-size:14px" ng-show="visibility">{{confirm}}</div>
 					</div>
 					<div class="modal-body row">
-						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<div class="form-group col-xs-12 col-sm-6 col-md-6" ng-directive="strongSecret">
 							<label>UniversityID</label>
 							<div>
-								<input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: add.ma_th.$invalid}" minlength="3"
-									maxlength="10" name="ma_th" id="UniversityID" ng-pattern="/^[a-zA-Z0-9-]+$/" ng-model="truonghoc.univer_code" required><span style="color:red">&nbsp;&#42;</span></div>
+								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret" id="UniversityID" ng-model="truonghoc.univer_code"
+									ng-model="strongSecret" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-messages="add.strongSecret.$error" ng-if="add.$submitted || add.strongSecret.$dirty">
+										<li ng-message="invalid">Input must be valid</li>
+										<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
+										<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+										<li ng-message="validnormal">Add letter after letter "-"</li>
+										<li ng-message="required">Please enter into!</li>
+									</ul>
+
+							</div>
 						</div>
-						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+						<div class="form-group col-xs-12 col-sm-6 col-md-6" ng-directive="strongSecret1">
 							<label>Name</label>
 							<div>
-								<input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: add.ten_th.$invalid}" name="ten_th"
-									id="Name" ng-model="truonghoc.univer_name" required><span style="color:red">&nbsp;&#42;</span></div>
+								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret1" id="strongSecret1" ng-model="truonghoc.univer_name"
+									ng-model="strongSecret1" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-messages="add.strongSecret1.$error" ng-if="add.$submitted || add.strongSecret1.$dirty">
+										<li ng-message="invalid">Input must be valid</li>
+										<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+										<li ng-message="required">Please enter into!</li>
+									</ul>
+							</div>
 						</div>
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label>Address</label>
 							<textarea style="width:95%" class="form-control" rows="3" id="address_Add" ng-model="truonghoc.univer_address"></textarea>
 						</div>
-						<!-- <div class="form-group col-xs-12 col-sm-6 col-md-6"> -->
-						<!-- <label for="pwd">Address:</label> -->
-						<!-- <input type="text" class="form-control" id="pwd" ng-model="truonghoc.univer_address"> -->
-						<!-- </div> -->
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label>Contact</label>
 							<textarea style="width:95%" class="form-control" rows="3" id="contact_Add" ng-model="truonghoc.contact"></textarea>
 						</div>
-						<!-- <div class="form-group col-xs-12 col-sm-6 col-md-6"> -->
-						<!-- <label for="usr">Contact Information</label> -->
-						<!-- <input type="text" class="form-control" id="usr" ng-model="truonghoc.contact"> -->
-						<!-- </div> -->
-						<!--<div class="form-group col-xs-12 col-sm-6 col-md-6">
-								<div class="radio">
-									<label>
-												<input type="radio" ng-model="truonghoc.trangthai" value="1" ng-checked="truonghoc.trangthai == ''">
-												Active
-											</label>
-								</div>
-								<div class="radio">
-									<label>
-												<input type="radio" ng-model="truonghoc.trangthai" value="0">
-												Inactive
-											</label>
-								</div>
-							</div>-->
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" ng-click="addtruonghoc()" ng-disabled="!add.$dirty || (add.$dirty && add.$invalid)"><span class="glyphicon glyphicon-plus"></span>Add</button>
+						<button type="submit" id="myReset" class="btn btn-primary" ng-click="addtruonghoc()"><span class="glyphicon glyphicon-plus"></span>Add</button>
 					</div>
 				</div>
 			</form>
@@ -104,7 +102,7 @@
 
 	<!-- Modal Edit content-->
 	<div class="modal fade container" id="myModalEdit" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog" ng-directive="strongSecret">
 
 			<!-- Modal content-->
 			<form name="update">
@@ -117,31 +115,37 @@
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label>UniversityID</label>
 							<div>
-								<input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: update.ma_th.$invalid}" minlength="3"
-									maxlength="10" name="ma_th" id="usr" ng-pattern="/^[a-zA-Z0-9]+$/" ng-model="edittruonghoc.univer_code" required><span style="color:red">&nbsp;&#42;</span></div>
+								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret" id="usr" ng-model="edittruonghoc.univer_code"
+									ng-model="strongSecret" strong-secret required><span style="color:red">&nbsp;&#42;</span></div>
+							<ul class="error-msgs" ng-messages="update.strongSecret.$error" ng-if="update.$submitted || update.strongSecret.$dirty">
+								<li ng-message="invalid">Input must be valid</li>
+								<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
+								<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+								<li ng-message="validnormal">Add letter after letter "-"</li>
+								<li ng-message="required">Please enter into!</li>
+							</ul>
 						</div>
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label>Name</label>
 							<div>
-								<input style="width:95%; float:left" type="text" class="form-control" ng-class="{red: update.ten_th.$invalid}" name="ten_th"
-									id="University Name" ng-model="edittruonghoc.univer_name" required><span style="color:red">&nbsp;&#42;</span></div>
+								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret1" id="University Name" ng-model="edittruonghoc.univer_name"
+									ng-model="strongSecret" strong-secret required><span style="color:red">&nbsp;&#42;</span></div>
+							<ul class="error-msgs" ng-messages="update.strongSecret1.$error" ng-if="update.$submitted || update.strongSecret1.$dirty">
+								<li ng-message="invalid">Input must be valid</li>
+								<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
+								<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+								<li ng-message="validnormal">Add letter after letter "-"</li>
+								<li ng-message="required">Please enter into!</li>
+							</ul>
 						</div>
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label>Address</label>
 							<textarea style="width:95%" class="form-control" rows="3" id="address_Add" ng-model="edittruonghoc.univer_address"></textarea>
 						</div>
-						<!-- <div class="form-group col-xs-12 col-sm-6 col-md-6"> -->
-						<!-- <label for="pwd">Address:</label> -->
-						<!-- <input type="text" class="form-control" id="pwd" ng-model="edittruonghoc.univer_address"> -->
-						<!-- </div> -->
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<label>Contact</label>
 							<textarea style="width:95%" class="form-control" rows="3" id="contact_Add" ng-model="edittruonghoc.contact"></textarea>
 						</div>
-						<!-- <div class="form-group col-xs-12 col-sm-6 col-md-6"> -->
-						<!-- <label for="usr">Contact Information</label> -->
-						<!-- <input type="text" class="form-control" id="usr" ng-model="edittruonghoc.contact"> -->
-						<!-- </div> -->
 						<div class="form-group col-xs-12 col-sm-6 col-md-6">
 							<div class="radio">
 								<label>
@@ -158,7 +162,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="updatetruonghoc(edittruonghoc.univer_id)" ng-disabled="!update.$dirty || (update.$dirty && update.$invalid)">Update</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" ng-disabled="update.$invalid" ng-click="updatetruonghoc(edittruonghoc.univer_id)">Update</button>
 					</div>
 				</div>
 			</form>
@@ -200,6 +204,10 @@
 		</div>
 	</div>
 
+
+	<script>
+
+	</script>
 
 
 </div>

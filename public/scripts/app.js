@@ -1,4 +1,4 @@
-var app = angular.module("myApp",['ngRoute']);
+var app = angular.module("myApp",["ngRoute","ngMessages"]);
 app.config(function($routeProvider){
   $routeProvider
   .when('/menu_Chuongtrinhhoc',{
@@ -35,3 +35,10 @@ app.config(function($routeProvider){
     templateUrl: 'page/menu_Khoahoc.html'
   })  
 });
+
+
+
+
+
+
+

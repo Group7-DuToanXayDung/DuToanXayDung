@@ -14,6 +14,7 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 				],
 				"iDisplayLength": 10,
 				"retrieve": true,
+				"bSort": false,
 				//"processing": true,
 				"deferRender": true,
 				"aaData": $scope.thanhvien_list,
@@ -73,8 +74,9 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', funct
 
 
 	$scope.getremove = function (id) {
+
 		$scope.id = id;
-		jQuery("#myModalConfirm").modal('show');
+
 	}
 
 	//xoa

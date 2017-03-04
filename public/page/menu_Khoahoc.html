@@ -7,34 +7,36 @@
 			</div>
 		</div>
 	</div>
-	<div class="table-responsive">
-		<table id="data_table" class="display text-center" width="100%" cellspacing="0" datatables="ng">
-			<thead>
-				<tr>
-					<th class="text-center">Code</th>
-					<th class="text-center">Name</th>
-					<th class="text-center">Description</th>
-					<th class="text-center">Start Date</th>
-					<th class="text-center">End Date</th>
-					<th class="text-center">Status</th>
-					<th class="text-center"></th>
-				</tr>
-			</thead>
+	<table id="data_table" class="display text-center" width="100%" cellspacing="0" datatables="ng">
+		<thead>
+			<tr>
+				<th class="text-center">No.</th>
+				<th class="text-center">Code</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Description</th>
+				<th class="text-center">Start Date</th>
+				<th class="text-center">End Date</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Edit</th>
+				<th class="text-center">Remove</th>
+			</tr>
+		</thead>
 
-			<tfoot>
-				<tr>
-					<th class="text-center">Code</th>
-					<th class="text-center">Name</th>
-					<th class="text-center">Description</th>
-					<th class="text-center">Start Date</th>
-					<th class="text-center">End Date</th>
-					<th class="text-center">Status</th>
-					<th class="text-center"></th>
-				</tr>
-			</tfoot>
+		<tfoot>
+			<tr>
+				<th class="text-center">No.</th>
+				<th class="text-center">Code</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Description</th>
+				<th class="text-center">Start Date</th>
+				<th class="text-center">End Date</th>
+				<th class="text-center">Status</th>
+				<th class="text-center">Edit</th>
+				<th class="text-center">Remove</th>
+			</tr>
+		</tfoot>
 
-		</table>
-	</div>
+	</table>
 
 
 
@@ -184,14 +186,12 @@
 	</div>
 
 
-
-
 	<script type="text/javascript">
-												 () {
-																							cker_Addstart").datepicker();
-																							cker_Addfinish").datepicker();
-																							cker_Editstart").datepicker();
-																							cker_Editfinish").datepicker();
+												$(function () {
+													$("#datepicker_Addstart").datepicker();
+													$("#datepicker_Addfinish").datepicker();
+													$("#datepicker_Editstart").datepicker();
+													$("#datepicker_Editfinish").datepicker();
 												});
 	</script>
 </div>
