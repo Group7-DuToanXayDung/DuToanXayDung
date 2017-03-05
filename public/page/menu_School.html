@@ -59,15 +59,16 @@
 							<div>
 								<input style="width:95%; float:left" type="text" class="form-control" maxlength="10" name="strongSecret" id="UniversityID"
 									ng-model="truonghoc.univer_code" strong-secret required><span style="color:red">&nbsp;&#42;</span>
-									<ul class="error-msgs" ng-show="exiss">
-										<li>UniversityID Exist</li>
+									<ul class="error-msgs" >
+										<li ng-show="exiss">UniversityID Exist</li>
+										<li ng-show="require1">Please enter into!</li>
 									</ul>
 									<ul class="error-msgs" ng-messages="add.strongSecret.$error" ng-if="add.$submitted || add.strongSecret.$dirty">
 										<li ng-message="invalid">Input must be valid</li>
 										<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
 										<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
 										<li ng-message="validnormal">Add letter after letter "-"</li>
-										<li ng-message="required">Please enter into!</li>
+										
 									</ul>
 
 							</div>
@@ -77,8 +78,8 @@
 							<div>
 								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret1" id="strongSecret1" ng-model="truonghoc.univer_name"
 									required><span style="color:red">&nbsp;&#42;</span>
-									<ul class="error-msgs" ng-messages="add.strongSecret1.$error" ng-if="add.$submitted || add.strongSecret1.$dirty">
-										<li ng-message="required">Please enter into!</li>
+									<ul class="error-msgs">
+										<li ng-show="require2">Please enter into!</li>
 									</ul>
 							</div>
 						</div>

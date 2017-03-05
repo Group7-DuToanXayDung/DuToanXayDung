@@ -87,12 +87,30 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 
 
 	$scope.exiss = false;
+	$scope.require1 = false;
+	$scope.require2 = false;
 	//them
 	$scope.addtruonghoc = function () {
 		if ($scope.add.$invalid) {
+			if ($scope.add.strongSecret.$error.required) {
+				$scope.require1 = true;
+			$timeout(function () {
+				$scope.require1 = false;
+			}, 2000);
+			};
+			if ($scope.add.strongSecret1.$error.required) {
+				$scope.require2 = true;
+			$timeout(function () {
+				$scope.require2 = false;
+			}, 2000);
+			}
 			return;
 		}
+		
 
+		
+		
+		
 		for (var i = 0; i < $scope.truonghoc_list.length; i++) {
 			if (angular.lowercase($scope.truonghoc_list[i].univer_code) == angular.lowercase($scope.truonghoc.univer_code)) {
 				
