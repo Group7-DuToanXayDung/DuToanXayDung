@@ -18,7 +18,6 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', '$timeo
                 ],
                 "iDisplayLength": 10,
                 "retrieve": true,
-                "bSort": false,
                 //"processing": true,
                 "deferRender": true,
                 "aaData": $scope.khoahoc_list,
@@ -68,7 +67,7 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', '$timeo
                         "data": null, mRender: function (data, type, row, index) {
                             return "<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span></button>&nbsp;"
                                 + "<button class='btn btn-danger btn-xs' id=" + data.int_id + " data-toggle='modal'  ng-click='getremove(" + data.int_id + ")'><span class='glyphicon glyphicon-remove'></span></button>";
-                        }
+                        },"sWidth": "7%"
                     }
                 ],
                 "order": [[0, "asc"]],

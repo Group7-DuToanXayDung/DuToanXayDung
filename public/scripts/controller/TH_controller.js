@@ -17,7 +17,6 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 				],
 				"iDisplayLength": 10,
 				"retrieve": true,
-				"bSort": false,
 				//"processing": true,
 				"deferRender": true,
 				"aaData": $scope.truonghoc_list,
@@ -26,14 +25,10 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 					{ "data": "univer_id"},
 					{ "data": "univer_code","sClass":"text" },
 					{
-						"data": null, mRender: function (data, type, row, index) {
-							return "<div id='tooltip'>" + data.univer_name + "<span id='tooltiptext'>" + data.univer_address + "</span></div>";
-						},"sClass":"text"
+						"data": "univer_name","sClass":"text"
 					},
 					{
-						"data": null, mRender: function (data, type, row, index) {
-							return "<div id='tooltip'>" + data.contact + "<span id='tooltiptext'>" + data.univer_address + "</span></div>";
-						},"sClass":"text"
+						"data": "univer_address","sClass":"text"
 					},
 					{ "data": "contact","sClass":"text" },
 					{
@@ -52,7 +47,7 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span></button>&nbsp;"
 							+"<button class='btn btn-danger btn-xs' id=" + data.univer_id + " data-toggle='modal'  ng-click='getremove(" + data.univer_id + ")'><span class='glyphicon glyphicon-remove'></span></button>";
-						}
+						},"sWidth": "7%"
 					}
 				],
 				"order": [[1, "asc"]],
