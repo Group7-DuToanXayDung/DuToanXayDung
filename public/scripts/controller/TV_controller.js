@@ -1,6 +1,6 @@
-app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile','$timeout', function ($scope, $http, $window, $compile,$timeout) {
+app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', '$timeout', function ($scope, $http, $window, $compile, $timeout) {
 
-	
+
 	var refresh = function () {
 		$http({
 			method: 'GET',
@@ -19,13 +19,27 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile','$time
 				"aaData": $scope.thanhvien_list,
 				"rowId": "user_id",
 				"aoColumns": [
-					{ "data": "user_id","sWidth": "5%" },
-					{ "data": "user_code","sClass":"text" },
-					{ "data": "lastname","sClass":"text" },
-					{ "data": "firstname","sClass":"text" },
-					{ "data": "username","sClass":"text" },
-					{ "data": "phone","sClass":"number" },
-					{ "data": "email","sClass":"text" },
+					{ "data": "user_id", "sWidth": "5%" },
+					{ "data": "user_code", "sClass": "text" },
+					{ "data": "lastname", "sClass": "text" },
+					{ "data": "firstname", "sClass": "text" },
+					{ "data": "username", "sClass": "text" },
+					{
+						"data": null, mRender: function (data, type, row) {
+							if (data.phone == "") {
+								data.phone = "";
+							}
+							return data.phone;
+						}, "sClass": "number"
+					},
+					{
+						"data": null, mRender: function (data, type, row) {
+							if (data.email == "undefined") {
+								data.email = "";
+							}
+							return data.email;
+						}, "sClass": "text"
+					},
 					{
 						"data": null, mRender: function (data, type, row) {
 							var str = "";
@@ -36,13 +50,13 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile','$time
 								str = "Inactive";
 							}
 							return str;
-						},"sWidth": "5%"
+						}, "sWidth": "5%"
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span></button>&nbsp;"
-							+"<button class='btn btn-danger btn-xs' id=" + data.user_id + " data-toggle='modal'  ng-click='getremove(" + data.user_id + ")'><span class='glyphicon glyphicon-remove'></span></button>";
-					},"sWidth": "7%"
+								+ "<button class='btn btn-danger btn-xs' id=" + data.user_id + " data-toggle='modal'  ng-click='getremove(" + data.user_id + ")'><span class='glyphicon glyphicon-remove'></span></button>";
+						}, "sWidth": "7%"
 					}
 				],
 				"order": [[0, "asc"]],
@@ -56,6 +70,11 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile','$time
 					cell.innerHTML = i + 1;
 				});
 			}).draw();
+
+			jQuery('#data_table tbody').on('click', 'tr', function () {
+					t.$('tr.selected').removeClass('selected');
+					$(this).addClass('selected');
+			});
 
 
 		}, function errorCallback(response) {
@@ -83,8 +102,8 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile','$time
 			dt.fnDraw();
 			$compile(document.getElementById('data_table'))($scope);
 			$scope.message = 'Removed successfully';
-            jQuery("#myModalmessage").modal('show');
-            $timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
+			jQuery("#myModalmessage").modal('show');
+			$timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
 		}, function errorCallback(response) {
 
 		});
@@ -96,8 +115,8 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile','$time
 	//them
 	$scope.addthanhvien = function () {
 		if ($scope.add.$invalid) {
-            return;
-        }
+			return;
+		}
 		if ($scope.admin == true)
 			$scope.roles.push(1);
 		if ($scope.registrar == true)
@@ -107,22 +126,21 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile','$time
 		if ($scope.student == true)
 			$scope.roles.push(4);
 		if ($scope.roles.length == 0) {
-			$window.alert('Chưa chọn vai trò của thành viên');
-			return;
+			$scope.roles.push(4);
 		}
 		for (var i = 0; i < $scope.thanhvien_list.length; i++) {
 			if (angular.lowercase($scope.thanhvien_list[i].user_code) == angular.lowercase($scope.thanhvien.user_code) && $scope.thanhvien_list[i].user_id != $scope.thanhvien.user_id) {
 				$scope.exiss = true;
-                $timeout(function () {
-                    $scope.exiss = false;
-                }, 3000);
+				$timeout(function () {
+					$scope.exiss = false;
+				}, 3000);
 				return;
 			}
 			if (angular.lowercase($scope.thanhvien_list[i].username) == angular.lowercase($scope.thanhvien.username) && $scope.thanhvien_list[i].user_id != $scope.thanhvien.user_id) {
 				$scope.exiss1 = true;
-                $timeout(function () {
-                    $scope.exiss1 = false;
-                }, 3000);
+				$timeout(function () {
+					$scope.exiss1 = false;
+				}, 3000);
 				return;
 			}
 		}
@@ -138,12 +156,12 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile','$time
 			dt.fnDraw();
 			$compile(document.getElementById('data_table'))($scope);
 			$scope.user_code = $scope.thanhvien.user_code;
-            $scope.lastname = $scope.thanhvien.lastname;
+			$scope.lastname = $scope.thanhvien.lastname;
 			$scope.firstname = $scope.thanhvien.firstname;
-            $scope.visibility = true;
-            $timeout(function () {
-                $scope.visibility = false;
-            }, 3000);
+			$scope.visibility = true;
+			$timeout(function () {
+				$scope.visibility = false;
+			}, 3000);
 			$scope.thanhvien = null;
 			$scope.roles = [];
 		}, function errorCallback(response) {
@@ -158,7 +176,7 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile','$time
 		var toSelect = $scope.thanhvien_list[index];
 		$scope.editthanhvien = toSelect;
 
-
+		$scope.confirm = $scope.editthanhvien.password;
 		$http({
 			method: 'GET',
 			url: '/rolesUser/' + toSelect.user_code
@@ -235,7 +253,25 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile','$time
 
 		});
 		$scope.message = 'Update Successful';
-            jQuery("#myModalmessage").modal('show');
-            $timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
+		jQuery("#myModalmessage").modal('show');
+		$timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
 	}
 }]);
+
+app.directive("compareTo", function () {
+	return {
+		require: "ngModel",
+		scope:
+		{
+			confirmPassword: "=compareTo"
+		},
+		link: function (scope, elecemt, attributes, modelVal) {
+			modelVal.$validators.compareTo = function (val) {
+				return val == scope.confirmPassword;
+			};
+			scope.$watch("confirmPassword", function () {
+				modelVal.$validate();
+			});
+		}
+	};
+});
