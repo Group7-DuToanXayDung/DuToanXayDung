@@ -19,11 +19,11 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 				"retrieve": true,
 				//"processing": true,
 				"deferRender": true,
-				"bSort" : false,
+				"bSort": false,
 				"aaData": $scope.monhoc_list,
 				"rowId": "dis_id",
 				"aoColumns": [
-					{ "data": "dis_id" },
+					{ "data": null },
 					{ "data": "dis_code" },
 					{ "data": "dis_name" },
 					{ "data": "dis_hours" },
@@ -52,7 +52,7 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 						}
 					}
 				],
-				"order": [[1, "asc"]],
+				"order": [[0, "asc"]],
 				"initComplete": function () {
 					$compile(document.getElementById('data_table'))($scope);
 				}

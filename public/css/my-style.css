@@ -31,3 +31,6 @@ body{
 .select{
 	background-color: red;
 }
+.text{
+	text-align: left;
+}

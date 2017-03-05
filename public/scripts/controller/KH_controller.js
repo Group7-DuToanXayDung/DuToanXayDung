@@ -1,4 +1,4 @@
-app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', function ($scope, $http, $window, $compile) {
+app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', '$timeout', function ($scope, $http, $window, $compile, $timeout) {
 
 
     var refresh = function () {
@@ -11,23 +11,29 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
             $scope.khoahoc_list = response.data;
 
             var t = jQuery("#data_table").DataTable({
-        
+
                 "aLengthMenu": [
                     [10, 25, 50, 100, -1],
                     [10, 25, 50, 100, "All"]
                 ],
                 "iDisplayLength": 10,
                 "retrieve": true,
-                "bSort" : false,
+                "bSort": false,
                 //"processing": true,
                 "deferRender": true,
                 "aaData": $scope.khoahoc_list,
                 "rowId": "int_id",
                 "aoColumns": [
-                    { "data": "int_id"},
-                    { "data": "int_code"},
-                    { "data": "int_name" },
-                    { "data": "int_description"},
+                    { "data": "int_id" },
+                    { "data": "int_code", "sClass": "text" },
+                    { "data": "int_name", "sClass": "text" },
+                    {
+                        "data": null, mRender: function (data, type, row) {
+                            if(data.int_description == "undefined")
+                                data.int_description = "";
+                            return data.int_description;
+                        }, "sClass": "text"
+                    },
                     {
                         "data": null, mRender: function (data, type, row) {
                             var str = "";
@@ -60,13 +66,8 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                     },
                     {
                         "data": null, mRender: function (data, type, row, index) {
-                            return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
-                        }
-                    },
-                    {
-                        "data": null, mRender: function (data, type, row, index) {
-                            console.log(index.row);
-                            return "<button class='btn btn-danger' id=" + data.int_id + " data-toggle='modal'  ng-click='getremove(" + data.int_id + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+                            return "<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span></button>&nbsp;"
+                                + "<button class='btn btn-danger btn-xs' id=" + data.int_id + " data-toggle='modal'  ng-click='getremove(" + data.int_id + ")'><span class='glyphicon glyphicon-remove'></span></button>";
                         }
                     }
                 ],
@@ -83,6 +84,11 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
                 });
             }).draw();
 
+            jQuery('#data_table tbody').on('click', 'tr', function () {
+                t.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            });
+
 
         }, function errorCallback(response) {
 
@@ -96,9 +102,15 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
 
     //them
     $scope.addkhoahoc = function () {
+        if ($scope.add.$invalid) {
+            return;
+        }
         for (var i = 0; i < $scope.khoahoc_list.length; i++) {
-            if ($scope.khoahoc_list[i].int_code == $scope.khoahoc.int_code) {
-                $window.alert('Mã khoa hoc đã tồn tại');
+            if (angular.lowercase($scope.khoahoc_list[i].int_code) == angular.lowercase($scope.khoahoc.int_code) && $scope.khoahoc_list[i].int_id != $scope.khoahoc.int_id) {
+                $scope.exiss = true;
+                $timeout(function () {
+                    $scope.exiss = false;
+                }, 3000);
                 return;
             }
         }
@@ -115,8 +127,13 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
 
             $scope.khoahoc.status = 1;
             $scope.khoahoc_list.push($scope.khoahoc);
+            $scope.int_code = $scope.khoahoc.int_code;
+            $scope.int_name = $scope.khoahoc.int_name;
+            $scope.visibility = true;
+            $timeout(function () {
+                $scope.visibility = false;
+            }, 3000);
             $scope.khoahoc = null;
-            refresh();
         }, function errorCallback(response) {
 
         });
@@ -138,6 +155,9 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
             dt.fnDeleteRow(tr);
             dt.fnDraw();
             $compile(document.getElementById('data_table'))($scope);
+            $scope.message = 'Removed successfully';
+            jQuery("#myModalmessage").modal('show');
+            $timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
         }, function errorCallback(response) {
         });
     }
@@ -180,9 +200,9 @@ app.controller('khoahoc_ctl', ['$scope', '$http', '$window', '$compile', functio
             dt.fnUpdate($scope.editkhoahoc, row); // Row
             dt.fnDraw();
             $compile(document.getElementById('data_table'))($scope);
-            //refresh();
-
-            //$scope.edittruonghoc = null;
+            $scope.message = 'Update Successful';
+            jQuery("#myModalmessage").modal('show');
+            $timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
         }, function errorCallback(response) {
 
         });

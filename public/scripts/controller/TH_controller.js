@@ -23,14 +23,19 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 				"aaData": $scope.truonghoc_list,
 				"rowId": "univer_id",
 				"aoColumns": [
-					{ "data": "univer_id" },
-					{ "data": "univer_code" },
+					{ "data": "univer_id"},
+					{ "data": "univer_code","sClass":"text" },
 					{
 						"data": null, mRender: function (data, type, row, index) {
 							return "<div id='tooltip'>" + data.univer_name + "<span id='tooltiptext'>" + data.univer_address + "</span></div>";
-						}
+						},"sClass":"text"
 					},
-					{ "data": "contact" },
+					{
+						"data": null, mRender: function (data, type, row, index) {
+							return "<div id='tooltip'>" + data.contact + "<span id='tooltiptext'>" + data.univer_address + "</span></div>";
+						},"sClass":"text"
+					},
+					{ "data": "contact","sClass":"text" },
 					{
 						"data": null, mRender: function (data, type, row) {
 							var str = "";
@@ -45,12 +50,8 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
-							return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
-						}
-					},
-					{
-						"data": null, mRender: function (data, type, row, index) {
-							return "<button class='btn btn-danger' id=" + data.univer_id + " data-toggle='modal'  ng-click='getremove(" + data.univer_id + ")'><span class='glyphicon glyphicon-remove'></span> Remove</button>";
+							return "<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span></button>&nbsp;"
+							+"<button class='btn btn-danger btn-xs' id=" + data.univer_id + " data-toggle='modal'  ng-click='getremove(" + data.univer_id + ")'><span class='glyphicon glyphicon-remove'></span></button>";
 						}
 					}
 				],
@@ -94,8 +95,7 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 
 		for (var i = 0; i < $scope.truonghoc_list.length; i++) {
 			if (angular.lowercase($scope.truonghoc_list[i].univer_code) == angular.lowercase($scope.truonghoc.univer_code)) {
-				$scope.confirm = "UniversityID Exist";
-
+				
 				$scope.exiss = true;
 				$timeout(function () {
 					$scope.exiss = false;

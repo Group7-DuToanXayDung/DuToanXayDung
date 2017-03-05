@@ -17,10 +17,10 @@
 				<th class="text-center">No.</th>
 				<th class="text-center">University ID</th>
 				<th class="text-center">Name</th>
+				<th class="text-center">Address</th>
 				<th class="text-center">Contact Information</th>
 				<th class="text-center">Status</th>
-				<th class="text-center">Edit</th>
-				<th class="text-center">Remove</th>
+				<th class="text-center"></th>
 			</tr>
 		</thead>
 
@@ -32,10 +32,10 @@
 				<th class="text-center">No.</th>
 				<th class="text-center">University ID</th>
 				<th class="text-center">Name</th>
+				<th class="text-center">Address</th>
 				<th class="text-center">Contact Information</th>
 				<th class="text-center">Status</th>
-				<th class="text-center">Edit</th>
-				<th class="text-center">Remove</th>
+				<th class="text-center"></th>
 			</tr>
 		</tfoot>
 	</table>
@@ -44,7 +44,7 @@
 	<div class="modal fade container " id="myModalAdd" role="dialog">
 		<div class="modal-dialog ">
 			<div class="alert alert-success" ng-if="visibility==true">
-				<strong>Thành công!</strong> Bạn vừa thềm thành công trường học có mã: <b>{{univer_code}}</b>, tên <b>{{univer_name}}</b>.
+				<strong>Thành công!</strong> Bạn vừa thêm thành công trường học có mã: <b>{{univer_code}}</b>, tên <b>{{univer_name}}</b>.
 			</div>
 			<!-- Modal content-->
 			<form name="add" novalidate>
@@ -57,8 +57,8 @@
 						<div class="form-group col-xs-12 col-sm-6 col-md-6" ng-directive="strongSecret">
 							<label>UniversityID</label>
 							<div>
-								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret" id="UniversityID" ng-model="truonghoc.univer_code"
-									strong-secret required><span style="color:red">&nbsp;&#42;</span>
+								<input style="width:95%; float:left" type="text" class="form-control" maxlength="10" name="strongSecret" id="UniversityID"
+									ng-model="truonghoc.univer_code" strong-secret required><span style="color:red">&nbsp;&#42;</span>
 									<ul class="error-msgs" ng-show="exiss">
 										<li>UniversityID Exist</li>
 									</ul>
@@ -78,7 +78,6 @@
 								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret1" id="strongSecret1" ng-model="truonghoc.univer_name"
 									required><span style="color:red">&nbsp;&#42;</span>
 									<ul class="error-msgs" ng-messages="add.strongSecret1.$error" ng-if="add.$submitted || add.strongSecret1.$dirty">
-										
 										<li ng-message="required">Please enter into!</li>
 									</ul>
 							</div>
@@ -130,7 +129,7 @@
 							<label>Name</label>
 							<div>
 								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret1" id="University Name" ng-model="edittruonghoc.univer_name"
-									  required><span style="color:red">&nbsp;&#42;</span></div>
+									required><span style="color:red">&nbsp;&#42;</span></div>
 							<ul class="error-msgs" ng-messages="update.strongSecret1.$error" ng-if="update.$submitted || update.strongSecret1.$dirty">
 								<li ng-message="invalid">Input must be valid</li>
 								<li ng-message="required">Please enter into!</li>
@@ -204,16 +203,16 @@
 
 
 	<div class="modal fade" id="myModalmessage" role="dialog">
-			<div class="modal-dialog modal-sm">
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-body">
-						<h4 class="modal-title text-center">{{message}}</h4>
-					</div>
+		<div class="modal-dialog modal-sm">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body">
+					<h4 class="modal-title text-center">{{message}}</h4>
 				</div>
-
 			</div>
+
 		</div>
+	</div>
 
 
 </div>
