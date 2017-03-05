@@ -1,4 +1,4 @@
-app.controller('vnito_ctl', ['$scope', '$http', '$window', '$compile', function ($scope, $http, $window, $compile) {
+app.controller('vnito_ctl', ['$scope', '$http', '$window', '$compile', '$timeout', function ($scope, $http, $window, $compile, $timeout) {
 	var refresh = function () {
 
 		$http({
@@ -13,19 +13,27 @@ app.controller('vnito_ctl', ['$scope', '$http', '$window', '$compile', function 
 				],
 				"iDisplayLength": 10,
 				"retrieve": true,
-				"bSort": false,
 				"deferRender": true,
 				"aaData": $scope.vnito_list,
 				"rowId": "com_id",
 				"aoColumns": [
-					{ "data": "com_id" },
-					{ "data": "com_code" },
+					{ "data": "com_id", "sWidth": "5%" },
+					{ "data": "com_code", "sClass": "text" },
+					{ "data": "com_name", "sClass": "text" },
 					{
 						"data": null, mRender: function (data, type, row, index) {
-							return "<div id='tooltip'>" + data.com_name + "<span id='tooltiptext'>" + data.com_address + "</span></div>";
-						}
+							if (data.com_address == "undefined")
+								data.com_address = "";
+							return data.com_address;
+						}, "sClass": "text"
 					},
-					{ "data": "com_contact" },
+					{
+						"data": null, mRender: function (data, type, row, index) {
+							if (data.com_contact == "undefined")
+								data.com_contact = "";
+							return data.com_contact;
+						}, "sClass": "text"
+					},
 					{
 						"data": null, mRender: function (data, type, row) {
 							var str = "";
@@ -40,13 +48,9 @@ app.controller('vnito_ctl', ['$scope', '$http', '$window', '$compile', function 
 					},
 					{
 						"data": null, mRender: function (data, type, row, index) {
-							return "<button class='btn btn-warning' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span> Edit</button>";
-						}
-					},
-					{
-						"data": null, mRender: function (data, type, row, index) {
-							return "<button class='btn btn-danger' id='R" + data.com_id + "' data-toggle='modal'  ng-click='getremove(" + data.com_id + ")' ><span class='glyphicon glyphicon-remove'></span> Remove</button>";
-						}
+							return "<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#myModalEdit' ng-click='editt(" + index.row + ")'><span class='glyphicon glyphicon-edit'></span></button>&nbsp;"
+								+ "<button class='btn btn-danger btn-xs' id='R" + data.com_id + "' data-toggle='modal'  ng-click='getremove(" + data.com_id + ")' ><span class='glyphicon glyphicon-remove'></span></button>";
+						}, "sWidth": "7%"
 					}
 				],
 				"order": [[0, "asc"]],
@@ -61,6 +65,11 @@ app.controller('vnito_ctl', ['$scope', '$http', '$window', '$compile', function 
 					$compile(document.getElementById('data_table'))($scope);
 				});
 			}).draw();
+
+			jQuery('#data_table tbody').on('click', 'tr', function () {
+				t.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			});
 
 
 		}, function errorCallback(response) {
@@ -77,6 +86,18 @@ app.controller('vnito_ctl', ['$scope', '$http', '$window', '$compile', function 
 
 	//them
 	$scope.addvnito = function () {
+		if ($scope.add.$invalid) {
+			return;
+		}
+		for (var i = 0; i < $scope.vnito_list.length; i++) {
+			if (angular.lowercase($scope.vnito_list[i].com_code) == angular.lowercase($scope.vnito.com_code)) {
+				$scope.exiss = true;
+				$timeout(function () {
+					$scope.exiss = false;
+				}, 3000);
+				return;
+			}
+		}
 		$http.post('/menu_VNITO', $scope.vnito).then(function successCallback(response) {
 			// refresh();
 			// $window.location.reload();
@@ -90,8 +111,13 @@ app.controller('vnito_ctl', ['$scope', '$http', '$window', '$compile', function 
 
 			$scope.vnito.com_status = 1;
 			$scope.vnito_list.push($scope.vnito);
+			$scope.com_code = $scope.vnito.com_code;
+			$scope.com_name = $scope.vnito.com_name;
+			$scope.visibility = true;
+			$timeout(function () {
+				$scope.visibility = false;
+			}, 3000);
 			$scope.vnito = null;
-			refresh();
 		}, function errorCallback(response) {
 
 		});
@@ -99,8 +125,6 @@ app.controller('vnito_ctl', ['$scope', '$http', '$window', '$compile', function 
 
 
 	//load form xoa
-	$scope.a;
-	$scope.c;
 	$scope.getremove = function (id) {
 
 		$scope.idremove = id;
@@ -117,6 +141,9 @@ app.controller('vnito_ctl', ['$scope', '$http', '$window', '$compile', function 
 				dt.fnDeleteRow(tr);
 				dt.fnDraw();
 				$compile(document.getElementById('data_table'))($scope);
+				$scope.message = 'Removed successfully';
+				jQuery("#myModalmessage").modal('show');
+				$timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
 			}, function errorCallback(response) {
 				console.log($scope.a);
 			});
@@ -141,6 +168,14 @@ app.controller('vnito_ctl', ['$scope', '$http', '$window', '$compile', function 
 
 	//sua
 	$scope.updatevnito = function () {
+		for (var i = 0; i < $scope.vnito_list.length; i++) {
+			if ($scope.vnito_list[i].com_id != $scope.editvnito.com_id && angular.lowercase($scope.vnito_list[i].com_code) == angular.lowercase($scope.editvnito.com_code)) {
+				$scope.message = 'Update Fail';
+				jQuery("#myModalmessage").modal('show');
+				$timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
+				return;
+			}
+		}
 		$http.put('/menu_VNITO/' + $scope.editvnito.com_id, $scope.editvnito).then(function successCallback(response) {
 			for (var i = 0; i < $scope.vnito_list.length; i++) {
 
@@ -153,6 +188,9 @@ app.controller('vnito_ctl', ['$scope', '$http', '$window', '$compile', function 
 			dt.fnUpdate($scope.editvnito, row); // Row
 			dt.fnDraw();
 			$compile(document.getElementById('data_table'))($scope);
+			$scope.message = 'Update Successful';
+			jQuery("#myModalmessage").modal('show');
+			$timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
 		}, function errorCallback(response) {
 
 		});

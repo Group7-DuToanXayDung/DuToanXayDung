@@ -162,13 +162,11 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 
 	//sua
 	$scope.updatetruonghoc = function () {
-		if ($scope.update.$invalid) {
-			$scope.disabled = true;
-			return;
-		}
 		for (var i = 0; i < $scope.truonghoc_list.length; i++) {
 			if ($scope.truonghoc_list[i].univer_id != $scope.edittruonghoc.univer_id && angular.lowercase($scope.truonghoc_list[i].univer_code) == angular.lowercase($scope.edittruonghoc.univer_code)) {
-				
+				$scope.message = 'Update Fail';
+				jQuery("#myModalmessage").modal('show');
+				$timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
 				return;
 			}
 		}

@@ -72,8 +72,8 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 			}).draw();
 
 			jQuery('#data_table tbody').on('click', 'tr', function () {
-					t.$('tr.selected').removeClass('selected');
-					$(this).addClass('selected');
+				t.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
 			});
 
 
@@ -227,6 +227,14 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 		if (jQuery("#student_u").is(':checked') == true)
 			role_current.push(4);
 
+		for (var i = 0; i < $scope.truonghoc_list.length; i++) {
+			if ($scope.thanhvien_list[i].user_id != $scope.editthanhvien.user_id && angular.lowercase($scope.thanhvien_list[i].user_code) == angular.lowercase($scope.editthanhvien.user_code)) {
+				$scope.message = 'Update Fail';
+				jQuery("#myModalmessage").modal('show');
+				$timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
+				return;
+			}
+		}
 		//var indata = { 'thanhvien': $scope.editthanhvien, 'roles': role_current };
 
 		$http.put('/menu_Users/' + $scope.editthanhvien.user_id, $scope.editthanhvien).then(function successCallback(response) {
