@@ -52,14 +52,16 @@
 					<div class="modal-header ">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Add University</h4>
-						<div style="text-align:center;padding:5px;color:#a4ff49;font-size:14px" ng-show="visibility">{{confirm}}</div>
 					</div>
 					<div class="modal-body row">
 						<div class="form-group col-xs-12 col-sm-6 col-md-6" ng-directive="strongSecret">
 							<label>UniversityID</label>
 							<div>
 								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret" id="UniversityID" ng-model="truonghoc.univer_code"
-									ng-model="strongSecret" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-show="exiss">
+										<li>UniversityID Exist</li>
+									</ul>
 									<ul class="error-msgs" ng-messages="add.strongSecret.$error" ng-if="add.$submitted || add.strongSecret.$dirty">
 										<li ng-message="invalid">Input must be valid</li>
 										<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
@@ -74,10 +76,9 @@
 							<label>Name</label>
 							<div>
 								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret1" id="strongSecret1" ng-model="truonghoc.univer_name"
-									ng-model="strongSecret1" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									required><span style="color:red">&nbsp;&#42;</span>
 									<ul class="error-msgs" ng-messages="add.strongSecret1.$error" ng-if="add.$submitted || add.strongSecret1.$dirty">
-										<li ng-message="invalid">Input must be valid</li>
-										<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+										
 										<li ng-message="required">Please enter into!</li>
 									</ul>
 							</div>
@@ -129,12 +130,9 @@
 							<label>Name</label>
 							<div>
 								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret1" id="University Name" ng-model="edittruonghoc.univer_name"
-									ng-model="strongSecret" strong-secret required><span style="color:red">&nbsp;&#42;</span></div>
+									  required><span style="color:red">&nbsp;&#42;</span></div>
 							<ul class="error-msgs" ng-messages="update.strongSecret1.$error" ng-if="update.$submitted || update.strongSecret1.$dirty">
 								<li ng-message="invalid">Input must be valid</li>
-								<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
-								<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
-								<li ng-message="validnormal">Add letter after letter "-"</li>
 								<li ng-message="required">Please enter into!</li>
 							</ul>
 						</div>
@@ -205,9 +203,17 @@
 	</div>
 
 
-	<script>
+	<div class="modal fade" id="myModalmessage" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-body">
+						<h4 class="modal-title text-center">{{message}}</h4>
+					</div>
+				</div>
 
-	</script>
+			</div>
+		</div>
 
 
 </div>

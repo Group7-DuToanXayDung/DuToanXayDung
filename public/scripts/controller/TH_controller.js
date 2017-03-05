@@ -60,6 +60,7 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 				},
 			});
 
+
 			t.on('order.dt search.dt draw.dt', function () {
 				t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
 					cell.innerHTML = i + 1;
@@ -67,6 +68,11 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 				});
 			}).draw();
 
+
+			jQuery('#data_table tbody').on('click', 'tr', function () {
+					t.$('tr.selected').removeClass('selected');
+					$(this).addClass('selected');
+			});
 
 		}, function errorCallback(response) {
 
@@ -79,45 +85,31 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 
 
 
-
+	$scope.exiss = false;
 	//them
 	$scope.addtruonghoc = function () {
 		if ($scope.add.$invalid) {
 			return;
 		}
-		
+
 		for (var i = 0; i < $scope.truonghoc_list.length; i++) {
-			if ($scope.truonghoc_list[i].univer_code == $scope.truonghoc.univer_code) {
+			if (angular.lowercase($scope.truonghoc_list[i].univer_code) == angular.lowercase($scope.truonghoc.univer_code)) {
 				$scope.confirm = "UniversityID Exist";
 
-				$scope.visibility = {
-					"visibility": "visible"
-				}
+				$scope.exiss = true;
 				$timeout(function () {
-					$scope.visibility = {
-						"visibility": "hidden"
-					}
-				}, 1000);
+					$scope.exiss = false;
+				}, 3000);
 				return;
 			}
 		}
-		
+
 		if ($scope.truonghoc.univer_address == null || $scope.truonghoc.contact == null) {
 			$scope.truonghoc.univer_address = "";
 			$scope.truonghoc.contact = "";
 		}
 		$http.post('/menu_School', $scope.truonghoc).then(function successCallback(response) {
-			//refresh();
-			//$window.location.reload();
-			$scope.confirm = "Add successful";
-			$scope.visibility = {
-				"visibility": "visible"
-			}
-			setTimeout(function () {
-				$scope.visibility = {
-					"visibility": "hidden"
-				}
-			}, 1000);
+			
 			$scope.truonghoc.status = 1;
 			$scope.truonghoc_list.push($scope.truonghoc);
 			$scope.truonghoc.univer_id = response.data.insertId;
@@ -155,6 +147,9 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 			dt.fnDeleteRow(tr);
 			dt.fnDraw();
 			$compile(document.getElementById('data_table'))($scope);
+			$scope.message = 'Removed successfully';
+			jQuery("#myModalmessage").modal('show');
+			$timeout(function(){jQuery("#myModalmessage").modal('hide')},2000);
 		}, function errorCallback(response) {
 
 		});
@@ -176,6 +171,12 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 			$scope.disabled = true;
 			return;
 		}
+		for (var i = 0; i < $scope.truonghoc_list.length; i++) {
+			if ($scope.truonghoc_list[i].univer_id != $scope.edittruonghoc.univer_id && angular.lowercase($scope.truonghoc_list[i].univer_code) == angular.lowercase($scope.edittruonghoc.univer_code)) {
+				
+				return;
+			}
+		}
 		$http.put('/menu_School/' + $scope.edittruonghoc.univer_id, $scope.edittruonghoc).then(function successCallback(response) {
 			for (var i = 0; i < $scope.truonghoc_list.length; i++) {
 				if ($scope.truonghoc_list[i].univer_id == $scope.edittruonghoc.univer_id) {
@@ -188,6 +189,9 @@ app.controller('truonghoc_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 			dt.fnDraw();
 			$compile(document.getElementById('data_table'))($scope);
 			$scope.disabled = false;
+			$scope.message = 'Update Successful';
+			jQuery("#myModalmessage").modal('show');
+			$timeout(function(){jQuery("#myModalmessage").modal('hide')},2000);
 		}, function errorCallback(response) {
 
 		});
