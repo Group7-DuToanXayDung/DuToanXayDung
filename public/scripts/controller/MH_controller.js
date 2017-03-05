@@ -19,11 +19,10 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 				"retrieve": true,
 				//"processing": true,
 				"deferRender": true,
-				"bSort": false,
 				"aaData": $scope.monhoc_list,
 				"rowId": "dis_id",
 				"aoColumns": [
-					{ "data": null },
+					{ "data": null, "orderable": false },
 					{ "data": "dis_code" },
 					{ "data": "dis_name" },
 					{ "data": "dis_hours" },
@@ -64,7 +63,10 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 					$compile(document.getElementById('data_table'))($scope);
 				});
 			}).draw();
-
+			jQuery('#data_table tbody').on('click', 'tr', function () {
+				t.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			});
 
 		}, function errorCallback(response) {
 
@@ -148,10 +150,6 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', func
 			var row = jQuery("tr#" + $scope.editmonhoc.dis_id);
 			dt.fnUpdate($scope.editmonhoc, row); // Row
 			dt.fnDraw();
-			$compile(document.getElementById('data_table'))($scope);
-			//refresh();
-
-			//$scope.edittruonghoc = null;
 		}, function errorCallback(response) {
 
 		});
