@@ -11,6 +11,9 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', '$ti
 			$scope.monhoc_list = response.data;
 
 			var t = jQuery("#data_table").DataTable({
+				"scrollY": 300, // feature
+				"ordering": true, // feature
+				responsive: true,
 				"aLengthMenu": [
 					[10, 25, 50, 100, -1],
 					[10, 25, 50, 100, "All"]
@@ -23,7 +26,7 @@ app.controller('dis_controller', ['$scope', '$http', '$window', '$compile', '$ti
 				"rowId": "dis_id",
 				"aoColumns": [
 					{ "data": null, "orderable": false, "sWidth": "5%" },
-					{ "data": "dis_code", "sClass": "text","sWidth": "10%" },
+					{ "data": "dis_code", "sClass": "text", "sWidth": "10%" },
 					{ "data": "dis_name", "sClass": "text" },
 					{ "data": "dis_hours", "sClass": "number" },
 					{ "data": "credits", "sClass": "number" },

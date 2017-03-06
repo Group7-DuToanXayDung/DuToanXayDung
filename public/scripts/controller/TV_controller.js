@@ -125,7 +125,10 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 		if ($scope.student == true)
 			$scope.roles.push(4);
 		if ($scope.roles.length == 0) {
-			
+			$scope.message = 'Not choose roles';
+			jQuery("#myModalmessage").modal('show');
+			$timeout(function () { jQuery("#myModalmessage").modal('hide') }, 2000);
+			return;
 		}
 		for (var i = 0; i < $scope.thanhvien_list.length; i++) {
 			if (angular.lowercase($scope.thanhvien_list[i].user_code) == angular.lowercase($scope.thanhvien.user_code) && $scope.thanhvien_list[i].user_id != $scope.thanhvien.user_id) {
@@ -163,6 +166,7 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 			}, 3000);
 			$scope.thanhvien = null;
 			$scope.roles = [];
+			$scope.confirm = null;
 		}, function errorCallback(response) {
 
 		});
@@ -226,7 +230,7 @@ app.controller('thanhvien_ctl', ['$scope', '$http', '$window', '$compile', '$tim
 		if (jQuery("#student_u").is(':checked') == true)
 			role_current.push(4);
 
-		for (var i = 0; i < $scope.truonghoc_list.length; i++) {
+		for (var i = 0; i < $scope.thanhvien_list.length; i++) {
 			if ($scope.thanhvien_list[i].user_id != $scope.editthanhvien.user_id && angular.lowercase($scope.thanhvien_list[i].user_code) == angular.lowercase($scope.editthanhvien.user_code)) {
 				$scope.message = 'Update Fail';
 				jQuery("#myModalmessage").modal('show');
