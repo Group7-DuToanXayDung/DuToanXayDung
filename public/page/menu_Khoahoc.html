@@ -1,0 +1,257 @@
+<div ng-controller="khoahoc_ctl">
+	<div class="container">
+		<div class="row">
+			<h2 class="sub-header">List of Intake</h2>
+			<div class="form-group">
+				<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+			</div>
+		</div>
+	</div>
+	<table id="data_table" class="display text-center" width="100%" cellspacing="0" datatables="ng">
+		<thead>
+			<tr>
+				<th class="text-center">No.</th>
+				<th class="text-center">Code</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Description</th>
+				<th class="text-center">Start Date</th>
+				<th class="text-center">End Date</th>
+				<th class="text-center">Status</th>
+				<th class="text-center"></th>
+			</tr>
+		</thead>
+
+		<tfoot>
+			<tr>
+				<th class="text-center">No.</th>
+				<th class="text-center">Code</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Description</th>
+				<th class="text-center">Start Date</th>
+				<th class="text-center">End Date</th>
+				<th class="text-center">Status</th>
+				<th class="text-center"></th>
+			</tr>
+		</tfoot>
+
+	</table>
+
+
+
+
+	<div class="container">
+		<!-- Modal Add content-->
+		<div class="modal fade container " id="myModalAdd" role="dialog">
+			<div class="modal-dialog ">
+				<!-- Modal content-->
+				<div class="alert alert-success" ng-if="visibility==true">
+					<strong>Thành công!</strong> Bạn vừa thêm thành công khóa học có mã: <b>{{int_code}}</b>, tên <b>{{int_name}}</b>.
+				</div>
+				<form name="add" novalidate>
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Add Intake</h4>
+						</div>
+						<div class="modal-body row">
+							<div class="form-group col-xs-12 col-sm-6 col-md-6" ng-directive="strongSecret">
+								<label>Intake Code</label>
+								<div>
+									<input style="width:95%; float:left" type="text" class="form-control" id="coursename_Code" ng-model="khoahoc.int_code" maxlength="10"
+										name="strongSecret" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+										<ul class="error-msgs" ng-show="exiss">
+											<li>IntakeID Exist</li>
+										</ul>
+										<ul class="error-msgs" ng-messages="add.strongSecret.$error" ng-if="add.$submitted || add.strongSecret.$dirty">
+											<li ng-message="invalid">Input must be valid</li>
+											<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
+											<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+											<li ng-message="validnormal">Add letter after letter "-"</li>
+											<li ng-message="required">Please enter into!</li>
+										</ul>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Intake Name</label>
+								<div>
+									<input style="width:95%; float:left" type="text" class="form-control" id="coursename_Add" ng-model="khoahoc.int_name" name="strongSecret1"
+										required><span style="color:red">&nbsp;&#42;</span>
+										<ul class="error-msgs" ng-messages="add.strongSecret1.$error" ng-if="add.$submitted || add.strongSecret1.$dirty">
+											<li ng-message="required">Please enter into!</li>
+										</ul>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Start Date</label>
+								<div>
+									<input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Addstart" ng-model="khoahoc.startdate"
+										name="strongSecret2" required><span style="color:red">&nbsp;&#42;</span>
+										<ul class="error-msgs" ng-messages="add.strongSecret2.$error" ng-if="add.$submitted || add.strongSecret2.$dirty">
+											<li ng-message="required">Please enter into!</li>
+										</ul>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>End Date</label>
+								<div>
+									<input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Addfinish" ng-model="khoahoc.enddate"
+										name="strongSecret3" required><span style="color:red">&nbsp;&#42;</span>
+										<ul class="error-msgs" ng-messages="add.strongSecret3.$error" ng-if="add.$submitted || add.strongSecret3.$dirty">
+											<li ng-message="required">Please enter into!</li>
+										</ul>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Description</label>
+								<textarea style="width:95%" class="form-control" rows="3" id="description_Add" ng-model="khoahoc.int_description"></textarea>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary" ng-click="addkhoahoc()"><span class="glyphicon glyphicon-plus"></span>Add</button>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<div class="container">
+		<!-- Modal Edit content-->
+		<div class="modal fade container" id="myModalEdit" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<form name="edit" novalidate>
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Update Intake</h4>
+						</div>
+						<div class="modal-body row">
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Intake Code</label>
+								<div>
+									<input style="width:95%; float:left" type="text" class="form-control" id="coursename_Codee" ng-model="editkhoahoc.int_code"
+										maxlength="10" name="strongSecret" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+										<ul class="error-msgs" ng-messages="edit.strongSecret.$error" ng-if="edit.$submitted || edit.strongSecret.$dirty">
+											<li ng-message="invalid">Input must be valid</li>
+											<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
+											<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+											<li ng-message="validnormal">Add letter after letter "-"</li>
+											<li ng-message="required">Please enter into!</li>
+										</ul>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Name</label>
+								<div>
+									<input style="width:95%; float:left" type="text" class="form-control" id="coursename_Edit" ng-model="editkhoahoc.int_name"
+										name="strongSecret1" required><span style="color:red">&nbsp;&#42;</span>
+										<ul class="error-msgs" ng-messages="edit.strongSecret1.$error" ng-if="edit.$submitted || edit.strongSecret1.$dirty">
+											<li ng-message="required">Please enter into!</li>
+										</ul>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Start Date</label>
+								<div>
+									<input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Editstart" ng-model="editkhoahoc.startdate"
+										name="strongSecret2" required><span style="color:red">&nbsp;&#42;</span>
+										<ul class="error-msgs" ng-messages="edit.strongSecret2.$error" ng-if="edit.$submitted || edit.strongSecret2.$dirty">
+											<li ng-message="required">Please enter into!</li>
+										</ul>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>End Date</label>
+								<div>
+									<input style="width:95%; float:left" type="text" class="form-control" id="datepicker_Editfinish" ng-model="editkhoahoc.enddate"
+										name="strongSecret3" required><span style="color:red">&nbsp;&#42;</span>
+										<ul class="error-msgs" ng-messages="edit.strongSecret3.$error" ng-if="edit.$submitted || edit.strongSecret3.$dirty">
+											<li ng-message="required">Please enter into!</li>
+										</ul>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Description</label>
+								<textarea style="width:95%" class="form-control" rows="3" id="description_Edit" ng-model="editkhoahoc.int_description"></textarea>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label style="display:block">Select status</label>
+								<form>
+									<label class="radio-inline">
+															<input type="radio"  name ="status_Edit" value="1" ng-model="editkhoahoc.status" ng-checked="editkhoahoc.status==1">
+															Active
+											</label>
+									<label class="radio-inline">
+															<input type="radio"  name ="status_Edit" value="0" ng-model="editkhoahoc.status" ng-checked="editkhoahoc.status==0">
+															Inactive
+
+											</label>
+								</form>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-warning" id="update_kh" data-dismiss="modal" ng-disabled="edit.$invalid" ng-click="updatekhoahoc()"><span class="glyphicon glyphicon-edit"></span>Update</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="modal fade" id="myModalConfirm" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header bg-danger">
+
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Confirm remove</h4>
+
+					</div>
+
+					<div class="modal-body">
+						<p>Do you want to remove data?</p>
+					</div>
+
+					<div class="modal-footer">
+						<button class="btn btn-danger" type="button" data-dismiss="modal" ng-click="remove()">Sure</button>
+						<button class="btn btn-primary"type="button" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="myModalmessage" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body">
+					<h4 class="modal-title text-center">{{message}}</h4>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+												$(function () {
+													$("#datepicker_Addstart").datepicker();
+													$("#datepicker_Addfinish").datepicker();
+													$("#datepicker_Editstart").datepicker();
+													$("#datepicker_Editfinish").datepicker();
+												});
+	</script>
+</div>
