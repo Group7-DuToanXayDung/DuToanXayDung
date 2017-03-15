@@ -1,0 +1,219 @@
+<div ng-controller="cth_controller">
+	<div class="container">
+		<div class="row">
+			<h2 class="sub-header">List of Specializations</h2>
+			<div class="form-group">
+				<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+			</div>
+		</div>
+	</div>
+	<table id="data_table" class="table table-hover" width="100%" cellspacing="0">
+		<thead>
+			<tr>
+				<th>No.</th>
+				<th>Code</th>
+				<th>Specialization ID</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Status</th>
+				<th></th>
+
+			</tr>
+		</thead>
+
+		<tfoot>
+			<tr>
+				<th>No.</th>
+				<th>Code</th>
+				<th>Specialization ID</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Status</th>
+				<th></th>
+			</tr>
+		</tfoot>
+	</table>
+
+
+
+
+	<!-- modal ADD -->
+	<div class="container">
+		<!-- Modal Add content-->
+		<div class="modal fade container " id="myModalAdd" role="dialog">
+			<div class="modal-dialog ">
+				<!-- Modal content-->
+				<div class="alert alert-success" ng-if="visibility==true">
+					<strong>Success!</strong> You have successfully added the curriculum: <b>{{pro_code}}</b>, name <b>{{pro_name}}</b>.
+				</div>
+
+				<form name="frmAdd" novalidate>
+
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Add Specializations </h4>
+						</div>
+
+						<div class="modal-body row">
+							<div class="form-group col-xs-12 col-sm-6 col-md-6" ng-directive="strongSecret">
+								<label>Specializations Code</label>
+								<div>
+									<input style="width:95%; float:left" type="text" class="form-control" id="program_Code" ng-model="add_menu.pro_code" maxlength="10"
+										name="strongSecret" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+										<ul class="error-msgs">
+											<li ng-show="exiss">Code has been exist.</li>
+											<li ng-show="required">This field must be enter.</li>
+										</ul>
+										<ul class="error-msgs" ng-messages="frmAdd.strongSecret.$error" ng-if="frmAdd.$submitted || frmAdd.strongSecret.$dirty">
+											<li ng-message="invalid">Input must be valid</li>
+											<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
+											<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+											<li ng-message="validnormal">Add letter after letter "-"</li>
+										</ul>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label> Name</label>
+								<div>
+									<input style="width:95%; float:left" type="text" class="form-control" id="program_Add" ng-model="add_menu.pro_name" name="strongSecret1"
+										required><span style="color:red">&nbsp;&#42;</span>
+										<ul class="error-msgs" ng-messages="frmAdd.strongSecret1.$error" ng-if="frmAdd.$submitted || frmAdd.strongSecret1.$dirty">
+											<li ng-show="required1">This field must be enter.</li>
+										</ul>
+								</div>
+							</div>
+
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Description</label>
+								<textarea style="width:95%" class="form-control" rows="3" id="description_Add" ng-model="add_menu.pro_description"></textarea>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary" ng-click="adds()"><span class="glyphicon glyphicon-plus"></span>Add</button>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- modal Edit -->
+	<div class="container">
+		<div class="modal fade container " id="myModalEdit" role="dialog">
+			<div class="modal-dialog ">
+
+				<!-- Modal content-->
+				<form name="edit" novalidate>
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Update Specialization</h4>
+						</div>
+						<div class="modal-body row">
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Specialization Code</label>
+								<div>
+									<input style="width:95%; float:left" type="text" class="form-control" id="programcode_Edit" ng-model="edit_menu.pro_code"
+										maxlength="10" name="strongSecret" strong-secret required>
+										<span style="color:red">&nbsp;&#42;</span>
+										<ul class="error-msgs">
+											<li ng-show="exiss">Code has been exist</li>
+											<li ng-show="require">Please enter into!</li>
+										</ul>
+										<ul class="error-msgs" ng-messages="edit.strongSecret.$error" ng-if="edit.$submitted || edit.strongSecret.$dirty">
+											<li ng-message="invalid">Input must be valid</li>
+											<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
+											<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+											<li ng-message="validnormal">Add letter after letter "-"</li>
+										</ul>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Name</label>
+								<div><input style="width:95%; float:left" type="text" class="form-control" id="programname_Edit" ng-model="edit_menu.pro_name" name="strongSecret1"
+										required>
+									<span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-messages="edit.strongSecret1.$error" ng-if="edit.$submitted || edit.strongSecret1.$dirty">
+										<li ng-show="required1">Please enter into!</li>
+									</ul>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label>Description</label>
+								<textarea style="width:95%" class="form-control" rows="3" id="description_Edit" ng-model="edit_menu.pro_description"></textarea>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6">
+								<label style="display:block">Select status</label>
+								<form>
+									<label class="radio-inline">
+												<input type="radio"  name ="status_Edit" value="1" ng-model="edit_menu.pro_status" ng-checked="edit_menu.pro_status==1">
+												Active
+								</label>
+									<label class="radio-inline">
+												<input type="radio"  name ="status_Edit" value="0" ng-model="edit_menu.pro_status" ng-checked="edit_menu.pro_status==0">
+												Inactive
+
+								</label>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-warning" ng-click="updates()"><span class="glyphicon glyphicon-edit"></span>Update</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+	<!-- modal confirm -->
+	<div class="container">
+		<div class="modal fade" id="myModalConfirm" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">ARE YOU SURE</h4>
+
+					</div>
+
+					<div class="modal-body">
+						<p>Do you want to remove data?</p>
+					</div>
+
+					<div class="modal-footer">
+
+						<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+							class="btn" data-dismiss="modal" ng-click='remove()'>Yes</button>
+							<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+								class="btn" data-dismiss="modal">No</button>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="myModalmessage" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body">
+					<h4 class="modal-title text-center">{{message}}</h4>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+</div>

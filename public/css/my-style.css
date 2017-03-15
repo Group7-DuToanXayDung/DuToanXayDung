@@ -1,0 +1,39 @@
+body{
+}
+.header{
+  margin-top: 10px;
+}
+.login-form{
+  margin-top: 20px;
+}
+.menu{
+  margin-left: 20px;
+}
+.dialog-themlop{
+  padding: 10px;
+}
+.dropdown-menu{
+  padding: 10px;
+}
+.red{
+  border: solid 1px red;
+}
+.error-msgs li { 
+		color: red;
+		position:absolute;
+		left:0;
+		padding:15px;
+		list-style-type:none;
+		}
+		.col-xs-12,.col-sm-6,.col-md-6{
+		margin-bottom:35px;
+		}
+.select{
+	background-color: red;
+}
+.text{
+	text-align: left;
+}
+.number{
+	text-align: right;
+}

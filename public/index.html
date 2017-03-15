@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>The Management of students in ISC center </title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap theme -->
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="css/dashboard.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css" />
+  <!-- <link rel="stylesheet" href="angular-datatables.css"> -->
+  <link href="css/dialog.css" rel="stylesheet">
+  <link href="css/my-style.css" rel="stylesheet">
+  <link href="css/jquery-ui.css" rel="stylesheet">
+  <link href="css/tooltip.css" rel="stylesheet">
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-app="myApp">
+
+  <div style="margin-bottom:30px;" ng-include='"page/include/header.html"'></div>
+  <!-- <div ng-include='"page/include/menu-trai.html"'></div> -->
+  <div class="container">
+    <ng-view></ng-view>
+  </div>
+  <script src="js/jquery.min.js"></script>
+<script src="js/angular.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/jquery.dataTables.min.js"></script>
+   <script src="js/angular-messages.min.js"></script>
+  <script src="js/angular-route.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controller/TH_controller.js"></script>
+  <script src="scripts/controller/CTH_controller.js"></script>
+  <script src="scripts/controller/TV_controller.js"></script>
+  <script src="scripts/controller/MH_controller.js"></script>
+  <script src="scripts/controller/KH_controller.js"></script>
+  <script src="scripts/controller/vnito_controller.js"></script>
+  <script src="scripts/directive/ngMessages.js"></script>
+
+</body>
+
+</html>

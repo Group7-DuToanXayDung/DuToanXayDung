@@ -1,0 +1,29 @@
+#tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+#tooltiptext {
+    /* visibility: hidden; */
+	display:none;
+	min-width:120px;
+    max-width: 500px;
+	background-color:#d6d1d1;
+    color: blue;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+	word-break: keep-all;
+	padding:5px;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top:100%;
+   
+}
+
+#tooltip:hover #tooltiptext {
+    /* visibility: visible; */
+	display:block;
+}

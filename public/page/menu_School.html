@@ -1,0 +1,222 @@
+<!-- Controller trường học-->
+
+<div ng-controller="truonghoc_ctl">
+	<div class="container">
+		<div class="row">
+			<h2 class="sub-header">List of Universities</h2>
+			<div class="form-group">
+				<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- dataTable content-->
+	<div class="responsive">
+		<table id="data_table" class="display text-center" width="100%" cellspacing="0" datatables="ng">
+			<thead>
+				<tr>
+					 <th class="text-center">No.</th> 
+					<th class="text-center">University ID</th>
+					<th class="text-center">Name</th>
+					<th class="text-center">Address</th>
+					<th class="text-center">Contact Information</th>
+					<th class="text-center">Status</th>
+					<th class="text-center"></th>
+				</tr>
+			</thead>
+
+
+
+
+			<tfoot>
+				<tr>
+					<th class="text-center">No.</th> 				
+					<th class="text-center">University ID</th>
+					<th class="text-center">Name</th>
+					<th class="text-center">Address</th>
+					<th class="text-center">Contact Information</th>
+					<th class="text-center">Status</th>
+					<th class="text-center"></th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<!-- Modal Add content-->
+	<div class="modal fade container " id="myModalAdd" role="dialog">
+		<div class="modal-dialog ">
+			<div class="alert alert-success" ng-if="visibility==true">
+				<strong>Success!</strong> You have just successfully added a school code: <b>{{univer_code}}</b>, name <b>{{univer_name}}</b>.
+			</div>
+			<!-- Modal content-->
+			<form name="add" novalidate>
+				<div class="modal-content">
+					<div class="modal-header ">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add University</h4>
+					</div>
+					<div class="modal-body row">
+						<div class="form-group col-xs-12 col-sm-6 col-md-6" ng-directive="strongSecret">
+							<label>University Code</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" maxlength="10" name="strongSecret" id="UniversityID"
+									ng-model="truonghoc.univer_code" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" >
+										<li ng-show="exiss">University Code Exist</li>
+										<li ng-show="require1">Please enter into!</li>
+									</ul>
+									<ul class="error-msgs" ng-messages="add.strongSecret.$error" ng-if="add.$submitted || add.strongSecret.$dirty">
+										<li ng-message="invalid">Input must be valid</li>
+										<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
+										<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+										<li ng-message="validnormal">Add letter after letter "-"</li>
+										
+									</ul>
+
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6" ng-directive="strongSecret1">
+							<label>Name</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret1" id="strongSecret1" ng-model="truonghoc.univer_name"
+									required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs">
+										<li ng-show="require2">Please enter into!</li>
+									</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Address</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="address_Add" ng-model="truonghoc.univer_address"></textarea>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Contact</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="contact_Add" ng-model="truonghoc.contact"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" id="myReset" class="btn btn-primary" ng-click="addtruonghoc()"><span class="glyphicon glyphicon-plus"></span>Add</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<!-- Modal Edit content-->
+	<div class="modal fade container" id="myModalEdit" role="dialog">
+		<div class="modal-dialog" ng-directive="strongSecret">
+
+			<!-- Modal content-->
+			<form name="update">
+				<div class="modal-content">
+					<div class="modal-header ">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Update University</h4>
+					</div>
+					<div class="modal-body row">
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>University Code</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret" id="usr" ng-model="edittruonghoc.univer_code"
+									ng-model="strongSecret" strong-secret required><span style="color:red">&nbsp;&#42;</span></div>
+									<ul class="error-msgs" >
+										<li ng-show="exiss">University Code Exist</li>
+										<li ng-show="require1">Please enter into!</li>
+									</ul>
+									
+							<ul class="error-msgs" ng-messages="update.strongSecret.$error" ng-if="update.$submitted || update.strongSecret.$dirty">
+								<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
+								<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+								<li ng-message="validnormal">Add letter after letter "-"</li>
+							</ul>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Name</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" name="strongSecret1" id="University Name" ng-model="edittruonghoc.univer_name"
+									required><span style="color:red">&nbsp;&#42;</span></div>
+							<ul class="error-msgs">
+										<li ng-show="require2">Please enter into!</li>
+							</ul>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Address</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="address_Add" ng-model="edittruonghoc.univer_address"></textarea>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Contact</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="contact_Add" ng-model="edittruonghoc.contact"></textarea>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<div class="radio">
+								<label>
+											<input type="radio" ng-model="edittruonghoc.status" value="1" ng-checked="edittruonghoc.status == '1'">
+											Active
+										</label>
+							</div>
+							<div class="radio">
+								<label>
+											<input type="radio" ng-model="edittruonghoc.status" value="0" ng-checked="edittruonghoc.status == '0'">
+											Inactive
+										</label>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning"  ng-click="updatetruonghoc(edittruonghoc.univer_id)"><span class="glyphicon glyphicon-edit"></span>Update</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+
+
+	<!-- modal confirm -->
+	<div class="container">
+		<div class="modal fade" id="myModalConfirm" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">ARE YOU SURE</h4>
+
+					</div>
+
+					<div class="modal-body">
+						<p>Do you want to remove data?</p>
+					</div>
+
+					<div class="modal-footer">
+
+						<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+							class="btn" data-dismiss="modal" ng-click='remove()'>Yes</button>
+							<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+								class="btn" data-dismiss="modal">No</button>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="myModalmessage" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body">
+					<h4 class="modal-title text-center">{{message}}</h4>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+</div>

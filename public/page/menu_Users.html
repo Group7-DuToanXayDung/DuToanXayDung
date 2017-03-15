@@ -1,0 +1,413 @@
+<div ng-controller="thanhvien_ctl">
+	<div>
+		<div class="container">
+			<div class="row">
+				<h2 class="sub-header">List of Users</h2>
+				<div class="form-group">
+					<button class="btn btn-primary " data-toggle="modal" data-target="#myModalAdd"><span class="glyphicon glyphicon-plus"></span>Add</button>
+				</div>
+			</div>
+		</div>
+		<table id="data_table" class="display text-center" width="100%" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="text-center">No.</th>
+					<th class="text-center">User ID</th>
+					<th class="text-center">Last Name</th>
+					<th class="text-center">First Name</th>
+					<th class="text-center">Username</th>
+					<th class="text-center">Phone</th>
+					<th class="text-center">Email</th>
+					<th class="text-center">Status</th>
+					<th class="text-center"></th>
+				</tr>
+			</thead>
+
+			<tfoot>
+				<tr>
+					<th class="text-center">No.</th>
+					<th class="text-center">User ID</th>
+					<th class="text-center">Last Name</th>
+					<th class="text-center">First Name</th>
+					<th class="text-center">Username</th>
+					<th class="text-center">Phone</th>
+					<th class="text-center">Email</th>
+					<th class="text-center">Status</th>
+					<th class="text-center"></th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+
+
+
+	<!-- modal add -->
+	<div class="modal fade container " id="myModalAdd" role="dialog">
+		<div class="modal-dialog ">
+
+			<!-- Modal content-->
+			<div class="alert alert-success" ng-if="visibility==true">
+				<strong>Success!</strong> You have successfully added member code: <b>{{user_code}}</b>, name <b>{{lastname}}&nbsp;{{firstname}}</b>.
+			</div>
+			<form name="add" novalidate>
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add User</h4>
+					</div>
+					<div class="modal-body row">
+						<div class="form-group col-xs-12 col-sm-6 col-md-6" ng-directive="strongSecret">
+							<label>User Code</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" id="UserID" ng-model="thanhvien.user_code" maxlength="10"
+									name="strongSecret" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs">
+										<li ng-show="exiss">User Code Exist</li>
+										<li ng-show="require">Please enter into!</li>
+									</ul>
+									<ul class="error-msgs" ng-messages="add.strongSecret.$error" ng-if="add.$submitted || add.strongSecret.$dirty">
+										<li ng-message="invalid">Input must be valid</li>
+										<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
+										<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+										<li ng-message="validnormal">Add letter after letter "-"</li>
+									</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Last Name</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" id="LastName" ng-model="thanhvien.lastname" name="strongSecret1"
+									required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-messages="add.strongSecret1.$error" ng-if="add.$submitted || add.strongSecret1.$dirty">
+										<li ng-show="required1">Please enter into!</li>
+									</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>First Name</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" id="First Name" ng-model="thanhvien.firstname" name="strongSecret2"
+									required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-messages="add.strongSecret2.$error" ng-if="add.$submitted || add.strongSecret2.$dirty">
+										<li ng-show="required2">Please enter into!</li>
+									</ul>
+							</div>
+						</div>
+
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Phone</label>
+							<div>
+								<input style="width:95%; float:left" type="text" name='phone' class="form-control" ng-pattern="/^[0-9]+$/" id="Phone"
+									ng-model="thanhvien.phone"><span style="color:red">&nbsp;</span>
+									<ul class="error-msgs" ng-if="add.phone.$dirty && add.phone.$invalid">
+										<li>Please enter into number!</li>
+									</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Email</label>
+							<div><input style="width:95%; float:left" type="email" class="form-control" id="Email" ng-model="thanhvien.email"><span
+									style="color:red">&nbsp;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Address</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="address_Add" ng-model="thanhvien.useraddress"></textarea>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Username</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" id="Username" ng-model="thanhvien.username" name="strongSecret3"
+									required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-show="exiss1">
+										<li>Username Exist</li>
+									</ul>
+									<ul class="error-msgs" ng-messages="add.strongSecret3.$error" ng-if="add.$submitted || add.strongSecret3.$dirty">
+										<li ng-show="required3">Please enter into!</li>
+									</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Password</label>
+							<div>
+								<input style="width:95%; float:left" type="password" class="form-control" id="Password" ng-model="thanhvien.password" name="strongSecret4"
+									required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-messages="add.strongSecret4.$error" ng-if="add.$submitted || add.strongSecret4.$dirty">
+										<li ng-show="required4">Please enter into!</li>
+									</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label style="display:block">Select Gender</label>
+							<form>
+								<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" ng-model="thanhvien.gender" value="1" ng-checked="true">
+											Male
+							</label>
+								<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" ng-model="thanhvien.gender" value="0">
+											Female
+
+							</label>
+							</form>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Confirm Password</label>
+							<div>
+								<input style="width:95%; float:left" type="password" class="form-control" id="enterPassword" ng-model="confirm" name="strongSecret5"
+									compare-to="thanhvien.password" required><span style="color:red">&nbsp;&#42;</span>
+									<span class="text-danger" ng-show="add.strongSecret5.$error.compareTo && add.strongSecret5.$dirty">Password incorrect, please try again</span>
+									<ul class="error-msgs" ng-messages="add.strongSecret5.$error" ng-if="add.$submitted || add.strongSecret5.$dirty">
+										<li ng-show="required5">Please enter into!</li>
+									</ul>
+							</div>
+						</div>
+
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Select Roles</label>
+							<div class="container">
+								<form>
+									<label class="checkbox-inline">
+									  <input type="checkbox" value="1" ng-model="admin">Admin
+									</label>
+									<label class="checkbox-inline">
+									  <input type="checkbox" value="2" ng-model="registrar">Registrar
+									</label>
+								</form>
+							</div>
+							<div class="container">
+								<form>
+									<label class="checkbox-inline">
+										  <input type="checkbox" value="3" ng-model="lecturer">Lecturer
+										</label>
+									<label class="checkbox-inline">
+										  <input type="checkbox" value="4" ng-model="student" ng-checked="true">Student
+										</label>
+								</form>
+							</div>
+
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary" ng-click="addthanhvien()"><span class="glyphicon glyphicon-plus"></span>Add</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+
+	<!-- modal edit -->
+
+	<div class="modal fade container " id="myModalEdit" role="dialog">
+		<div class="modal-dialog ">
+
+			<!-- Modal content-->
+			<form name="edit" novalidate>
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Update User</h4>
+					</div>
+					<div class="modal-body row">
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>User Code</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" id="UserID" ng-model="editthanhvien.user_code" maxlength="10"
+									name="strongSecret" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs">
+										<li ng-show="exiss">User Code Exist</li>
+										<li ng-show="require">Please enter into!</li>
+									</ul>
+									<ul class="error-msgs" ng-messages="edit.strongSecret.$error" ng-if="edit.$submitted || edit.strongSecret.$dirty">
+										<li ng-message="invalid">Input must be valid</li>
+										<li ng-message="normal">Input must be a-z or A-Z or 0-9 or letter " - " </li>
+										<li ng-message="threeCharactersValidator">Strong secret has to least 3 characters long</li>
+										<li ng-message="validnormal">Add letter after letter "-"</li>
+									</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Last Name</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" id="LastName" ng-model="editthanhvien.lastname" name="strongSecret1"
+									strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-messages="edit.strongSecret1.$error" ng-if="edit.$submitted || edit.strongSecret1.$dirty">
+										<li ng-show="required1">Please enter into!</li>
+									</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>First Name</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" id="First Name" ng-model="editthanhvien.firstname"
+									name="strongSecret2" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-messages="edit.strongSecret2.$error" ng-if="edit.$submitted || edit.strongSecret2.$dirty">
+										<li ng-show="required2">Please enter into!</li>
+									</ul>
+							</div>
+						</div>
+
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Phone</label>
+							<div><input style="width:95%; float:left" type="text" name="phone1" class="form-control" id="Phone" ng-model="editthanhvien.phone"><span
+									style="color:red">&nbsp;</span>
+								<ul class="error-msgs" ng-if="add.phone1.$dirty && add.phone1.$invalid">
+									<li>Please enter into number!</li>
+								</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Email</label>
+							<div><input style="width:95%; float:left" type="email" class="form-control" id="Email" ng-model="editthanhvien.email"><span
+									style="color:red">&nbsp;</span></div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Address</label>
+							<textarea style="width:95%" class="form-control" rows="3" id="address_Add" ng-model="editthanhvien.useraddress"></textarea>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Username</label>
+							<div>
+								<input style="width:95%; float:left" type="text" class="form-control" id="Username" ng-model="editthanhvien.username" name="strongSecret3"
+									strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-messages="edit.strongSecret3.$error" ng-if="edit.$submitted || edit.strongSecret3.$dirty">
+										<li ng-show="required3">Please enter into!</li>
+									</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Password</label>
+							<div>
+								<input style="width:95%; float:left" type="password" class="form-control" id="Password" ng-model="editthanhvien.password"
+									name="strongSecret4" strong-secret required><span style="color:red">&nbsp;&#42;</span>
+									<ul class="error-msgs" ng-messages="edit.strongSecret4.$error" ng-if="edit.$submitted || edit.strongSecret4.$dirty">
+										<li ng-show="required4">Please enter into!</li>
+									</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label style="display:block">Select Gender</label>
+							<form>
+								<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" value="1" ng-model="editthanhvien.gender" ng-checked="editthanhvien.gender == 1">
+											Male
+							</label>
+								<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" value="0" ng-model="editthanhvien.gender" ng-checked="editthanhvien.gender == 0">
+											Female
+
+							</label>
+							</form>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Confirm Password</label>
+							<div>
+								<input style="width:95%; float:left" type="password" class="form-control" id="enterPassword" ng-model="confirm" name="strongSecret5"
+									compare-to="editthanhvien.password" required><span style="color:red">&nbsp;&#42;</span>
+									<span class="text-danger" ng-show="edit.strongSecret5.$error.compareTo && edit.strongSecret5.$dirty">Password incorrect, please try again</span>
+									<ul class="error-msgs" ng-messages="edit.strongSecret5.$error" ng-if="edit.$submitted || edit.strongSecret5.$dirty">
+										<li ng-show="required5">Please enter into!</li>
+									</ul>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label>Select Roles</label>
+							<div class="container">
+								<form>
+									<label class="checkbox-inline">
+									  <input type="checkbox" id="admin_u" value="1">Admin
+									</label>
+									<label class="checkbox-inline">
+									  <input type="checkbox" id="registra_u" value="2">Registrar
+									</label>
+								</form>
+							</div>
+							<div class="container">
+								<form>
+									<label class="checkbox-inline">
+										  <input type="checkbox" id="lecturer_u" value="3">Lecturer
+										</label>
+									<label class="checkbox-inline">
+										  <input type="checkbox" id="student_u" value="4">Student
+										</label>
+								</form>
+							</div>
+
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-md-6">
+							<label style="display:block">Select status</label>
+							<form>
+								<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" value="1"  ng-model="editthanhvien.user_status" ng-checked="editthanhvien.user_status==1">
+											Active
+							</label>
+								<label class="radio-inline">
+											<input type="radio"  name ="status_Edit" value="0" ng-model="editthanhvien.user_status" ng-checked="editthanhvien.user_status==0">
+											Inactive
+
+							</label>
+							</form>
+						</div>
+
+
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-warning" ng-click="updatethanhvien()"><span class="glyphicon glyphicon-edit"></span>Update</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+
+	<!-- modal confirm -->
+	<div class="container">
+		<div class="modal fade" id="myModalConfirm" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">ARE YOU SURE</h4>
+
+					</div>
+
+					<div class="modal-body">
+						<p>Do you want to remove data?</p>
+					</div>
+
+					<div class="modal-footer">
+
+						<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+							class="btn" data-dismiss="modal" ng-click='remove()'>Yes</button>
+							<button style="color: blue" onMouseOver="this.style.background='#CB3D39'" onMouseOut="this.style.background='#F0F0F0'" type="button"
+								class="btn" data-dismiss="modal">No</button>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="myModalmessage" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body">
+					<h4 class="modal-title text-center">{{message}}</h4>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+</div>
