@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 22, 2017 lúc 07:16 SA
--- Phiên bản máy phục vụ: 10.1.21-MariaDB
--- Phiên bản PHP: 5.6.30
+-- Client :  127.0.0.1
+-- Généré le :  Mer 15 Mars 2017 à 10:28
+-- Version du serveur :  10.1.19-MariaDB
+-- Version de PHP :  5.6.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `iscdb`
+-- Base de données :  `iscdb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `access`
+-- Structure de la table `access`
 --
 
 CREATE TABLE `access` (
@@ -33,7 +33,7 @@ CREATE TABLE `access` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `access`
+-- Contenu de la table `access`
 --
 
 INSERT INTO `access` (`access_id`, `access_name`, `access_status`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `access` (`access_id`, `access_name`, `access_status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `company`
+-- Structure de la table `company`
 --
 
 CREATE TABLE `company` (
@@ -57,10 +57,18 @@ CREATE TABLE `company` (
   `com_status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Contenu de la table `company`
+--
+
+INSERT INTO `company` (`com_id`, `com_code`, `com_name`, `com_address`, `com_contact`, `com_status`) VALUES
+(94, 'TMA', 'TMA Solution', 'TP Hồ Chí Minh', 'undefined', 1),
+(95, 'SGT5555', 'Sai Gon Tech', 'TP Hồ Chí Minh', 'ddd', 1);
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `decentralization`
+-- Structure de la table `decentralization`
 --
 
 CREATE TABLE `decentralization` (
@@ -70,10 +78,23 @@ CREATE TABLE `decentralization` (
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Contenu de la table `decentralization`
+--
+
+INSERT INTO `decentralization` (`decen_id`, `user_code`, `access_id`, `status`) VALUES
+(46, 'ISC1-002', '1', 1),
+(47, 'ISC1-002', '2', 1),
+(48, 'ISC1-002', '4', 1),
+(49, 'ISC1-001', '4', 1),
+(50, 'ISC2-001', '4', 1),
+(51, 'tu123', '1', 1),
+(52, 'tu123', '1', 1);
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `discipline`
+-- Structure de la table `discipline`
 --
 
 CREATE TABLE `discipline` (
@@ -86,10 +107,25 @@ CREATE TABLE `discipline` (
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Contenu de la table `discipline`
+--
+
+INSERT INTO `discipline` (`dis_id`, `dis_code`, `dis_name`, `dis_description`, `dis_hours`, `credits`, `status`) VALUES
+(15, 'G01', 'Working Process', '', 12, 2, 1),
+(16, 'G02', 'Critical Thinking', '', 24, 5, 1),
+(17, 'G03', 'Professional Speaking', '', 24, 4, 1),
+(18, 'G04', 'Technical Writing', '', 24, 4, 0),
+(19, 'G05', 'Software Testing Process', '', 127, 2, 1),
+(20, 'G06', 'Database Management Systems', 'undefined', 24, 4, 1),
+(21, 'G07', 'Front-End (Bootstrap + Angular.js + jQuery)', 'undefined', 24, 4, 1),
+(22, 'G08', '.NET Back-End', 'undefined', 36, 6, 1),
+(23, 'G057', 'Web development using PHP language', 'undefined', 235, -3, 1);
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `intake`
+-- Structure de la table `intake`
 --
 
 CREATE TABLE `intake` (
@@ -102,10 +138,20 @@ CREATE TABLE `intake` (
   `enddate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Contenu de la table `intake`
+--
+
+INSERT INTO `intake` (`int_id`, `int_code`, `int_name`, `int_description`, `status`, `startdate`, `enddate`) VALUES
+(97, 'ISC01', 'ISC', 'Just for test', 1, '2016-12-05', '2017-04-01'),
+(98, 'ISC02444', 'asdasd', '', 0, '2016-12-01', '2017-04-01'),
+(99, 'ISC03', 'ISC', 'undefined', 1, '2016-12-01', '2017-03-01'),
+(100, 'ISC01000', 'ISC', '4444', 1, '2017-03-03', '2017-03-10');
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `log`
+-- Structure de la table `log`
 --
 
 CREATE TABLE `log` (
@@ -119,7 +165,7 @@ CREATE TABLE `log` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `study_program`
+-- Structure de la table `study_program`
 --
 
 CREATE TABLE `study_program` (
@@ -130,10 +176,20 @@ CREATE TABLE `study_program` (
   `pro_status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Contenu de la table `study_program`
+--
+
+INSERT INTO `study_program` (`pro_id`, `pro_code`, `pro_name`, `pro_description`, `pro_status`) VALUES
+(102, 'NET', '.NET(C#)', '', 1),
+(103, 'AND', 'Android', '', 1),
+(104, 'IOS', 'IOS(Swift)', '', 1),
+(105, 'PHP', 'Web development using PHP language', '', 1);
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `university`
+-- Structure de la table `university`
 --
 
 CREATE TABLE `university` (
@@ -146,19 +202,17 @@ CREATE TABLE `university` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `university`
+-- Contenu de la table `university`
 --
 
 INSERT INTO `university` (`univer_id`, `univer_code`, `univer_name`, `univer_address`, `contact`, `status`) VALUES
-(1, 'BKU', 'Bách Khoa TP HCM', 'TP Hồ Chí Minh', '1234567890', 1),
-(4, 'TDM', 'Thu Dau Mot', 'Binh Duong', '12312321', 1),
-(6, 'sdasd', 'asda', 'asd', 'asd', 0),
-(10, 'asdasd', 'asd', 'asdas', 'dasd', 1);
+(116, 'BUH', 'Ngân Hàng', 'TP Hồ Chí Minh', '', 1),
+(117, 'DHCN4', 'Trường Đại Học Công Nghiệp 4 thành phố Hồ Chí Minh', '123 Gò Vấp', '- Nguyễn Văn An\n- Trần Văn Long', 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
@@ -177,24 +231,34 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Contenu de la table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_code`, `firstname`, `lastname`, `phone`, `email`, `gender`, `useraddress`, `username`, `password`, `status`, `univer_code`) VALUES
+(7, 'ISC1-002', 'Quốc Tú', 'Lê', 123123213, 'tu.it@gmail.com', 0, 'Vĩnh Long', 'tu123', '123123', 0, NULL),
+(8, 'ISC1-001', 'Ngọc Vũ', 'Phạm', 123123121, 'vupn199955@gmail.com', 0, 'Bình Dương', 'vupn199955', 'ngocvu12', 1, NULL),
+(9, 'ISC2-001', 'Văn Dũng', 'Nguyễn', 123123123, 'dung@gmail.com', 0, 'adasdasd', 'dung123', '123123', 1, NULL),
+(10, 'tu123', 'Tú', 'Nguyễn Văn', 2147483647, 'tu@gmail.com', 0, '1325', 'tu1238', '123abc', 1, NULL);
+
+--
+-- Index pour les tables exportées
 --
 
 --
--- Chỉ mục cho bảng `access`
+-- Index pour la table `access`
 --
 ALTER TABLE `access`
   ADD PRIMARY KEY (`access_id`);
 
 --
--- Chỉ mục cho bảng `company`
+-- Index pour la table `company`
 --
 ALTER TABLE `company`
   ADD PRIMARY KEY (`com_id`),
   ADD UNIQUE KEY `com_code` (`com_code`);
 
 --
--- Chỉ mục cho bảng `decentralization`
+-- Index pour la table `decentralization`
 --
 ALTER TABLE `decentralization`
   ADD PRIMARY KEY (`decen_id`),
@@ -202,41 +266,41 @@ ALTER TABLE `decentralization`
   ADD KEY `access_id` (`access_id`);
 
 --
--- Chỉ mục cho bảng `discipline`
+-- Index pour la table `discipline`
 --
 ALTER TABLE `discipline`
   ADD PRIMARY KEY (`dis_id`),
   ADD UNIQUE KEY `dis_code` (`dis_code`);
 
 --
--- Chỉ mục cho bảng `intake`
+-- Index pour la table `intake`
 --
 ALTER TABLE `intake`
   ADD PRIMARY KEY (`int_id`),
   ADD UNIQUE KEY `int_code` (`int_code`);
 
 --
--- Chỉ mục cho bảng `log`
+-- Index pour la table `log`
 --
 ALTER TABLE `log`
   ADD PRIMARY KEY (`log_id`);
 
 --
--- Chỉ mục cho bảng `study_program`
+-- Index pour la table `study_program`
 --
 ALTER TABLE `study_program`
   ADD PRIMARY KEY (`pro_id`),
   ADD UNIQUE KEY `pro_code` (`pro_code`);
 
 --
--- Chỉ mục cho bảng `university`
+-- Index pour la table `university`
 --
 ALTER TABLE `university`
   ADD PRIMARY KEY (`univer_id`),
   ADD UNIQUE KEY `univer_code` (`univer_code`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
@@ -244,60 +308,60 @@ ALTER TABLE `users`
   ADD KEY `univer_code` (`univer_code`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT cho bảng `access`
+-- AUTO_INCREMENT pour la table `access`
 --
 ALTER TABLE `access`
   MODIFY `access_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT cho bảng `company`
+-- AUTO_INCREMENT pour la table `company`
 --
 ALTER TABLE `company`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 --
--- AUTO_INCREMENT cho bảng `decentralization`
+-- AUTO_INCREMENT pour la table `decentralization`
 --
 ALTER TABLE `decentralization`
-  MODIFY `decen_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `decen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
--- AUTO_INCREMENT cho bảng `discipline`
+-- AUTO_INCREMENT pour la table `discipline`
 --
 ALTER TABLE `discipline`
-  MODIFY `dis_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
--- AUTO_INCREMENT cho bảng `intake`
+-- AUTO_INCREMENT pour la table `intake`
 --
 ALTER TABLE `intake`
-  MODIFY `int_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `int_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 --
--- AUTO_INCREMENT cho bảng `log`
+-- AUTO_INCREMENT pour la table `log`
 --
 ALTER TABLE `log`
   MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT cho bảng `study_program`
+-- AUTO_INCREMENT pour la table `study_program`
 --
 ALTER TABLE `study_program`
-  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 --
--- AUTO_INCREMENT cho bảng `university`
+-- AUTO_INCREMENT pour la table `university`
 --
 ALTER TABLE `university`
-  MODIFY `univer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `univer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Contraintes pour les tables exportées
 --
 
 --
--- Các ràng buộc cho bảng `users`
+-- Contraintes pour la table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`univer_code`) REFERENCES `university` (`univer_code`);
