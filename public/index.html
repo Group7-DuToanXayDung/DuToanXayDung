@@ -31,20 +31,36 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+  <style>
+    .se-pre-con {
+      background: #fff url("logo/Preloader_21.gif") no-repeat scroll center center;
+      height: 100%;
+      left: 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 9999;
+    }
+  </style>
 </head>
 
 <body ng-app="myApp">
+
+ 
+  <div class="se-pre-con"></div>
 
   <div style="margin-bottom:30px;" ng-include='"page/include/header.html"'></div>
   <!-- <div ng-include='"page/include/menu-trai.html"'></div> -->
   <div class="container">
     <ng-view></ng-view>
   </div>
-  <script src="js/jquery.min.js"></script>
-<script src="js/angular.min.js"></script>
+  <!--<script src="js/jquery.min.js"></script>-->
+  <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <script src="js/angular.min.js"></script>
   <script src="js/jquery-ui.js"></script>
   <script src="js/jquery.dataTables.min.js"></script>
-   <script src="js/angular-messages.min.js"></script>
+  <script src="js/angular-messages.min.js"></script>
   <script src="js/angular-route.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="scripts/app.js"></script>
@@ -55,7 +71,14 @@
   <script src="scripts/controller/KH_controller.js"></script>
   <script src="scripts/controller/vnito_controller.js"></script>
   <script src="scripts/directive/ngMessages.js"></script>
-
+   <script>
+     //paste this code under head tag or in a seperate js file.
+    	// Wait for window load
+    	$(window).load(function() {
+      	// Animate loader off screen
+      	$(".se-pre-con").fadeOut("slow");;
+    	});
+  </script>
 </body>
 
 </html>
