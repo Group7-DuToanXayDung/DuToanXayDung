@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 15 Mars 2017 à 10:28
+-- Généré le :  Mer 22 Mars 2017 à 07:11
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.6.28
 
@@ -41,6 +41,36 @@ INSERT INTO `access` (`access_id`, `access_name`, `access_status`) VALUES
 (2, 'Giáo Vụ', 1),
 (3, 'Giảng Viên', 1),
 (4, 'Học Viên', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `class`
+--
+
+CREATE TABLE `class` (
+  `id_class` int(11) NOT NULL,
+  `name_class` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dis_code` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `startday` date DEFAULT NULL,
+  `endday` date DEFAULT NULL,
+  `study_time` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `classroom`
+--
+
+CREATE TABLE `classroom` (
+  `id_room` int(11) NOT NULL,
+  `code_room` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type_room` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `number_seats` int(11) DEFAULT NULL,
+  `status_room` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -83,13 +113,13 @@ CREATE TABLE `decentralization` (
 --
 
 INSERT INTO `decentralization` (`decen_id`, `user_code`, `access_id`, `status`) VALUES
-(46, 'ISC1-002', '1', 1),
-(47, 'ISC1-002', '2', 1),
-(48, 'ISC1-002', '4', 1),
 (49, 'ISC1-001', '4', 1),
 (50, 'ISC2-001', '4', 1),
 (51, 'tu123', '1', 1),
-(52, 'tu123', '1', 1);
+(52, 'tu123', '1', 1),
+(53, 'ISC1-002', '1', 1),
+(54, 'ISC1-002', '2', 1),
+(55, 'ISC1-002', '4', 1);
 
 -- --------------------------------------------------------
 
@@ -125,6 +155,20 @@ INSERT INTO `discipline` (`dis_id`, `dis_code`, `dis_name`, `dis_description`, `
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `discipline_of_study_program`
+--
+
+CREATE TABLE `discipline_of_study_program` (
+  `id_dosp` int(11) NOT NULL,
+  `pro_code` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dis_code` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `status_dosp` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `intake`
 --
 
@@ -151,6 +195,23 @@ INSERT INTO `intake` (`int_id`, `int_code`, `int_name`, `int_description`, `stat
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `lecturers`
+--
+
+CREATE TABLE `lecturers` (
+  `id_lec` int(11) NOT NULL,
+  `code_lec` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `degree` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `major` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` text COLLATE utf8_unicode_ci,
+  `description` text COLLATE utf8_unicode_ci,
+  `status_lec` int(11) DEFAULT NULL,
+  `user_code` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `log`
 --
 
@@ -160,6 +221,47 @@ CREATE TABLE `log` (
   `table_name` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `row` int(11) DEFAULT NULL,
   `create_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `students`
+--
+
+CREATE TABLE `students` (
+  `id_stu` int(11) NOT NULL,
+  `code_stu` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `major` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` text COLLATE utf8_unicode_ci,
+  `univer_code` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_ss` int(11) DEFAULT NULL,
+  `user_code` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `int_code` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `student_profile`
+--
+
+CREATE TABLE `student_profile` (
+  `id_profile` int(11) NOT NULL,
+  `name_profile` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status_profile` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `student_status`
+--
+
+CREATE TABLE `student_status` (
+  `id_ss` int(11) NOT NULL,
+  `name_ss` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -251,6 +353,20 @@ ALTER TABLE `access`
   ADD PRIMARY KEY (`access_id`);
 
 --
+-- Index pour la table `class`
+--
+ALTER TABLE `class`
+  ADD PRIMARY KEY (`id_class`),
+  ADD KEY `dis_code` (`dis_code`);
+
+--
+-- Index pour la table `classroom`
+--
+ALTER TABLE `classroom`
+  ADD PRIMARY KEY (`id_room`),
+  ADD UNIQUE KEY `code_room` (`code_room`);
+
+--
 -- Index pour la table `company`
 --
 ALTER TABLE `company`
@@ -273,6 +389,14 @@ ALTER TABLE `discipline`
   ADD UNIQUE KEY `dis_code` (`dis_code`);
 
 --
+-- Index pour la table `discipline_of_study_program`
+--
+ALTER TABLE `discipline_of_study_program`
+  ADD PRIMARY KEY (`id_dosp`),
+  ADD KEY `pro_code` (`pro_code`),
+  ADD KEY `dis_code` (`dis_code`);
+
+--
 -- Index pour la table `intake`
 --
 ALTER TABLE `intake`
@@ -280,10 +404,43 @@ ALTER TABLE `intake`
   ADD UNIQUE KEY `int_code` (`int_code`);
 
 --
+-- Index pour la table `lecturers`
+--
+ALTER TABLE `lecturers`
+  ADD PRIMARY KEY (`id_lec`),
+  ADD UNIQUE KEY `code_lec` (`code_lec`),
+  ADD KEY `user_code` (`user_code`);
+
+--
 -- Index pour la table `log`
 --
 ALTER TABLE `log`
   ADD PRIMARY KEY (`log_id`);
+
+--
+-- Index pour la table `students`
+--
+ALTER TABLE `students`
+  ADD PRIMARY KEY (`id_stu`),
+  ADD UNIQUE KEY `code_stu` (`code_stu`),
+  ADD KEY `univer_code` (`univer_code`),
+  ADD KEY `id_ss` (`id_ss`),
+  ADD KEY `user_code` (`user_code`),
+  ADD KEY `int_code` (`int_code`);
+
+--
+-- Index pour la table `student_profile`
+--
+ALTER TABLE `student_profile`
+  ADD PRIMARY KEY (`id_profile`),
+  ADD UNIQUE KEY `name_profile` (`name_profile`);
+
+--
+-- Index pour la table `student_status`
+--
+ALTER TABLE `student_status`
+  ADD PRIMARY KEY (`id_ss`),
+  ADD UNIQUE KEY `name_ss` (`name_ss`);
 
 --
 -- Index pour la table `study_program`
@@ -317,30 +474,65 @@ ALTER TABLE `users`
 ALTER TABLE `access`
   MODIFY `access_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT pour la table `class`
+--
+ALTER TABLE `class`
+  MODIFY `id_class` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `classroom`
+--
+ALTER TABLE `classroom`
+  MODIFY `id_room` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT pour la table `company`
 --
 ALTER TABLE `company`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT pour la table `decentralization`
 --
 ALTER TABLE `decentralization`
-  MODIFY `decen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `decen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT pour la table `discipline`
 --
 ALTER TABLE `discipline`
-  MODIFY `dis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `dis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT pour la table `discipline_of_study_program`
+--
+ALTER TABLE `discipline_of_study_program`
+  MODIFY `id_dosp` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `intake`
 --
 ALTER TABLE `intake`
   MODIFY `int_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 --
+-- AUTO_INCREMENT pour la table `lecturers`
+--
+ALTER TABLE `lecturers`
+  MODIFY `id_lec` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT pour la table `log`
 --
 ALTER TABLE `log`
   MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `students`
+--
+ALTER TABLE `students`
+  MODIFY `id_stu` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `student_profile`
+--
+ALTER TABLE `student_profile`
+  MODIFY `id_profile` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `student_status`
+--
+ALTER TABLE `student_status`
+  MODIFY `id_ss` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `study_program`
 --
@@ -350,7 +542,7 @@ ALTER TABLE `study_program`
 -- AUTO_INCREMENT pour la table `university`
 --
 ALTER TABLE `university`
-  MODIFY `univer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `univer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
@@ -359,6 +551,34 @@ ALTER TABLE `users`
 --
 -- Contraintes pour les tables exportées
 --
+
+--
+-- Contraintes pour la table `class`
+--
+ALTER TABLE `class`
+  ADD CONSTRAINT `class_ibfk_1` FOREIGN KEY (`dis_code`) REFERENCES `discipline` (`dis_code`);
+
+--
+-- Contraintes pour la table `discipline_of_study_program`
+--
+ALTER TABLE `discipline_of_study_program`
+  ADD CONSTRAINT `discipline_of_study_program_ibfk_1` FOREIGN KEY (`pro_code`) REFERENCES `study_program` (`pro_code`),
+  ADD CONSTRAINT `discipline_of_study_program_ibfk_2` FOREIGN KEY (`dis_code`) REFERENCES `discipline` (`dis_code`);
+
+--
+-- Contraintes pour la table `lecturers`
+--
+ALTER TABLE `lecturers`
+  ADD CONSTRAINT `lecturers_ibfk_1` FOREIGN KEY (`user_code`) REFERENCES `users` (`user_code`);
+
+--
+-- Contraintes pour la table `students`
+--
+ALTER TABLE `students`
+  ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`univer_code`) REFERENCES `university` (`univer_code`),
+  ADD CONSTRAINT `students_ibfk_2` FOREIGN KEY (`id_ss`) REFERENCES `student_status` (`id_ss`),
+  ADD CONSTRAINT `students_ibfk_3` FOREIGN KEY (`user_code`) REFERENCES `users` (`user_code`),
+  ADD CONSTRAINT `students_ibfk_4` FOREIGN KEY (`int_code`) REFERENCES `intake` (`int_code`);
 
 --
 -- Contraintes pour la table `users`
