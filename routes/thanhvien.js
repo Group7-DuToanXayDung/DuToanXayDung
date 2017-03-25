@@ -80,6 +80,13 @@ router.post('/menu_Users', function (req, res) {
 			if (err)
 				throw err;
 		});
+		if (access_id == '3') {
+			var sql_pq = 'insert into lecturers(user_code,status_lec) values("' + user_code + '",1)';
+			connection.query(sql_pq, function (err) {
+				if (err)
+					throw err;
+			});
+		}
 	}
 
 });
